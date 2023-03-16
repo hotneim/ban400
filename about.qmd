@@ -1,0 +1,9 @@
+---
+  title: "About"
+---
+
+Please direct any feedback to the course instructors:
+
+Håkon Otneim: `hakon.otneim@nhh.no`
+
+Ole-Petter Moe Hansen: `ole-petter.hansen@nhh.no`

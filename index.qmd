@@ -1,0 +1,14 @@
+# Welcome! {.unnumbered}
+
+This is the companion website for the course **BAN400 - R Programming for Data Science**, given at The Norwegian School of Economics (NHH). The purpose of this website is to provide study material such as lecture videos, exercises and assignments for students taking the course. 
+
+BAN400 has previously consisted of two separate modules; one intensive one-week introduction to R that could be taken separately as a 2.5 ECTS course as BAN420, as well as the main course itself (pun intended), which, together with BAN420, completed the 7.5 ECTS unit BAN400.
+
+From the fall semester of 2023, we do no longer offer the intensive option. BAN400 is now offered as one regular course. We will, however, still make an explicit transition from Part 1, where we introduce basic programming, to Part 2 where we will learn a number of useful techniques that are particularly useful when working with data.
+
+All announcements and course administration such as homework delivery and feedback will be carried out through the course page at Canvas, which is the learning management system used by NHH. You will need to sign up to the course in order to gain access to the Canvas page.
+
+## Schedule {.unnumbered}
+ 
+## Practical information {.unnumbered}
+

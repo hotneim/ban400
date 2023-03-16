@@ -1,0 +1,16 @@
+/*-- scss:defaults --*/
+$h2-font-size:          1.6rem !default;
+$headings-font-weight:  500 !default;
+$sidebar-bg: #E7E6E6;
+$sidebar-fg: #00395A;
+$navbar-bg: #E7E6E6;
+$navbar-fg: #00395A;
+
+/*-- scss:rules --*/
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
+}
+$margin-left: 1%;
+body {
+     float: left;
+}

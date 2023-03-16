@@ -1,0 +1,155 @@
+# Assignment 1 {.unnumbered}
+
+
+
+## Problem 1 {.unnumbered}
+
+We will look at the monthly returns on the NASDAQ composite stock index from August 2013 to June 2018, as well as the returns on 16 individual stocks listed on NASDAQ. The data is contained in the file [`data-nasdaq-returns.xls`](data-nasdaq-returns.xls), and has been collected from the Yahoo Finance website.
+
+Put the data in an appropriate folder on your computer. Perform the following tasks:
+
+1.  Read the data into R and take a first look at the data set. The main index is in the `NASDAQ`-column.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see how the top of the data set should look like after you have loaded it into R.
+
+```{r, echo = FALSE, message = FALSE}
+# Packages
+library(dplyr)     # The pipe and data wrangling
+library(readr)     # Reading csv-files
+library(readxl)    # Reading excel-files
+library(ggplot2)   # For plotting
+
+# PROBLEM 1: THE NASDAQ-DATA ----------
+
+# Reading the data
+nasdaq_data <- read_excel("data-nasdaq-returns.xls")
+
+nasdaq_data
+```
+
+:::
+
+2.  Make a new data frame containing only the date column and returns on the main index as well as one of the individual stocks of your choosing. Name the new data frame appropriately.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see how the top of the new data set should look like.
+
+For example, after picking ADBE as the stock:
+
+```{r, echo = FALSE, message = FALSE}
+nasdaq_and_adbe <-
+  nasdaq_data %>%
+  select(Date, NASDAQ, ADBE)
+
+nasdaq_and_adbe
+```
+
+:::
+
+3.  Make a scatterplot of the two variables in your newly created data frame.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see the plot should look like.
+
+Still, using ADBE, will of course look a bit different if you have chosen a different stock:
+
+```{r, echo = FALSE, message = FALSE}
+ggplot(nasdaq_and_adbe, aes(x = NASDAQ, y = ADBE)) +
+  geom_point()
+```
+
+:::
+
+4.  The function `sign(x)` returns the sign of `x`, that is, it returns -1 if `x` is negative and 1 if `x` is positive. Make two new columns, named `sign_NASDAQ` and a corresponding name for the stock that you have chosen to include, that contains the sign of the return, indicating whether the index or stock went up or down that day.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see how the top of the new data set should look like.
+
+```{r, echo = FALSE, message = FALSE}
+nasdaq_and_adbe_sign <-
+  nasdaq_and_adbe %>%
+  mutate(NASDAQ_sign = sign(NASDAQ)) %>%
+  mutate(ADBE_sign = sign(ADBE))
+
+nasdaq_and_adbe_sign
+```
+
+:::
+
+5.  Make another column consisting of the sum of the two sign columns divided by two. The resulting value will then be -1 if both the index and the stock went down that day, 0 if they went in separate directions, and 1 if both went up.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see how the top of the new data set should look like.
+
+```{r, echo = FALSE, message = FALSE}
+nasdaq_and_adbe_sum <-
+  nasdaq_and_adbe_sign %>% 
+  mutate(sum = (NASDAQ_sign + ADBE_sign)/2)
+
+nasdaq_and_adbe_sum
+```
+
+:::
+
+6.  We would like to count the number of days for which the new `sum`-column is either -1, 0, or 1. Do that by applying the function `table()` to the `sum`-column. (Recall that we can pick out individual columns using the dollar-sign).
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see how the output should look like.
+
+For the ADBE-stock:
+
+```{r, echo = FALSE, message = FALSE}
+table(nasdaq_and_adbe_sum$sum)
+```
+
+:::
+
+7.  In the tasks above you may (or may not) have created several intermediate data frames under different names for each problem, or perhaps you have overwritten the data frame for each new task. Let us rather complete task 1, 2, 4 and 5 in one single operation, where you just append each task to the previous using the pipe-operator. That way you only need to come up with one name for the data set.
+
+::: {.callout-note collapse="true" icon="false"}
+## Click here to see to see a hint if you need to.
+
+The code may look something like this, replace the dots:
+
+```{r, eval = FALSE, message = FALSE}
+stock_data <-
+  read_excel(...) %>%       
+  select(...) %>%                  
+  mutate(...) %>%          
+  mutate(...) %>%              
+  mutate(...)       
+```
+
+:::
+
+## Problem 2 {.unnumbered}
+
+The `.csv`-file (comma separated values) is a common format for storing data in a plain text file. The file [`data-missile.csv`](data-missile.csv) contains data on North Korean missile launches from 1984 until 2017. Put the file in folder on your computer and inspect the contents by opening it in a text editor such as Notepad or Textedit.
+
+R ships with a function `read.csv()` that we can use to read csv-files in the same way as we use `read_excel()` to read excel-files. We will, however, use a function from the `readr`-package called `read_csv()` for this purpose that does *almost* the same thing as the default `read.csv()`-function. There are some subtle differences between these two functions that are not very important, but `read_csv()` works a little bit better together with many other functions and packages that we will use later.
+
+Load `readr` using the `library()` function. If you get an error message telling you that `there is no package called 'readr'`, then you need to install it first using the `install.packages()`-function.
+
+```{r, include = FALSE}
+library(readr)
+```
+
+Load the data into into R using the following command:
+
+```{r, message = FALSE}
+missile <- read_csv("data-missile.csv")
+```
+
+Look at the data. The variable «apogee» is the highest altitude reached by the missile in km. Calculate the following statistics for this variable:
+
+1.  The mean.
+2.  The median.
+3.  The standard deviation.
+
+::: {.callout-note collapse="true" icon="false"}
+## Maybe you get some unexpected results here. You need to troubleshoot the problem in order to solve the issue. Click here if you need some hints on what to try.
+
+The problem is that you get `NA`-values right? Why is this? Look at the data, and you will see that many values are missing, and they should be ignored when calculating the mean, median and standard deviation. Look at the help files for the functions in question (e.g. `?mean`) to see if there is something you can to to fix the issue.
+
+:::

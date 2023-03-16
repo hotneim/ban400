@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "BAN400 - R Programming for Data Science"
+  image: pictures/nhh.png
+  page-navigation: true
+  navbar:
+    logo: pictures/nhh.png
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+  sidebar:
+    title: "Menu"
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: Course overview
+      - text: "---"
+      - href: 01-intro-to-r.qmd
+        text: "1. Introduction to R"
+      - text: "---"
+      - section: "Assignments"
+        contents:
+        - href: assignment-01.qmd
+          text: "Assignment 1"
+      - href: references.qmd
+        text: "References"
+
+editor: visual
+
+
+          
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    theme: 
+        - cosmo
+        - custom.scss
+    css: style.css
+    fontsize: "1.1em"
+    linestretch: "1.7"
+    number-sections: true
+    shift-heading-level-by: 0
+    html-math-method: katex

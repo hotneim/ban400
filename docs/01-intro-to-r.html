@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.520">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BAN400 - R Programming for Data Science – intro-to-r</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assignment-01.html" rel="next">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <img src="./pictures/nhh.png" alt="">
+    <span class="navbar-title">BAN400 - R Programming for Data Science</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link active">1. Introduction to R</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Assignments</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">Assignment 1</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r"> <span class="header-section-number">1</span> Introduction to R</a>
+  <ul class="collapse">
+  <li><a href="#tour-of-rstudio" id="toc-tour-of-rstudio" class="nav-link" data-scroll-target="#tour-of-rstudio"> <span class="header-section-number">1.1</span> Tour of RStudio</a></li>
+  <li><a href="#calculations-and-variables" id="toc-calculations-and-variables" class="nav-link" data-scroll-target="#calculations-and-variables"> <span class="header-section-number">1.2</span> Calculations and Variables</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"> <span class="header-section-number">1.3</span> Vectors</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"> <span class="header-section-number">1.4</span> Packages</a></li>
+  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory"> <span class="header-section-number">1.5</span> Working directory</a></li>
+  <li><a href="#reading-data" id="toc-reading-data" class="nav-link" data-scroll-target="#reading-data"> <span class="header-section-number">1.6</span> Reading data</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting"> <span class="header-section-number">1.7</span> Plotting</a></li>
+  <li><a href="#writing-scripts" id="toc-writing-scripts" class="nav-link" data-scroll-target="#writing-scripts"> <span class="header-section-number">1.8</span> Writing scripts</a></li>
+  <li><a href="#the-pipe-operator" id="toc-the-pipe-operator" class="nav-link" data-scroll-target="#the-pipe-operator"> <span class="header-section-number">1.9</span> The pipe operator</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="introduction-to-r" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction to R</h1>
+<p>Welcome to the first taste of BAN400. We will start by downloading and installing the tools that we need to start coding, and then we will explore some of the most basic aspects of the R programming language. After most of the videos we have included a small problem that we encourage you to try before you move on to the next topic.</p>
+<p>Before we start, you need to install two items on your computer. Please do the installations in the following order:</p>
+<ol type="1">
+<li><p><strong>The R Programming Language:</strong> Navigate to <a href="https://cran.uib.no/">cran.uib.no</a> and download the version of R that corresponds to your operating system. Run the installation as you would for any other program that you install on your system.</p></li>
+<li><p><strong>RStudio:</strong> Navigate to <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop/</a>, and download the version of “RStudio Desktop” that corresponds to your operating system. Run the installation as you would for any other program that you install on your computer.</p></li>
+</ol>
+<p>Both R and RStudio are free to download and free to use.</p>
+<section id="tour-of-rstudio" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="tour-of-rstudio"><span class="header-section-number">1.1</span> Tour of RStudio</h2>
+<iframe src="https://player.vimeo.com/video/528720000" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>In this video we open up RStudio for the first time and take a small tour of the user interface.</p>
+</section>
+<section id="calculations-and-variables" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="calculations-and-variables"><span class="header-section-number">1.2</span> Calculations and Variables</h2>
+<iframe src="https://player.vimeo.com/video/529314633" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>We move on to write our first R commands. It is critical that you already now start to <em>feel</em> the programming, and you do that best by typing in the code lines just as in the video above (no copy/paste!), making sure that you get the same results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can use R as a calculator:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pretty simple! We must use paratheses if we have more complicated expressions:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span><span class="sc">+</span><span class="dv">8</span>)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">8</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables are important in R. We can save just about anything inside the</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># computer memory by giving them names:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span><span class="dv">4</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># R performs all operations on the right hand side before assigning the value to c:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> a<span class="sc">+</span>b</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># No errors, warnings or questions when overwriting!</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> c <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's make an error!</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>d</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># We can name things more or less what we want. Not a non-trivial problem in</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># large projects!</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>whatever_we_want <span class="ot">&lt;-</span> <span class="st">"hello world"</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>whatever_we_want</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>Pick your favorite three integers and store them in three different variables. Calculate yor magic number, which is the sum of these three integers. Store your magic number in a new variable. Give your new variable a name that clearly identifies what it is.</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>number1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>number2 <span class="ot">&lt;-</span> <span class="dv">87</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>number3 <span class="ot">&lt;-</span> <span class="dv">101</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>magic_number <span class="ot">&lt;-</span> number1 <span class="sc">+</span> number2 <span class="sc">+</span> number3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="vectors"><span class="header-section-number">1.3</span> Vectors</h2>
+<iframe src="https://player.vimeo.com/video/533529869" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vectors are very important in R. We remember perhaps from our math classes that vectors may represent points in space; in R it is a way to store more than one number (or string, or some other data type) under a single variable name. When doing statistics, this may for example be a set of <em>observations</em>.</p>
+<p>In this video we first create a vector of numbers using the <code>c()</code>-function, and then we look at various ways to extract/pick out the elements: to <em>subset</em>. Python coders will notice two important distinctions from what they are used to:</p>
+<ul>
+<li>In R we start counting on 1, and not 0!</li>
+<li>When trying to subset using an index that out of the range of the vector, we do not get an error message, we just get back the empty value <code>NA</code>.</li>
+</ul>
+<p>Furthermore, we use the Up-arrow to get back the last command that we have executed in the console. You can even tap the up-arrow again in order go further back in your command history (and of course use the down-arrow to navigate the other way).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can make a vector in the following way:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">7.8</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="fl">0.16</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>vector1</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting (The first item has index 1!)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">1</span>]        <span class="co"># Square brackets to subset</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">10</span>]       <span class="co"># Out-of-range error</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]      <span class="co"># Subset a sequence</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>vector1[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]   <span class="co"># Subset using another vector!</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># The letter "c" stands for "combine". R makes it very easy to work with</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># vectors:</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>vector1 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>vector1<span class="sc">*</span><span class="dv">3</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># We can use *functions* to calculate various things:</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vector1)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vector1)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vector1)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vector1)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># We can make a vector of strings as well:</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"hello"</span>, <span class="st">"world"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector can only contain one data type!</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Perhaps we need the standard deviation later?</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>sd_vector1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(vector1)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>sd_vector1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>Calculate the maximum and minimum values of <code>vector1</code>, as well as the median. (<strong>Hint</strong>, and this will be the most important lesson you will learn in this course: <strong>If you do not know the name of the function, Google it!</strong>)</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Relevant Google searches: "minimum value r", "maximum r", "median r"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(vector1)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(vector1)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(vector1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="packages" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="packages"><span class="header-section-number">1.4</span> Packages</h2>
+<iframe src="https://player.vimeo.com/video/533529889" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>In this video we install our first package in R. There are two major takeaways from this:</p>
+<ul>
+<li>We install the package on our computer using the <code>install.packages()</code>-function. <em>We only have to do this once per computer</em>.</li>
+<li>If we are going to use some of the functions in a package we need to load it using the <code>library()</code>-command. You have to do that every time you restart R (and we will later see that we will typically load all the packages we need in the beginning of the scripts that we write).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In order to install the package readxl, we run the following command. </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We run this command only once.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># When we are going to use it, we load it using the "library()"-function, </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># and we need to repreat this every time we restart R.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong> Install the following packages. We will make use of them (and several others) later in the course: <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code> and <code>lubridate</code>.</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-directory" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">1.5</span> Working directory</h2>
+<iframe src="https://player.vimeo.com/video/534108000" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>We introduce the concept of a working directory, which is the folder where R looks for files that we are going to read into the memory, and where R puts the files that we create, for instance image files of plots.</p>
+<p>There are two central functions:</p>
+<ul>
+<li><p><code>getwd()</code> prints out the current working directory.</p></li>
+<li><p><code>setwd("C:/path/to/folder")</code> sets the working directory to the specified folder. We will as a general rule not use <code>setwd()</code> in our scripts (the reason for that will become clear later), but rather use RStudio’s menu system for changing the working directory (we will in practice not need to do that as a general rule as well, which will also become clear in a short while).</p></li>
+</ul>
+<p>We may however have to deal with file paths in our code, and make the following technical notes:</p>
+<ul>
+<li>On UNIX systems (such as Mac or Linux) the file paths look differently, they do not start with a drive letter such as <code>C:\</code>.</li>
+<li>On Windows, we <em>always</em> use the backslash <code>/</code> to separate between the folders in R code, and not the usual forward slash <code>\</code>. This may be counter-intuitive to some, but in programming the forward slash usually has special meaning (the escape character) and must not be used for anything else. On UNIX systems we also use the backslash, but that is the system standard for writing file paths, so it does not require any special attention to users of those operating systems.</li>
+</ul>
+<p><strong>Exercise:</strong> Make sure that you have completed the following tasks before proceding to the next lesson:</p>
+<ul>
+<li>You have created a dedicated folder on your computer where you will collected all material that we will use today.</li>
+<li>You have downloaded the file <a href="testdata.xls"><code>testdata.xls</code></a> and put in in your newly created folder.</li>
+<li>You have changed your working directory to this folder.</li>
+<li>You have <strong>positively confirmed</strong> that your working directory now is correctly set.</li>
+</ul>
+</section>
+<section id="reading-data" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="reading-data"><span class="header-section-number">1.6</span> Reading data</h2>
+<iframe src="https://player.vimeo.com/video/534108034" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>We read our first small data file into the memory of R and apply some simple operations to it. We will spend much more time working with data in R in later lessons.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The data is in the .xls-format, so we need the readxl-package in order to load </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it into R.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside this package, there is a function called read_excel:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># That's fine, but in order to use this data, we need to save it in a variable</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the (top of the) data set.</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>testdata</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we see the data in the environment. We can look at it by typing the name that we</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># gave it. We can also pick out individual columns using the $-sign:</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>X1</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calaculate the mean for X1 and X2:</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X1)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X2)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># How many rows/observations do we have?</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(testdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong></p>
+<ol type="1">
+<li>How many columns does our data set have?</li>
+<li>Can you find a way to print out a vector that contains the sum of the X1 and X2 columns in <code>testdata</code>?</li>
+<li>What is the total sum of all the numbers in the <code>X1</code> and <code>X2</code> columns of <code>testdata</code>?</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(testdata)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="plotting"><span class="header-section-number">1.7</span> Plotting</h2>
+<iframe src="https://player.vimeo.com/video/539129717" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>We introduce the main package for the plotting engine that we will use in this course; <code>ggplot2</code>, and its basic syntax.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A simple scatterplot</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Making adjustments to the plot</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty =</span> <span class="st">"l"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"X2"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2-package</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is the code for creating a simple scatterplot of the X1 and X2 columns in</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># our data set:</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># First make the plot, then save it to a file</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># A more flexible way to do it is to save the plot in a variable, and then</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># supply the name of the plot to the ggsave-finction:</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>, p)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co"># That way, we can save the plot p at any time, we do not have to do it directly</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># after the plotting commands.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong> Can you figure out how to make the dots in the plot bigger and blue?</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="writing-scripts" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="writing-scripts"><span class="header-section-number">1.8</span> Writing scripts</h2>
+<iframe src="https://player.vimeo.com/video/539129736" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>In this video we stop writing code directly in the console, and rather write our code in a script file, which is simply a pure text file containing commands. There are two important new concepts that we have to pay attention to when writing scripts:</p>
+<ul>
+<li>The <em>comment character</em> <code>#</code>: Evertything after this character in an R-script is ignored when executing the script. We can use the comment character to add small comments to our code, briefly explaining what is going on. This is a great help for other people trying to understand what you have done, in particular, and perhaps most importantly: the <em>future you</em> returning to a project. The comment character <code>#</code> is the same as in Python.</li>
+<li>The keybinding <code>Ctrl - Enter</code> (<code>Cmd - Enter</code> on a Mac) executes the line where your cursor is located in the script. You can also select several lines and execute all of them using this shortcut.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Introduction to R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Read our data set</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a scatterplot of the X1 and X2-variables</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Scatterplot of testdata"</span>) <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>, plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong> Make sure to save your script as an <code>.R</code>-file in the folder that we created for this session. Close RStudio. Then navigate to the folder and double click on the script file. Hopefully RStudio opens (if not, right click, select “Open in” and then Rstudio, confirm if prompted to set RStudio as default program for opening .R-files).</p>
+<p>Find out what your working directory is now. What just happened? How is this useful?</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Opening RStudio by double clicking on the script file automatically sets the working directory to the location of the script file. Very useful when returning to a project.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-pipe-operator" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="the-pipe-operator"><span class="header-section-number">1.9</span> The pipe operator</h2>
+<iframe src="https://player.vimeo.com/video/539150179" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>We introduce the pipe operator <code>%&gt;%</code>, which allows us to apply a sequence of functions in a practical way that allows us to read the code from left to right, just as we read normal text.</p>
+<p>If you installed the <code>dplyr</code>-package in the “Packages”-section, then you have already installed the <code>magrittr</code>-package that includes the pipe. The shortcut for the pipe in RStudio is <code>Ctrl - Shift - M</code> on Windows, and <code>Cmd - Shift - M</code> on a Mac.</p>
+<p><strong>We will use this technique extensively throughout the course!</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For this lesson, you need to have magrittr installed. Run the line </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># below if you don't have it already: </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("magrittr")</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create some data:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> (<span class="sc">-</span><span class="dv">500</span>)<span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Want to calculate mean of sqrt of abs values of x...</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># one way: via temporary variables: </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>abs.x <span class="ot">&lt;-</span> <span class="fu">abs</span>(x)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>sqrt.abs.x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(abs.x)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(sqrt.abs.x)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ...or collapse them all with nested functions: </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">sqrt</span>(<span class="fu">abs</span>(x)))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># With Magrittr: </span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># x %&gt;% f() is equivalent to  f(x)</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Why would we want to do this: </span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#  - code becomes more easy to read</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  - easier to develop code, particularly when dealing with data sets</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#  Example 1</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  Example 2</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>), <span class="at">na.rm=</span>T)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>(<span class="at">na.rm=</span>T)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>(<span class="sc">-</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">2</span> <span class="sc">%&gt;%</span> .<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="fu">atan2</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> <span class="fu">atan2</span>(<span class="dv">1</span>,.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>Use magrittr to calculate the equivalent of <code>alt.1</code> and <code>alt.2</code></p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<iframe src="https://player.vimeo.com/video/539150219" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.3</span> <span class="ot">&lt;-</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  abs <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  sqrt <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  mean</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.1</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.2</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>alt<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./assignment-01.html" class="pagination-link">
+        <span class="nav-page-text">Assignment 1</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,432 @@
+# Introduction to R 
+
+Welcome to the first taste of BAN400. We will start by downloading and installing the tools that we need to start coding, and then we will explore some of the most basic aspects of the R programming language. After most of the videos we have included a small problem that we encourage you to try before you move on to the next topic.
+
+Before we start, you need to install two items on your computer. Please do the installations in the following order:
+
+1.  **The R Programming Language:** Navigate to [cran.uib.no](https://cran.uib.no/) and download the version of R that corresponds to your operating system. Run the installation as you would for any other program that you install on your system.
+
+2.  **RStudio:** Navigate to [posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/), and download the version of "RStudio Desktop" that corresponds to your operating system. Run the installation as you would for any other program that you install on your computer.
+
+Both R and RStudio are free to download and free to use.
+
+## Tour of RStudio
+
+<iframe src="https://player.vimeo.com/video/528720000" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+In this video we open up RStudio for the first time and take a small tour of the user interface.
+
+## Calculations and Variables
+
+<iframe src="https://player.vimeo.com/video/529314633" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+We move on to write our first R commands. It is critical that you already now start to *feel* the programming, and you do that best by typing in the code lines just as in the video above (no copy/paste!), making sure that you get the same results.
+
+```{r, eval = FALSE}
+# We can use R as a calculator:
+2+2
+
+# Pretty simple! We must use paratheses if we have more complicated expressions:
+(2+8)/2
+2+8/2
+
+# Variables are important in R. We can save just about anything inside the
+# computer memory by giving them names:
+a <- 5
+a
+a*4 
+
+b <- 3
+
+# R performs all operations on the right hand side before assigning the value to c:
+c <- a+b
+c
+
+# No errors, warnings or questions when overwriting!
+c <- 4
+
+c <- c + 2
+c
+
+# Let's make an error!
+d
+
+# We can name things more or less what we want. Not a non-trivial problem in
+# large projects!
+whatever_we_want <- "hello world"
+whatever_we_want
+```
+
+**Exercise:**
+
+Pick your favorite three integers and store them in three different variables. Calculate yor magic number, which is the sum of these three integers. Store your magic number in a new variable. Give your new variable a name that clearly identifies what it is.
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r eval = FALSE}
+number1 <- 1
+number2 <- 87
+number3 <- 101
+
+magic_number <- number1 + number2 + number3
+```
+
+:::
+
+## Vectors
+
+<iframe src="https://player.vimeo.com/video/533529869" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+Vectors are very important in R. We remember perhaps from our math classes that vectors may represent points in space; in R it is a way to store more than one number (or string, or some other data type) under a single variable name. When doing statistics, this may for example be a set of *observations*.
+
+In this video we first create a vector of numbers using the `c()`-function, and then we look at various ways to extract/pick out the elements: to *subset*. Python coders will notice two important distinctions from what they are used to:
+
+-   In R we start counting on 1, and not 0!
+-   When trying to subset using an index that out of the range of the vector, we do not get an error message, we just get back the empty value `NA`.
+
+Furthermore, we use the Up-arrow to get back the last command that we have executed in the console. You can even tap the up-arrow again in order go further back in your command history (and of course use the down-arrow to navigate the other way).
+
+```{r, eval = FALSE}
+# We can make a vector in the following way:
+vector1 <- c(3, 5, 7.8, 10, 2, 0.16, -3)
+
+# Print out
+vector1
+
+# Subsetting (The first item has index 1!)
+vector1[1]        # Square brackets to subset
+vector1[10]       # Out-of-range error
+vector1[2:5]      # Subset a sequence
+vector1[c(1,3)]   # Subset using another vector!
+
+# The letter "c" stands for "combine". R makes it very easy to work with
+# vectors:
+vector1 - 1
+vector1*3
+
+# We can use *functions* to calculate various things:
+length(vector1)
+mean(vector1)
+sum(vector1)
+sd(vector1)
+
+# We can make a vector of strings as well:
+vector2 <- c("hello", "world")
+
+# A vector can only contain one data type!
+
+# Perhaps we need the standard deviation later?
+sd_vector1 <- sd(vector1)
+sd_vector1
+```
+
+**Exercise:**
+
+Calculate the maximum and minimum values of `vector1`, as well as the median. (**Hint**, and this will be the most important lesson you will learn in this course: **If you do not know the name of the function, Google it!**)
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r eval = FALSE}
+# Relevant Google searches: "minimum value r", "maximum r", "median r"
+
+min(vector1)
+max(vector1)
+median(vector1)
+```
+
+:::
+
+## Packages
+
+<iframe src="https://player.vimeo.com/video/533529889" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+In this video we install our first package in R. There are two major takeaways from this:
+
+-   We install the package on our computer using the `install.packages()`-function. *We only have to do this once per computer*.
+-   If we are going to use some of the functions in a package we need to load it using the `library()`-command. You have to do that every time you restart R (and we will later see that we will typically load all the packages we need in the beginning of the scripts that we write).
+
+```{r, eval = FALSE}
+# In order to install the package readxl, we run the following command. 
+# We run this command only once.
+install.packages("readxl")
+
+# When we are going to use it, we load it using the "library()"-function, 
+# and we need to repreat this every time we restart R.
+library(readxl)
+```
+
+**Exercise:** Install the following packages. We will make use of them (and several others) later in the course: `ggplot2`, `dplyr`, `tidyr` and `lubridate`.
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r, eval = FALSE}
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("lubridate")
+```
+
+:::
+
+## Working directory
+
+<iframe src="https://player.vimeo.com/video/534108000" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+We introduce the concept of a working directory, which is the folder where R looks for files that we are going to read into the memory, and where R puts the files that we create, for instance image files of plots.
+
+There are two central functions:
+
+-   `getwd()` prints out the current working directory.
+
+-   `setwd("C:/path/to/folder")` sets the working directory to the specified folder. We will as a general rule not use `setwd()` in our scripts (the reason for that will become clear later), but rather use RStudio's menu system for changing the working directory (we will in practice not need to do that as a general rule as well, which will also become clear in a short while). 
+
+We may however have to deal with file paths in our code, and make the following technical notes:
+
+-   On UNIX systems (such as Mac or Linux) the file paths look differently, they do not start with a drive letter such as `C:\`.
+-   On Windows, we *always* use the backslash `/` to separate between the folders in R code, and not the usual forward slash `\`. This may be counter-intuitive to some, but in programming the forward slash usually has special meaning (the escape character) and must not be used for anything else. On UNIX systems we also use the backslash, but that is the system standard for writing file paths, so it does not require any special attention to users of those operating systems.
+
+**Exercise:** Make sure that you have completed the following tasks before proceding to the next lesson:
+
+-   You have created a dedicated folder on your computer where you will collected all material that we will use today.
+-   You have downloaded the file [`testdata.xls`](testdata.xls) and put in in your newly created folder.
+-   You have changed your working directory to this folder.
+-   You have **positively confirmed** that your working directory now is correctly set.
+
+## Reading data
+
+<iframe src="https://player.vimeo.com/video/534108034" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+We read our first small data file into the memory of R and apply some simple operations to it. We will spend much more time working with data in R in later lessons.
+
+```{r, eval  = FALSE}
+# The data is in the .xls-format, so we need the readxl-package in order to load 
+# it into R.
+library(readxl)
+
+# Inside this package, there is a function called read_excel:
+read_excel("testdata.xls")
+
+# That's fine, but in order to use this data, we need to save it in a variable
+testdata <- read_excel("testdata.xls")
+
+# Print out the (top of the) data set.
+testdata
+
+# Now we see the data in the environment. We can look at it by typing the name that we
+# gave it. We can also pick out individual columns using the $-sign:
+testdata$X1
+
+# Calaculate the mean for X1 and X2:
+mean(testdata$X1)
+mean(testdata$X2)
+
+# How many rows/observations do we have?
+nrow(testdata)
+```
+
+**Exercise:**
+
+1.  How many columns does our data set have?
+2.  Can you find a way to print out a vector that contains the sum of the X1 and X2 columns in `testdata`?
+3.  What is the total sum of all the numbers in the `X1` and `X2` columns of `testdata`?
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r, eval = FALSE}
+# 1
+ncol(testdata)
+
+# 2 
+testdata$X1 + testdata$X2
+
+# 3
+sum(testdata$X1 + testdata$X2)
+```
+
+:::
+
+## Plotting
+
+<iframe src="https://player.vimeo.com/video/539129717" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+We introduce the main package for the plotting engine that we will use in this course; `ggplot2`, and its basic syntax.
+
+```{r, eval  = FALSE}
+# A simple scatterplot
+plot(testdata$X1, testdata$X2)
+
+# Making adjustments to the plot
+plot(testdata$X1, testdata$X2,
+     pch = 20,
+     bty = "l",
+     xlab = "X1",
+     ylab = "X2")
+
+# Load the ggplot2-package
+library(ggplot2)
+
+# Here is the code for creating a simple scatterplot of the X1 and X2 columns in
+# our data set:
+ggplot(testdata, aes(x = X1, y = X2)) + geom_point()
+
+# First make the plot, then save it to a file
+ggplot(testdata, aes(x = X1, y = X2)) + geom_point()
+ggsave("testplot.pdf")
+
+# A more flexible way to do it is to save the plot in a variable, and then
+# supply the name of the plot to the ggsave-finction:
+p <- ggplot(testdata, aes(x = X1, y = X2)) + geom_point()
+ggsave("testplot.pdf", p)
+
+# That way, we can save the plot p at any time, we do not have to do it directly
+# after the plotting commands.
+```
+
+**Exercise:** Can you figure out how to make the dots in the plot bigger and blue?
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r, eval = FALSE}
+ggplot(testdata, aes(x = X1, y = X2)) + geom_point(colour = "blue", size = 5)
+```
+
+:::
+
+## Writing scripts
+
+<iframe src="https://player.vimeo.com/video/539129736" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+In this video we stop writing code directly in the console, and rather write our code in a script file, which is simply a pure text file containing commands. There are two important new concepts that we have to pay attention to when writing scripts:
+
+-   The *comment character* `#`: Evertything after this character in an R-script is ignored when executing the script. We can use the comment character to add small comments to our code, briefly explaining what is going on. This is a great help for other people trying to understand what you have done, in particular, and perhaps most importantly: the *future you* returning to a project. The comment character `#` is the same as in Python.
+-   The keybinding `Ctrl - Enter` (`Cmd - Enter` on a Mac) executes the line where your cursor is located in the script. You can also select several lines and execute all of them using this shortcut.
+
+```{r, eval = FALSE}
+# Introduction to R
+# -------------------
+
+# Load packages 
+library(readxl)
+library(ggplot2)
+
+# Read our data set
+testdata <- read_xls("testdata.xls")
+
+# Make a scatterplot of the X1 and X2-variables
+plot <- ggplot(testdata, aes(x = X1, y = X2)) + 
+    geom_point() + 
+    ggtitle("Scatterplot of testdata") +
+    theme_classic()
+ggsave("testplot.pdf", plot)
+```
+
+**Exercise:** Make sure to save your script as an `.R`-file in the folder that we created for this session. Close RStudio. Then navigate to the folder and double click on the script file. Hopefully RStudio opens (if not, right click, select "Open in" and then Rstudio, confirm if prompted to set RStudio as default program for opening .R-files).
+
+Find out what your working directory is now. What just happened? How is this useful?
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+Opening RStudio by double clicking on the script file automatically sets the working directory to the location of the script file. Very useful when returning to a project.
+
+:::
+
+## The pipe operator
+
+<iframe src="https://player.vimeo.com/video/539150179" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+We introduce the pipe operator `%>%`, which allows us to apply a sequence of functions in a practical way that allows us to read the code from left to right, just as we read normal text.
+
+If you installed the `dplyr`-package in the "Packages"-section, then you have already installed the `magrittr`-package that includes the pipe. The shortcut for the pipe in RStudio is `Ctrl - Shift - M` on Windows, and `Cmd - Shift - M` on a Mac.
+
+**We will use this technique extensively throughout the course!**
+
+```{r eval = FALSE}
+# For this lesson, you need to have magrittr installed. Run the line 
+# below if you don't have it already: 
+# install.packages("magrittr")
+
+# Create some data:
+x <- (-500):500
+
+# Want to calculate mean of sqrt of abs values of x...
+# one way: via temporary variables: 
+abs.x <- abs(x)
+sqrt.abs.x <- sqrt(abs.x)
+alt.1 <- mean(sqrt.abs.x)
+
+# ...or collapse them all with nested functions: 
+alt.2 <- mean(sqrt(abs(x)))
+
+library(magrittr)
+# With Magrittr: 
+# x %>% f() is equivalent to  f(x)
+# Why would we want to do this: 
+#  - code becomes more easy to read
+#  - easier to develop code, particularly when dealing with data sets
+
+#  Example 1
+sqrt(2)
+2 %>% sqrt
+
+#  Example 2
+mean(c(1,2,NA), na.rm=T)
+c(1,2,NA) %>% mean(na.rm=T)
+
+# Example 3
+(-2)^2
+-2 %>% .^2
+
+# Example 4
+atan2(1,2)
+2 %>% atan2(1,.)
+```
+
+**Exercise:**
+
+Use magrittr to calculate the equivalent of `alt.1` and `alt.2`
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/539150219" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+```{r, eval = FALSE}
+alt.3 <- 
+  x %>% 
+  abs %>% 
+  sqrt %>% 
+  mean
+
+alt.1
+alt.2
+alt.3
+```
+
+:::
+

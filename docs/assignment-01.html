@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.520">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BAN400 - R Programming for Data Science – assignment-01</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./01-intro-to-r.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <img src="./pictures/nhh.png" alt="">
+    <span class="navbar-title">BAN400 - R Programming for Data Science</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">1. Introduction to R</a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Assignments</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-01.html" class="sidebar-item-text sidebar-link active">Assignment 1</a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#assignment-1" id="toc-assignment-1" class="nav-link active" data-scroll-target="#assignment-1">Assignment 1</a>
+  <ul class="collapse">
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1">Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2">Problem 2</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="assignment-1" class="level1 unnumbered">
+<h1 class="unnumbered">Assignment 1</h1>
+<section id="problem-1" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="problem-1">Problem 1</h2>
+<p>We will look at the monthly returns on the NASDAQ composite stock index from August 2013 to June 2018, as well as the returns on 16 individual stocks listed on NASDAQ. The data is contained in the file <a href="data-nasdaq-returns.xls"><code>data-nasdaq-returns.xls</code></a>, and has been collected from the Yahoo Finance website.</p>
+<p>Put the data in an appropriate folder on your computer. Perform the following tasks:</p>
+<ol type="1">
+<li>Read the data into R and take a first look at the data set. The main index is in the <code>NASDAQ</code>-column.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see how the top of the data set should look like after you have loaded it into R.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59 × 11
+   Date     NASDAQ    ADBE     AMZN     AAPL     BBBY     CSCO    CMCSA     COST
+   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 2013-0… -0.0101 -0.0329 -0.0696   0.0739  -3.64e-2 -0.0933  -0.0686  -0.0484 
+ 2 2013-0…  0.0494  0.127   0.107   -0.0217   4.79e-2  0.00513  0.0695   0.0291 
+ 3 2013-1…  0.0386  0.0430  0.152    0.0920  -5.17e-4 -0.0378   0.0535   0.0243 
+ 4 2013-1…  0.0351  0.0461  0.0781   0.0619   9.14e-3 -0.0598   0.0466   0.0611 
+ 5 2013-1…  0.0283  0.0532  0.0130   0.00886  2.87e-2  0.0540   0.0412  -0.0525 
+ 6 2014-0… -0.0176 -0.0116 -0.106   -0.114   -2.29e-1 -0.0235   0.0466  -0.0576 
+ 7 2014-0…  0.0486  0.148   0.00946  0.0500   6.03e-2 -0.00503 -0.0520   0.0388 
+ 8 2014-0… -0.0257 -0.0430 -0.0737   0.0198   1.43e-2  0.0280  -0.0324  -0.0448 
+ 9 2014-0… -0.0203 -0.0636 -0.101    0.0948  -1.02e-1  0.0303   0.0338   0.0352 
+10 2014-0…  0.0306  0.0452  0.0273   0.0702  -2.08e-2  0.0633   0.00846  0.00293
+# … with 49 more rows, and 2 more variables: DLTR &lt;dbl&gt;, EXPE &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Make a new data frame containing only the date column and returns on the main index as well as one of the individual stocks of your choosing. Name the new data frame appropriately.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see how the top of the new data set should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For example, after picking ADBE as the stock:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59 × 3
+   Date        NASDAQ    ADBE
+   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+ 1 2013-08-01 -0.0101 -0.0329
+ 2 2013-09-01  0.0494  0.127 
+ 3 2013-10-01  0.0386  0.0430
+ 4 2013-11-01  0.0351  0.0461
+ 5 2013-12-01  0.0283  0.0532
+ 6 2014-01-01 -0.0176 -0.0116
+ 7 2014-02-01  0.0486  0.148 
+ 8 2014-03-01 -0.0257 -0.0430
+ 9 2014-04-01 -0.0203 -0.0636
+10 2014-05-01  0.0306  0.0452
+# … with 49 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Make a scatterplot of the two variables in your newly created data frame.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see the plot should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Still, using ADBE, will of course look a bit different if you have chosen a different stock:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="assignment-01_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>The function <code>sign(x)</code> returns the sign of <code>x</code>, that is, it returns -1 if <code>x</code> is negative and 1 if <code>x</code> is positive. Make two new columns, named <code>sign_NASDAQ</code> and a corresponding name for the stock that you have chosen to include, that contains the sign of the return, indicating whether the index or stock went up or down that day.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see how the top of the new data set should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59 × 5
+   Date        NASDAQ    ADBE NASDAQ_sign ADBE_sign
+   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+ 1 2013-08-01 -0.0101 -0.0329          -1        -1
+ 2 2013-09-01  0.0494  0.127            1         1
+ 3 2013-10-01  0.0386  0.0430           1         1
+ 4 2013-11-01  0.0351  0.0461           1         1
+ 5 2013-12-01  0.0283  0.0532           1         1
+ 6 2014-01-01 -0.0176 -0.0116          -1        -1
+ 7 2014-02-01  0.0486  0.148            1         1
+ 8 2014-03-01 -0.0257 -0.0430          -1        -1
+ 9 2014-04-01 -0.0203 -0.0636          -1        -1
+10 2014-05-01  0.0306  0.0452           1         1
+# … with 49 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Make another column consisting of the sum of the two sign columns divided by two. The resulting value will then be -1 if both the index and the stock went down that day, 0 if they went in separate directions, and 1 if both went up.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see how the top of the new data set should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 59 × 6
+   Date        NASDAQ    ADBE NASDAQ_sign ADBE_sign   sum
+   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+ 1 2013-08-01 -0.0101 -0.0329          -1        -1    -1
+ 2 2013-09-01  0.0494  0.127            1         1     1
+ 3 2013-10-01  0.0386  0.0430           1         1     1
+ 4 2013-11-01  0.0351  0.0461           1         1     1
+ 5 2013-12-01  0.0283  0.0532           1         1     1
+ 6 2014-01-01 -0.0176 -0.0116          -1        -1    -1
+ 7 2014-02-01  0.0486  0.148            1         1     1
+ 8 2014-03-01 -0.0257 -0.0430          -1        -1    -1
+ 9 2014-04-01 -0.0203 -0.0636          -1        -1    -1
+10 2014-05-01  0.0306  0.0452           1         1     1
+# … with 49 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>We would like to count the number of days for which the new <code>sum</code>-column is either -1, 0, or 1. Do that by applying the function <code>table()</code> to the <code>sum</code>-column. (Recall that we can pick out individual columns using the dollar-sign).</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see how the output should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For the ADBE-stock:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-1  0  1 
+15 10 34 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li>In the tasks above you may (or may not) have created several intermediate data frames under different names for each problem, or perhaps you have overwritten the data frame for each new task. Let us rather complete task 1, 2, 4 and 5 in one single operation, where you just append each task to the previous using the pipe-operator. That way you only need to come up with one name for the data set.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click here to see to see a hint if you need to.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code may look something like this, replace the dots:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>stock_data <span class="ot">&lt;-</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(...) <span class="sc">%&gt;%</span>       </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(...) <span class="sc">%&gt;%</span>                  </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>          </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>              </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...)       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="problem-2">Problem 2</h2>
+<p>The <code>.csv</code>-file (comma separated values) is a common format for storing data in a plain text file. The file <a href="data-missile.csv"><code>data-missile.csv</code></a> contains data on North Korean missile launches from 1984 until 2017. Put the file in folder on your computer and inspect the contents by opening it in a text editor such as Notepad or Textedit.</p>
+<p>R ships with a function <code>read.csv()</code> that we can use to read csv-files in the same way as we use <code>read_excel()</code> to read excel-files. We will, however, use a function from the <code>readr</code>-package called <code>read_csv()</code> for this purpose that does <em>almost</em> the same thing as the default <code>read.csv()</code>-function. There are some subtle differences between these two functions that are not very important, but <code>read_csv()</code> works a little bit better together with many other functions and packages that we will use later.</p>
+<p>Load <code>readr</code> using the <code>library()</code> function. If you get an error message telling you that <code>there is no package called 'readr'</code>, then you need to install it first using the <code>install.packages()</code>-function.</p>
+<p>Load the data into into R using the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missile <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-missile.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the data. The variable «apogee» is the highest altitude reached by the missile in km. Calculate the following statistics for this variable:</p>
+<ol type="1">
+<li>The mean.</li>
+<li>The median.</li>
+<li>The standard deviation.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Maybe you get some unexpected results here. You need to troubleshoot the problem in order to solve the issue. Click here if you need some hints on what to try.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The problem is that you get <code>NA</code>-values right? Why is this? Look at the data, and you will see that many values are missing, and they should be ignored when calculating the mean, median and standard deviation. Look at the help files for the functions in question (e.g.&nbsp;<code>?mean</code>) to see if there is something you can to to fix the issue.</p>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-intro-to-r.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Introduction to R</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
