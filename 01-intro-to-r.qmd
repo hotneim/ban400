@@ -1,4 +1,5 @@
-# Introduction to R 
+
+# Introduction to R
 
 Welcome to the first taste of BAN400. We will start by downloading and installing the tools that we need to start coding, and then we will explore some of the most basic aspects of the R programming language. After most of the videos we have included a small problem that we encourage you to try before you move on to the next topic.
 
@@ -75,7 +76,6 @@ number3 <- 101
 
 magic_number <- number1 + number2 + number3
 ```
-
 :::
 
 ## Vectors
@@ -141,7 +141,6 @@ min(vector1)
 max(vector1)
 median(vector1)
 ```
-
 :::
 
 ## Packages
@@ -176,7 +175,6 @@ install.packages("dplyr")
 install.packages("tidyr")
 install.packages("lubridate")
 ```
-
 :::
 
 ## Working directory
@@ -191,7 +189,7 @@ There are two central functions:
 
 -   `getwd()` prints out the current working directory.
 
--   `setwd("C:/path/to/folder")` sets the working directory to the specified folder. We will as a general rule not use `setwd()` in our scripts (the reason for that will become clear later), but rather use RStudio's menu system for changing the working directory (we will in practice not need to do that as a general rule as well, which will also become clear in a short while). 
+-   `setwd("C:/path/to/folder")` sets the working directory to the specified folder. We will as a general rule not use `setwd()` in our scripts (the reason for that will become clear later), but rather use RStudio's menu system for changing the working directory (we will in practice not need to do that as a general rule as well, which will also become clear in a short while).
 
 We may however have to deal with file paths in our code, and make the following technical notes:
 
@@ -258,7 +256,6 @@ testdata$X1 + testdata$X2
 # 3
 sum(testdata$X1 + testdata$X2)
 ```
-
 :::
 
 ## Plotting
@@ -308,7 +305,6 @@ ggsave("testplot.pdf", p)
 ```{r, eval = FALSE}
 ggplot(testdata, aes(x = X1, y = X2)) + geom_point(colour = "blue", size = 5)
 ```
-
 :::
 
 ## Writing scripts
@@ -349,10 +345,9 @@ Find out what your working directory is now. What just happened? How is this use
 ## Expand for solution
 
 Opening RStudio by double clicking on the script file automatically sets the working directory to the location of the script file. Very useful when returning to a project.
-
 :::
 
-## The pipe operator
+## The pipe operator {#pipe}
 
 <iframe src="https://player.vimeo.com/video/539150179" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
 
@@ -427,6 +422,4 @@ alt.1
 alt.2
 alt.3
 ```
-
 :::
-

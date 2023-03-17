@@ -21,8 +21,13 @@ website:
       - href: index.qmd
         text: Course overview
       - text: "---"
-      - href: 01-intro-to-r.qmd
-        text: "1. Introduction to R"
+      - section: "PART I"
+        contents:
+        - href: 01-intro-to-r.qmd
+          text: "1. Introduction to R"
+        - href: 02-data-wrangling.qmd
+          text: "2. Data Wrangling"
+      - section: "PART II"
       - text: "---"
       - section: "Assignments"
         contents:

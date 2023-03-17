@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.520">
+<meta name="generator" content="quarto-0.9.615">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./01-intro-to-r.html" rel="prev">
+<link href="./02-data-wrangling.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -175,20 +175,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">PART I</a>
+      <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">1. Introduction to R</a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-wrangling.html" class="sidebar-item-text sidebar-link">2. Data Wrangling</a>
+  </div>
+</li>
+    </ul>
+  </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Assignments</a>
-      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Assignments</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-01.html" class="sidebar-item-text sidebar-link active">Assignment 1</a>
@@ -245,24 +260,21 @@ Click here to see how the top of the data set should look like after you have lo
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 59 × 11
+<pre><code># A tibble: 59 x 11
    Date     NASDAQ    ADBE     AMZN     AAPL     BBBY     CSCO    CMCSA     COST
    &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
- 1 2013-0… -0.0101 -0.0329 -0.0696   0.0739  -3.64e-2 -0.0933  -0.0686  -0.0484 
- 2 2013-0…  0.0494  0.127   0.107   -0.0217   4.79e-2  0.00513  0.0695   0.0291 
- 3 2013-1…  0.0386  0.0430  0.152    0.0920  -5.17e-4 -0.0378   0.0535   0.0243 
- 4 2013-1…  0.0351  0.0461  0.0781   0.0619   9.14e-3 -0.0598   0.0466   0.0611 
- 5 2013-1…  0.0283  0.0532  0.0130   0.00886  2.87e-2  0.0540   0.0412  -0.0525 
- 6 2014-0… -0.0176 -0.0116 -0.106   -0.114   -2.29e-1 -0.0235   0.0466  -0.0576 
- 7 2014-0…  0.0486  0.148   0.00946  0.0500   6.03e-2 -0.00503 -0.0520   0.0388 
- 8 2014-0… -0.0257 -0.0430 -0.0737   0.0198   1.43e-2  0.0280  -0.0324  -0.0448 
- 9 2014-0… -0.0203 -0.0636 -0.101    0.0948  -1.02e-1  0.0303   0.0338   0.0352 
-10 2014-0…  0.0306  0.0452  0.0273   0.0702  -2.08e-2  0.0633   0.00846  0.00293
-# … with 49 more rows, and 2 more variables: DLTR &lt;dbl&gt;, EXPE &lt;dbl&gt;</code></pre>
+ 1 2013-0~ -0.0101 -0.0329 -0.0696   0.0739  -3.64e-2 -0.0933  -0.0686  -0.0484 
+ 2 2013-0~  0.0494  0.127   0.107   -0.0217   4.79e-2  0.00513  0.0695   0.0291 
+ 3 2013-1~  0.0386  0.0430  0.152    0.0920  -5.17e-4 -0.0378   0.0535   0.0243 
+ 4 2013-1~  0.0351  0.0461  0.0781   0.0619   9.14e-3 -0.0598   0.0466   0.0611 
+ 5 2013-1~  0.0283  0.0532  0.0130   0.00886  2.87e-2  0.0540   0.0412  -0.0525 
+ 6 2014-0~ -0.0176 -0.0116 -0.106   -0.114   -2.29e-1 -0.0235   0.0466  -0.0576 
+ 7 2014-0~  0.0486  0.148   0.00946  0.0500   6.03e-2 -0.00503 -0.0520   0.0388 
+ 8 2014-0~ -0.0257 -0.0430 -0.0737   0.0198   1.43e-2  0.0280  -0.0324  -0.0448 
+ 9 2014-0~ -0.0203 -0.0636 -0.101    0.0948  -1.02e-1  0.0303   0.0338   0.0352 
+10 2014-0~  0.0306  0.0452  0.0273   0.0702  -2.08e-2  0.0633   0.00846  0.00293
+# ... with 49 more rows, and 2 more variables: DLTR &lt;dbl&gt;, EXPE &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -286,7 +298,7 @@ Click here to see how the top of the new data set should look like.
 <p>For example, after picking ADBE as the stock:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 59 × 3
+<pre><code># A tibble: 59 x 3
    Date        NASDAQ    ADBE
    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;
  1 2013-08-01 -0.0101 -0.0329
@@ -299,7 +311,7 @@ Click here to see how the top of the new data set should look like.
  8 2014-03-01 -0.0257 -0.0430
  9 2014-04-01 -0.0203 -0.0636
 10 2014-05-01  0.0306  0.0452
-# … with 49 more rows</code></pre>
+# ... with 49 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -323,7 +335,7 @@ Click here to see the plot should look like.
 <p>Still, using ADBE, will of course look a bit different if you have chosen a different stock:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-01_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -346,7 +358,7 @@ Click here to see how the top of the new data set should look like.
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 59 × 5
+<pre><code># A tibble: 59 x 5
    Date        NASDAQ    ADBE NASDAQ_sign ADBE_sign
    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
  1 2013-08-01 -0.0101 -0.0329          -1        -1
@@ -359,7 +371,7 @@ Click here to see how the top of the new data set should look like.
  8 2014-03-01 -0.0257 -0.0430          -1        -1
  9 2014-04-01 -0.0203 -0.0636          -1        -1
 10 2014-05-01  0.0306  0.0452           1         1
-# … with 49 more rows</code></pre>
+# ... with 49 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -382,7 +394,7 @@ Click here to see how the top of the new data set should look like.
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 59 × 6
+<pre><code># A tibble: 59 x 6
    Date        NASDAQ    ADBE NASDAQ_sign ADBE_sign   sum
    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
  1 2013-08-01 -0.0101 -0.0329          -1        -1    -1
@@ -395,7 +407,7 @@ Click here to see how the top of the new data set should look like.
  8 2014-03-01 -0.0257 -0.0430          -1        -1    -1
  9 2014-04-01 -0.0203 -0.0636          -1        -1    -1
 10 2014-05-01  0.0306  0.0452           1         1     1
-# … with 49 more rows</code></pre>
+# ... with 49 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -444,12 +456,12 @@ Click here to see to see a hint if you need to.
 <div class="callout-body-container callout-body">
 <p>The code may look something like this, replace the dots:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>stock_data <span class="ot">&lt;-</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(...) <span class="sc">%&gt;%</span>       </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(...) <span class="sc">%&gt;%</span>                  </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>          </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>              </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...)       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>stock_data <span class="ot">&lt;-</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(...) <span class="sc">%&gt;%</span>       </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(...) <span class="sc">%&gt;%</span>                  </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>          </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">%&gt;%</span>              </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...)       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -462,7 +474,7 @@ Click here to see to see a hint if you need to.
 <p>Load <code>readr</code> using the <code>library()</code> function. If you get an error message telling you that <code>there is no package called 'readr'</code>, then you need to install it first using the <code>install.packages()</code>-function.</p>
 <p>Load the data into into R using the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>missile <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-missile.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>missile <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-missile.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Look at the data. The variable «apogee» is the highest altitude reached by the missile in km. Calculate the following statistics for this variable:</p>
 <ol type="1">
@@ -573,8 +585,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01-intro-to-r.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1. Introduction to R</span>
+      <a href="./02-data-wrangling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Data Wrangling</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

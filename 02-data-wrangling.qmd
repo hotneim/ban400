@@ -1,0 +1,361 @@
+---
+number-offset: 1
+---
+
+# Data wrangling
+
+In this section we will learn how to handle *data* in a very efficient way. We will learn to
+
+-   filter a data set based on variable values,
+-   select variables,
+-   create new variables,
+-   group data based on variables,
+-   dummarise the data, and
+-   join different data sets.
+
+We will obviously use R to solve these problems, but we do have the choice between different coding styles to do it. One way is to only use functions that already ship with R, or we can use functions from additional packages to solve the same problems. We choose the latter, and not only that: We will thoughout this course use a specific *set of packages*, an ecosystem if you wish (or even a philosophy of data work), called the *tidyverse*.
+
+The tidyverse ([tidyverse.org](https://www.tidyverse.org/)) is a set of R packages that work very well together, follows a consistent logic, and that enables us to write extremely clean code. We have already touched upon the difference between data wrangling using base R and the tidyverse in [Chapter 1.9](01-intro-to-r.qmd#pipe).
+
+See the video below for some more details regarding the tidyverse. Some formulations in the video gives the impression that this material should be consumed on a specific *day*, but that are just some residue from a time when this part of the course was given intensively. You can find the cheat sheet [here](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf). See also [this](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) webpage for further information about one of the most central packages in tidyverse, `dplyr`.
+
+<iframe src="https://player.vimeo.com/video/562515779" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+## The basics of `dplyr`
+
+<iframe src="https://player.vimeo.com/video/562515810" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+First, we warm up with a first few functions from dplyr. Note how the syntax is similar to how we use the magrittr-pipe `%>%`. You can download the data set here: [data-geilo.xlsx](data-geilo.xlsx).
+
+```{r, include=FALSE}
+# Load libraries
+library(dplyr)
+library(magrittr)
+library(tidyr)
+library(readxl)
+
+# Import data from Excel-file
+sales <- 
+  read_excel(
+    "data-geilo.xlsx", 
+    sheet = "Sales")
+
+# Look at data: 
+head(sales)
+
+# All sales where cocoa > 0: 
+sales[sales$cocoa > 0,]
+
+# Similarly with dplyr has a function for this: 
+filter(sales, cocoa > 0)
+
+# or even better: combine dplyr and magrittr: 
+sales %>%
+  filter(cocoa > 0)
+
+# Some governing principles in with dplyr/tidyverse functions: 
+# 
+#  - The first argument is a data frame.
+#  - The subsequent arguments describe what to do with the data frame. You 
+#    can refer to columns in the data frame directly without using $.
+#  - The result is a new data frame
+
+# Sorting the data with dplyr: 
+sales %>%
+  arrange(cocoa) %>%
+  head
+
+# Sorting the data with several columns: 
+sales %>%
+  arrange(cocoa, orange, swix) %>%
+  head
+```
+
+**Exercise:** Report the top of the dataset, sorted by
+
+-   cocoa (increasing)
+-   swix (decreasing)
+-   orange (decreasing)
+
+You should obtain a result equal to the data frame below. Note we only show the first six entries of the result.
+
+```{r, echo = FALSE}
+sales %>%
+  arrange(cocoa, desc(swix), desc(orange)) %>%
+  head
+```
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r, eval = FALSE}
+sales %>%
+  arrange(cocoa, desc(swix), desc(orange)) %>%
+  head
+
+# Alternatively: 
+ sales %>%
+   arrange(cocoa, -swix, -orange) %>%
+   head
+ 
+# Note however that (-) requires num. vectors. desc can take e.g. factors as well.)
+```
+:::
+
+## Selecting and creating new variables, and summarising a data frame
+
+<iframe src="https://player.vimeo.com/video/562515867" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+# Selecting some variables: 
+head(sales[,c("swix", "cocoa")])
+
+sales %>%
+  select(cocoa, swix) %>%
+  head
+
+# create new variables: 
+sales %>%
+  mutate(items = cocoa+swix+orange) %>%
+  head
+
+sales %>%
+  transmute(
+    items = cocoa+swix+orange,
+    trans = trans) %>%
+  head
+
+# Summarise data: 
+sales %>%
+  summarise(sum_cocoa = sum(cocoa))
+
+# Assignment 1: how many items were sold in total?
+# Assignment 2: What was the max and min number of items bought by
+# the people that also bought cocoa?
+
+```
+
+**Exercise:**
+
+-   How many items were sold *in total*?
+-   What is the min. and max. number of items purchased by customers that also bought at least one cocoa?
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/562515843" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+# Exercise 1: 
+
+sales %>%
+  transmute(items = cocoa + swix + orange) %>%
+  summarise(sum_items = sum(items))
+
+# Exercise 2: 
+sales %>%
+  filter(cocoa>0) %>%
+  transmute(
+    items = cocoa + swix + orange) %>%
+  summarise(
+    max_items = max(items),
+    min_items = min(items)
+  )
+
+```
+:::
+
+## Groups and summarise
+
+<iframe src="https://player.vimeo.com/video/562515689" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+# Compare the output from this command: 
+sales
+
+# ..to this one: 
+sales %>% group_by(customer)
+
+# Note how we in the second command have added some meta-information on groups
+# to the data frame. Groups change the results we get when applying
+# functions to the data frame. See below: 
+
+sales %>%
+  summarise(
+    sum.orange = sum(orange),
+    no.trans = n()) 
+
+sales %>%
+  group_by(customer) %>%
+  summarise(
+    sum.orange = sum(orange),
+    no.trans = n()) 
+
+# When we apply "summarise" to a data frame we are reducing it 
+# to the summary statistics that we list in the call to the function. 
+# In the command above, this is a sum and a count. There are many
+# such functions we can use - just keep in mind that the function
+# should return one item per group (or just one item if you don't
+# have groups). 
+# 
+# Make sure you are aware of the difference between mutate and 
+# summarise: mutate *adds* a variable to the data frame, 
+# summarise aggregates it. 
+
+```
+
+**Exercise:** How many cocoas were bought in total by customers who also bought more than two oranges? (Hint: How does *mutate* work on a grouped data frame?)
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/562515902" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+sales %>%
+  group_by(customer) %>%
+  mutate(sum.orange = sum(orange)) %>%
+  filter(sum.orange > 2) %>%
+  summarise(sum.cocoa = sum(cocoa))
+```
+:::
+
+## Joining data frames
+
+<iframe src="https://player.vimeo.com/video/562515738" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+Finally, we will join data frames. See the [data wrangling cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf), under the header "Combine data sets".
+
+```{r, eval=FALSE}
+# Read in both sheets
+sales <- read_excel("../datasett/Geilo.xlsx", sheet="Sales")
+customers <- read_excel("../datasett/Geilo.xlsx", sheet="Customers")
+
+# See that sales stores transactions, as well as a link to a 
+# customer number: 
+head(sales)
+
+# In the "customers"-file we find info on each customer: 
+head(customers)
+```
+
+**Exercise:** Use the dplyr join verbs to create the following four different results:
+
+-   A dataframe with transactions and customer info filled in
+-   A dataframe with transactions for all registered customers
+-   A dataframe with transactions for customers that are not registered
+-   A dataframe that combines all the information in both data sets
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/562515717" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+
+sales %>%
+  left_join(customers, by="customer") %>%
+  group_by(hotel) %>% 
+  summarise(
+    sum_orange = sum(orange))
+
+  arrange(customer) %>%
+  head
+
+# 1: 
+sales %>%
+  left_join(customers, by="customer") %>%
+  arrange(customer) %>%
+  head
+
+# 2: 
+sales %>%
+  semi_join(customers, by="customer") %>%
+  arrange(customer) %>%
+  head
+
+# 3: (why does this give different res. than is.na()?)
+sales %>%
+  anti_join(customers, by="customer") %>%
+  arrange(customer) %>%
+  head
+
+# 4:
+full <- 
+  sales %>%
+  full_join(customers, by = "customer")
+
+```
+:::
+
+## Wrapping up
+
+A word of caution on tidyverse: `dplyr` is somewhat contested among R-users. Some claim it is very easy to learn (although I'm not aware of any studies). Critics argue that it is slow compared to `data.table.` `data.table`can (sometimes) beat Python/Pandas in terms of spee not, but `dplyr` can not do that. Note also that the tidyverse ecosystem in general is continually being updated. This means that if you try to run the commands from this course on a fresh install of R and Tidyverse in a few years, it might not work unless you update the syntax.
+
+Think about your usage of programming: If it is occasional scripting, ad-hoc reports etc, then speed is often not important, and occasionally changing syntax might not be an issue.
+
+However, in my experience the tidyverse is significantly "faster" than alternatives for important use cases - which involve many exploratory analyses, data visualizations, and trying out many different ways of modelling a problem (i.e. usually what constrains your time may be how fast you can express what you want - not how long you need to wait for results).
+
+Let's wrap up this chapter with a final exercise:
+
+**Exercise:** Create a summary statistics with the following properties:
+
+-   Customer on rows, with all customers as well as non-registered customers (non-registered can be in a single row)
+-   In addition to customer numbers, four columns:
+    -   Number of transactions in total
+    -   Total sales of each type of item
+
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/562515755" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+
+</iframe>
+
+```{r, eval=FALSE}
+# Why doesn't this work!?
+#(check e.g. customer nr 2!):
+full %>% 
+  arrange(customer) %>%
+  mutate(
+    customer=replace_na(customer, "Unregistered")
+  ) %>%
+  group_by(customer) %>%
+  summarise(count         = n(),
+            sale.orange   = sum(orange, na.rm=T),
+            sale.cocoa    = sum(cocoa   , na.rm=T),
+            sale.swix     = sum(swix    , na.rm=T))
+
+
+# A better way: 
+sumstats <-
+  full %>%
+  arrange(customer) %>%
+  mutate(customer = replace_na(customer, "Unregistered")) %>%
+  group_by(customer) %>%
+  summarise(
+    count         = sum(!is.na(trans)),
+    sale.orange   = sum(orange, na.rm = T),
+    sale.cocoa    = sum(cocoa   , na.rm = T),
+    sale.swix     = sum(swix    , na.rm = T)
+  )
+```
+
+:::
