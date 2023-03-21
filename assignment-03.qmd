@@ -1,0 +1,79 @@
+# Assignment 3 {.unnumbered}
+
+In this assignment we will visualize some of the data that was published [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-05-21) as part of the [Tidy Tuesday project](https://github.com/rfordatascience/tidytuesday). There is one observation for each country of the world, and several interesting variables. One of them is the amount of mismanaged plastic waste in each country in a given year, and we will here build a plot using this data by adding more and more layers of complexity.
+
+[Download the data here,](data-plastic.csv) and load it into memory:
+
+```{r, message = FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+plastic <- read_csv("data-plastic.csv")
+```
+The warning message just says that the first column name is empty in the `csv`-file (confirm that by looking at the file if you wish), and that it has been given the generic name `X1`.
+
+We would like to visualize the association between the GDP and the amount of mismanaged plastic waste in the countries of the world. Below you will find four figures of increasing complexity. Replicate them as best as you can, and feel free to spend a few minutes looking at and interpreting the graphs.
+
+### Step 1: A basic scatterplot of the log-transformed variables {-}
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+plastic %>% 
+    ggplot +
+    geom_point(mapping = aes(x = log(gdp),
+                             y = log(per_capita_mismanaged)))
+```
+
+### Step 2: Make the dots reflect country size and continent {-}
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+plastic %>% 
+    ggplot +
+    geom_point(mapping = aes(x = log(gdp),
+                             y = log(per_capita_mismanaged),
+                             size = population,
+                             colour = region))
+```
+
+### Step 3: Fix labels, add theme (you can choose whatever you want), change color palette {-}
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+plastic %>% 
+    ggplot +
+    geom_point(mapping = aes(x = log(gdp),
+                             y = log(per_capita_mismanaged),
+                             size = population,
+                             colour = region)) +
+    xlab("Per capita GDP (log)") +
+    ylab("Per capita mismanaged plastic waste (kg/day, log)") +
+    scale_colour_brewer(palette = "Spectral") +
+    labs(colour = "Region") +
+    guides(size = FALSE) +
+    theme_classic()
+```
+
+### Step 4: Add text labels for the countries and a smoother {-}
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+plastic %>% 
+    ggplot +
+    geom_point(mapping = aes(x = log(gdp),
+                             y = log(per_capita_mismanaged),
+                             size = population,
+                             colour = region)) +
+    geom_text(mapping = aes(x = log(gdp),
+                            y = log(per_capita_mismanaged),
+                            label = code),
+              size = 2,
+              nudge_x = .15) +
+    geom_smooth(aes(x = log(gdp), y = log(per_capita_mismanaged)), colour = "black") +
+    xlab("Per capita GDP (log)") +
+    ylab("Per capita mismanaged plastic waste (kg/day, log)") +
+    scale_colour_brewer(palette = "Spectral") +
+    labs(colour = "Region") +
+    guides(size = FALSE) +
+    theme_classic()
+```
+
+### Step 5 (if you have time): Be creative. Add more layers to the plot above, or learn something else from the data set using `ggplot2` {-}
+

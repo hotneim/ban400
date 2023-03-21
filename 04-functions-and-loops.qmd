@@ -1,0 +1,350 @@
+# Functions and Loops
+
+We will next introduce two vital programming techniques: functions and loops. With these techniques we will be able to leverage that we are working with a programming language, as opposed to manually moving around data in a spreadsheet. This will allow us to both do more calculations as well as writing more complex code. 
+
+In programming, functions and loops are essential building blocks that allow you to create efficient and reusable code. Functions allow you to encapsulate a piece of code into a named block, which you can then call from other parts of your program. Loops allow you to repeat a block of code a certain number of times, or until a certain condition is met.
+
+Functions and loops are particularly important in data science, where you often need to perform the same operation on a large dataset. By encapsulating these operations into functions and using loops to apply them to the entire dataset, you can save yourself a lot of time and effort.
+
+In this chapter, we will introduce the basics of functions and loops in R programming. We will introduce loops and functions in turn before we bring it all together in the end of the chapter. 
+
+
+## An introduction to loops 
+
+<iframe src="https://player.vimeo.com/video/565760862" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+```{r, eval = FALSE}
+# We can write a first, simple loop. Note that
+# 1:  We iterate through all numbers 1:10, starting at the beginning. 
+# 2: "i" is available as a variable when "print(i)" is executed
+for(i in 1:10) {
+    print(i)
+}
+
+
+# We can loop through other collections as well: 
+for(animal in c("cats", "dogs", "hamsters")){
+  print(paste0("I like ", animal, "!"))
+}
+
+
+# Let's say we have a vector x, and want to calculate the cumulative
+# sum of it. 
+x <- seq(from = 1, to = 100, by = 2)
+y <- rep(NA, length(x))
+
+
+# We *could* write out the necessary calculations as below:
+y[1] <- sum(x[1:1])
+y[2] <- sum(x[1:2])
+y[3] <- sum(x[1:3])
+
+# No no no we write a loop instead
+for(i in 1:length(x)) {
+    y[i] <- sum(x[1:i])
+}
+
+# For this particular example, we have a base R-function that 
+# also does the job: 
+cumsum(x)
+```
+
+
+
+**Exercise:**
+
+The Fibonacci sequence 1,1,2,3,5,8,13,... 
+is defined by $F_n = F_{n-1}+F_{n-2}$ for $n>1$. 
+This sequence possesses many mysterious qualities. 
+Look at this remarkable picture for instance: 
+https://en.wikipedia.org/wiki/Golden_ratio#/media/File:Golden_mean.png. 
+It displays the ratio of subsequent Fibonacci numbers, 
+i.e. $F_{n}/F_{n-1}$, that quickly converges to the golden ratio
+ $\frac{1+\sqrt{5}}{2}= 1.618...$. Can you reproduce this figure in R?
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/565760900" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+```{r eval = FALSE}
+library(tidyverse)
+library(ggplot2)
+
+n <- 10
+
+# Create a data frame for storing results:
+df <- 
+  tibble(
+    number = 1:n,
+    F = NA_integer_)
+
+# The first two values are just 1: 
+df$F[1:2] <- 1
+
+# Calculate the rest of the sequence
+for(i in 3:n) {
+  df$F[i] <- df$F[i-2] + df$F[i-1]
+}
+
+# We can calculate the subsequent ratios using a one-liner like this:
+df$F[2:n]/df$F[1:(n-1)]
+
+# Alternatively, we can use the lag-function in dplyr. Note that
+# the first ratio is missing. 
+df <- 
+  df %>% 
+  mutate(ratio = F / lag(F, order_by = number))
+  
+# Define the golden ratio
+phi = (1 + sqrt(5))/2
+
+# We can plot this with ggplot. 
+df %>%
+  ggplot(aes(x = number, y = ratio)) +
+  geom_line(colour = "red") +
+  geom_point(colour = "red") +
+  geom_hline(yintercept = phi, colour = "blue") +
+  theme_bw()
+```
+
+:::
+
+
+## Reading many files 
+
+<iframe src="https://player.vimeo.com/video/565760952" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+Let us look at the following problem. We have downloaded some stock price data files directly from 
+Yahoo Finance ([data-stockprices.zip](data-stockprices.zip)). We are really only interested in the closing price for each stock, and we want to extract those columns and put them into a data frame. From what we know already, we can start imagining how we can do this - and remember that it is just an administrative job. We are not talking about  doing any analyses, at least not yet. This is just a dirty job, but one that has to be done! It is obviously repetitive, so we'll solve it using loops. 
+
+We have a folder with files. We want the "close" column in each of them in a data set because, eventually, I want to plot these time series in figures. The first obvious problem here is of course that the data is distributed across several files. Before we start loading them, however, we should recall our discussions on data structure in the previous chapter ([Wide or long?](03-graphics.qmd#wideorlong)).
+
+The "Excel/Human"-way of storing data would probably be something like this: The first column contains the dates, and then we would have one column for each of the stock. This would make the data fit the shape of the screen alright, but the data would be *wide* and not suitable for further data analysis and plotting operations. Why? Because there would be several observations for each row; and furthermore: Are we certain that the dates for the different stocks match up exactly? 
+
+Surely, it must be better to store this information in the long format; with one observation per row, and one column per variable. In this case, that would be three variables: The date, the stock, and the closing price for that stock at that date.
+
+```{r eval = FALSE}
+# Let us play a bit with first one and see what we get:
+
+# Take the first one and select the date and the correct column
+library(dplyr)
+library(lubridate)
+library(readr)
+
+apple <- 
+  read_csv("AAPL.csv") %>% 
+  select(Date, Close) %>% 
+  mutate(Date = ymd(Date)) %>% 
+  mutate(stock = "AAPL") %>% 
+  rename(date = Date,
+         close = Close) 
+
+# ... boring, repetitive, and also, what if we get some other files tomorrow?
+files <- dir(pattern = "*.csv")
+
+# How many files do we have?
+length(files)
+
+# How many rows?
+nrow(apple)
+
+# Let us initialize an empty data frame where we fill inn the correct columns inside
+# a for loop
+stockprices <- 
+  tibble(
+    date = ymd(),
+    close = numeric(),
+    stock = character())
+
+# Filling the rows
+for(stockfile in files){
+  stockprices <- 
+    read_csv(stockfile) %>% 
+    select(Date, Close) %>% 
+    mutate(Date = ymd(Date)) %>% 
+    rename(date = Date,
+           close = Close) %>% 
+    mutate(stock = tools::file_path_sans_ext(stockfile)) %>% 
+    bind_rows(stockprices)
+}
+```
+
+## Loops can be slow! 
+
+<iframe src="https://player.vimeo.com/video/565761011" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+In non-compiled languages such as R, loops tend to be slow, so experienced programmers often tries to avoid using them. Sometimes we can avoid using loops by finding a function that performs a particular task directly on a vector (or list) of elements, meaning that we do not have to 
+explicitly write out the looping ourselves. This is called *vectorizing* our code.
+
+```{r, eval=FALSE}
+# For example, we calculated the cumulative sum of a vector of numbers by
+# creating the following loop:
+
+partial_sum <- function(x) {
+  ps <- rep(NA, length(x))
+  for(i in 1:length(x)) {
+    ps[i] <- sum(x[1:i])
+  }
+  return(ps)
+}
+
+# Incidentally, there is a function that does exactly the same operation in R
+# directly on the vector x:
+cumsum(x)
+
+library(microbenchmark)
+test <- microbenchmark(partial_sum(x), cumsum(x))
+
+# Why such a big difference? The built-in function is written in a much faster
+# language. Always vectorize your code if possible. This can make a huge
+# difference in bigger projects when we are dealing with hours and days instead
+# of nanoseconds.
+# 
+
+# There are many ways to both vectorize and speed up our code 
+# in R (particularly the "apply"-family of functions!). We will return
+# to this topic in BAN400. 
+```
+
+
+## Functions 
+
+<iframe src="https://player.vimeo.com/video/565761052" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+Writing your own functions is a great tool that can allow you to both do more complex calculations and simplify your code. Another benefit is that it allows you to free up memory in your own brain when developing code. Once you have figured out how to solve a specific problem, you can store your solution in a function. This way, you can re use your solution many times, without having to remember exactly how it was solved. 
+
+The book [Clean Code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) presents principles and guidelines when writing functions. A few principles we should keep in mind when writing functions are: 
+
+1.  Functions should be *short* 
+2.  A function should do *one* thing
+3.  Use understandable names of functions and arguments
+
+Note that we use the terms "principles" here, and not rules. However, to motivate why these are good principles to strive for when writing code, consider what a function would look like if it does not adhere to the principles....it will be a complicated mess that is hard to understand, debug and use. 
+
+```{r, eval=FALSE}
+# We use functions all the time
+plot(1:10, (1:10)^2, type = "l")
+
+# or we get out a number:
+mean(stockprices$close)
+
+# or perhaps a numerical summary of a data set
+summary(stockprices)
+
+# Perhaps we want to make one of those ourselves. 
+subtract <- function(number1, number2) {
+    return(number1 - number2)
+}
+
+subtract(10, 5)
+subtract(5, 10)
+
+subtract_sqrt <- function(number1, number2) {
+    sqrt(number1 - number2)
+}
+
+subtract_sqrt(10, 5)
+subtract_sqrt(5, 10)
+
+subtract_sqrt <- function(number1, number2) {
+    if(number2 > number1) {
+        stop("Can't take the square root of a negative number, make sure that a >= b!")
+    } else {
+        sqrt(number1 - number2)
+    }
+}
+
+subtract_sqrt(5, 10)
+subtract_sqrt(10, 5)
+
+```
+
+**Exercise:**
+
+ Make a function that plots the stock value time series for a given stock.
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+<iframe src="https://player.vimeo.com/video/565761130" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+
+```{r eval = FALSE}
+library(ggplot2)
+
+plotprice <- function(ticker, pricedata) {
+  
+  pricedata %>% 
+    filter(stock == ticker) %>% 
+    ggplot(aes(x = date, y = close)) +
+    geom_line()
+  
+}
+
+plotprice("AAPL", stockprices)
+```
+
+:::
+
+
+## A more complicated function 
+
+<iframe src="https://player.vimeo.com/video/565761187" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture" allowfullscreen></iframe>
+
+Okay, so let us try to make use of this if we imagine the following problem. We have collected the stock price data as before, and we have been tasked with presenting this data in a meeting. You really want to be able to create pretty plots on the fly with different stocks, perhaps in different formats, and you want the option to save the plot as well as a pdf file. Also, you want to be able to normalize the plots with a swith in the function so that they show percentage deviations from the level on the first day in the observation period rather than the raw price.
+
+
+```{r, eval=FALSE}
+# We build a function step by step. An we start with a simple version much like
+# the one we built in the last lesson:
+
+plotStocks <- function(data) {
+  data %>% 
+    ggplot() +
+    geom_line(mapping = aes(x = date, y = close, colour = stock)) +
+    xlab("") +
+    ylab("") +
+    labs(linetype = "Ticker") +
+    theme_bw() + 
+    theme(legend.position = "none") +
+    geom_text(mapping = aes(x = x,
+                            y = y,
+                            label = stock),
+              data =   
+                . %>% 
+                group_by(stock) %>% 
+                summarize(x = tail(date, n = 1),
+                          y = tail(close, n = 1)),
+              hjust = -.3) + 
+    scale_x_date(expand = c(.14, 0))
+}
+
+normaliseAndPlot <- 
+  function(data,norm=FALSE){
+    if(norm){
+      data %>% 
+        group_by(stock) %>% 
+        arrange(stock,date) %>% 
+        mutate(
+          firstclose = head(close,n=1),
+          close = close/firstclose
+        ) %>% 
+        plotStocks() +
+        ggtitle("Normalized prices")
+    }else{
+      data %>% 
+        plotStocks() + 
+        ggtitle("Prices")
+    }
+  }
+
+stockprices %>% 
+  filter(stock %in% c("AAPL", "MSFT", "SIRI")) %>% 
+  normaliseAndPlot(norm = TRUE) %>% 
+  ggsave(filename = 'test.pdf')
+
+```
+
+
+

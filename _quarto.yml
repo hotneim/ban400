@@ -27,12 +27,22 @@ website:
           text: "1. Introduction to R"
         - href: 02-data-wrangling.qmd
           text: "2. Data Wrangling"
+        - href: 03-graphics.qmd
+          text: "3. Graphics"
+        - href: 04-functions-and-loops.qmd
+          text: "4. Functions and Loops"
       - section: "PART II"
       - text: "---"
       - section: "Assignments"
         contents:
         - href: assignment-01.qmd
           text: "Assignment 1"
+        - href: assignment-02.qmd
+          text: "Assignment 2"
+        - href: assignment-03.qmd
+          text: "Assignment 3"
+        - href: assignment-04.qmd
+          text: "Assignment 4"
       - href: references.qmd
         text: "References"
 
