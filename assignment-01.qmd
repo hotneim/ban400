@@ -1,7 +1,5 @@
 # Assignment 1 {.unnumbered}
 
-
-
 ## Problem 1 {.unnumbered}
 
 We will look at the monthly returns on the NASDAQ composite stock index from August 2013 to June 2018, as well as the returns on 16 individual stocks listed on NASDAQ. The data is contained in the file [`data-nasdaq-returns.xls`](data-nasdaq-returns.xls), and has been collected from the Yahoo Finance website.
@@ -27,7 +25,6 @@ nasdaq_data <- read_excel("data-nasdaq-returns.xls")
 
 nasdaq_data
 ```
-
 :::
 
 2.  Make a new data frame containing only the date column and returns on the main index as well as one of the individual stocks of your choosing. Name the new data frame appropriately.
@@ -44,7 +41,6 @@ nasdaq_and_adbe <-
 
 nasdaq_and_adbe
 ```
-
 :::
 
 3.  Make a scatterplot of the two variables in your newly created data frame.
@@ -58,7 +54,6 @@ Still, using ADBE, will of course look a bit different if you have chosen a diff
 ggplot(nasdaq_and_adbe, aes(x = NASDAQ, y = ADBE)) +
   geom_point()
 ```
-
 :::
 
 4.  The function `sign(x)` returns the sign of `x`, that is, it returns -1 if `x` is negative and 1 if `x` is positive. Make two new columns, named `sign_NASDAQ` and a corresponding name for the stock that you have chosen to include, that contains the sign of the return, indicating whether the index or stock went up or down that day.
@@ -74,7 +69,6 @@ nasdaq_and_adbe_sign <-
 
 nasdaq_and_adbe_sign
 ```
-
 :::
 
 5.  Make another column consisting of the sum of the two sign columns divided by two. The resulting value will then be -1 if both the index and the stock went down that day, 0 if they went in separate directions, and 1 if both went up.
@@ -89,7 +83,6 @@ nasdaq_and_adbe_sum <-
 
 nasdaq_and_adbe_sum
 ```
-
 :::
 
 6.  We would like to count the number of days for which the new `sum`-column is either -1, 0, or 1. Do that by applying the function `table()` to the `sum`-column. (Recall that we can pick out individual columns using the dollar-sign).
@@ -102,7 +95,6 @@ For the ADBE-stock:
 ```{r, echo = FALSE, message = FALSE}
 table(nasdaq_and_adbe_sum$sum)
 ```
-
 :::
 
 7.  In the tasks above you may (or may not) have created several intermediate data frames under different names for each problem, or perhaps you have overwritten the data frame for each new task. Let us rather complete task 1, 2, 4 and 5 in one single operation, where you just append each task to the previous using the pipe-operator. That way you only need to come up with one name for the data set.
@@ -120,7 +112,6 @@ stock_data <-
   mutate(...) %>%              
   mutate(...)       
 ```
-
 :::
 
 ## Problem 2 {.unnumbered}
@@ -151,5 +142,4 @@ Look at the data. The variable «apogee» is the highest altitude reached by the
 ## Maybe you get some unexpected results here. You need to troubleshoot the problem in order to solve the issue. Click here if you need some hints on what to try.
 
 The problem is that you get `NA`-values right? Why is this? Look at the data, and you will see that many values are missing, and they should be ignored when calculating the mean, median and standard deviation. Look at the help files for the functions in question (e.g. `?mean`) to see if there is something you can to to fix the issue.
-
 :::
