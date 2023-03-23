@@ -323,30 +323,30 @@ Expand for some hints.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.428164</code></pre>
+<pre><code>[1] -0.1830671</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2145211</code></pre>
+<pre><code>[1] -0.06014261</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5664578</code></pre>
+<pre><code>[1] -0.5480783</code></pre>
 </div>
 </div>
 <p>… or with a different value of the population mean:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.36982</code></pre>
+<pre><code>[1] 15.10183</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.45351</code></pre>
+<pre><code>[1] 15.11218</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.81337</code></pre>
+<pre><code>[1] 14.56601</code></pre>
 </div>
 </div>
 </div>
@@ -381,10 +381,10 @@ Expand for some hints.
 <p>Using <code>N = 10</code> and <code>M = 20</code> should give something like this (however not with identical results because you will sample different numbers).</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.32986505  0.02983607 -0.49481711 -0.15651344 -0.03560684 -0.17013413
- [7] -0.38223891 -0.36042724 -0.25961810  0.03434958 -0.56701154  0.56366062
-[13] -0.10660924  0.38717291  0.26760565 -0.13489520 -0.05994597  0.56728321
-[19] -0.10232453  0.01739934</code></pre>
+<pre><code> [1]  0.336106373  0.017210794  0.133580717 -0.199725236  0.112201694
+ [6]  0.177725070 -0.020692810  0.037388216 -0.021072801  0.368906876
+[11]  0.122978345 -0.060627480  0.357364339 -0.002544003 -0.246066329
+[16] -0.086472939 -0.115673920  0.184482962  0.000845937 -0.392942253</code></pre>
 </div>
 </div>
 </div>
@@ -470,6 +470,62 @@ Expand for a hint
 <ol start="5" type="1">
 <li>Fill in the value of the <code>st_dev</code>-column using a for-loop and the function you made in question 1.</li>
 </ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for a hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You must loop over all the rows of the data frame that you created in the last question, and fill in the standard deviations such as the one we calculated in question 3. That is: we can solve this by putting a <em>for loop inside a for loop</em>. In that case we must be careful to not mix up the two counting indices.</p>
+<p>Your code might look something like this, assuming that you have defined the number <code>M</code> and that you have initialized the data frame in the previous question:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(simexp)) {  <span class="co"># "Outer" for loop, using "i" as counting index</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Input the code from question 3 to create a vector of sample means.</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># You must, however change the counting index to something else ("j" for example)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Within this "inner" loop, you must also pick out the correct N-value from the </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data frame with "simexp$N[i]".</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Insert the standard deviation of the sample means into the data frame.</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Can be something like this:</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  simexp<span class="sc">$</span>st_dev[i] <span class="ot">&lt;-</span> <span class="fu">sd</span>(sample_means)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>NB!</strong> It is good if some alarm bells go off here. Nesting for loops inside of each other is not something that we like, because they are so inefficient. A natural next step here is to see if we can get rid of one of them by vectorizing or some other technique (that might be slightly too advanced for us at this point).</p>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Make a graph where you compare the observed standard deviations with the theoretical value.</li>
+</ol>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand for a hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here is a simple plot using <code>M = 200</code>; observed as solid line, theoretical as dashed line. Looks good!</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="assignment-04_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="problem-2" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="problem-2">Problem 2</h2>
@@ -477,24 +533,21 @@ Expand for a hint
 <p>To see what claims data can look like, we can use the “tweedie”-package. We can interpret an observation as the total claim cost for one insurance held for a full year. The parameters <code>phi</code> and <code>power</code> control the shape of the distribution, and <code>mu</code> is the expected value.</p>
 <p>The function <code>rtweedie(n, mu, phi, power)</code> generates <code>n</code> observations from the tweedie distribution with the specified parameters. You can try to generate 10 insurance claims from the distribution with mean <code>mu</code> = 10 and shape parameters <code>phi</code> = 10 000 and <code>power</code> = 1.9 using the following line:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tweedie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tweedie' was built under R version 4.1.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rtweedie</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">10000</span>, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tweedie)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rtweedie</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">10000</span>, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0 0 0 0 0 0 0 0 0 0</code></pre>
 </div>
 </div>
 <p>Most likely you will observe 10 zeros, each of which belong to the majority of houses that do not burn down in a given year. If you do observe a non-zero, however, this would represent the total amount claimed by a single (unlucky) insurance holder that year.</p>
-<p>So what is the expected value of the claim for each customer? The long-run average across all customers of the insurance company? The total amount of money that the company on average expects to pay out to their policy holders divided by the number of policy holders?</p>
-<p>We <em>know</em> the anwer to that question because we generate the observations from a known probability distribution: The answer is <code>mu</code> = 10 000. Knowing this number is obviously very important to the company, because it dictates that the price of each of the insurance policies should be something like</p>
+<p>So what is the expected value of the claim for each customer? The long-run average across all customers of the insurance company, i.e.&nbsp;the total amount of money that the company on average pays out to their policy holders divided by the number of policy holders and the number of years of data?</p>
+<p>We <em>know</em> the answer to this question in our particular case because we generate the observations from a known probability distribution: The answer is <code>mu</code> = 10 000. Knowing this number is obviously very important to the company, because it dictates that the price of each of the insurance policies should be something like</p>
 <p><span class="math display">10 000 + \text{Costs} + \textrm{Safety margin} + \textrm{Profits},</span> that is, the amount that the insurance company expects to pay back to the customer in damages, plus the costs of running the company, plus some safety margin to make sure that the natural fluctuations from year to year do not cause the company to lose money in bad years, plus some profits that make the whole endeavor worthwhile as a business.</p>
 <p>The expected payout, however, is not known in practice, and must be estimated from historical data. We usually do this by taking the average, but we see immediately that it is not obvious that this will work in our situation above where we had just ten observations. If you sampled ten zeros, then the average is zero, and we have barely any information at all regarding the amount that the insurance companly must charge for these policies. In the event that you sampled one or more non-zeros, it is quite unlikely that the average over ten observations is anywhere near the true expected value of 10 000.</p>
 <p>We can ramp this experiment up a notch, by rather sampling 100 000 observations from this distributions (or claimed amount from 100 000 customers over a given year if you wish) and then taking the average:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rtweedie</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mu =</span> <span class="dv">10000</span>, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rtweedie</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mu =</span> <span class="dv">10000</span>, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This number is likely not that far from the true expectation. The story line here is as follows: How large must the sample be for the insurance company to make useful statistical inferences about their population of customers?</p>
 <p>One classical method for making statements regarding the unknown population mean is the <span class="math inline">t</span>-test. You may recall from your introduction to statistics that the <span class="math inline">t</span>-statistic provides a measure of the distance from the observed sample mean to some hypothesized population mean that is approximately normally distributed. This is due to the Cental Limit Theorem, which postulates that the distribution of the sample mean (and essentially any other statistic that is based on a sum of random variables such as the <span class="math inline">t</span>-statistic) converges towards the normal distribution… which is <em>almost</em> always true. One exception is if the underlying distribution of the observations is exceptionally weird. We have already seen that the claim-type data that we generate from the tweedie distribution are quite special, and that we need a fair amount of data in order to see the usual convergence of the sample mean towards the population mean.</p>
@@ -502,10 +555,10 @@ Expand for a hint
 <p>In the code snippet below, we first define the variables <code>N</code> and <code>true_mu</code> and set their value to 100 and 10 000, respectively. We then sample <code>n</code> observations from the tweedie distribution having expected value equal to <code>true_mu</code> (and <code>phi</code> = 1000 and <code>power</code> = 1.9 as above).</p>
 <p>Finally, we use the sampled data to test the null hypothesis whether <span class="math inline">\mu = 10 000</span>, a hypothesis that <em>we know is true</em>. However, if the <span class="math inline">p</span>-value of the test is smaller than 5%, then we reject the null hypothesis at the 5% level.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>true_mu <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">rtweedie</span>(N, <span class="at">mu =</span> true_mu, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(sample, <span class="at">mu =</span> true_mu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>true_mu <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">rtweedie</span>(N, <span class="at">mu =</span> true_mu, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(sample, <span class="at">mu =</span> true_mu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can check this several times and see what you get. If the <span class="math inline">t</span>-test works as it should (i.e., if the sample is large enough for the Central Limit Theorem to provide a reasonable approximation for the distribution of the test statistic), then we should reject the null hypothesis 5% of the times.</p>
 <p>But, why repeat such a trivial task manually? Let us put it in a loop, an perform a proper simulation experiment. The idea is to simulate <span class="math inline">M</span> datasets, each with <span class="math inline">N</span> observations, and run the <span class="math inline">t</span>-test on each one of the <span class="math inline">M</span> datasets. Again, with a 5% significance level we should expect to reject the null in about 5% of the times that we do this, <em>if we have enough data</em>.</p>
@@ -514,7 +567,7 @@ Expand for a hint
 <li>Create a function <code>simTweedieTest()</code> that takes <code>N</code> as argument. The function should simulate a data set with a tweedie-distribution with parameters <code>mu = 10000, phi = 100, power = 1.9</code>, and run a <span class="math inline">t</span>-test on the simulated data using the null hypothesis <span class="math inline">\mu_0 = 10000</span>. The function should return the <span class="math inline">p</span>-value of the test.</li>
 </ol>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -523,10 +576,10 @@ You must figure out how to extract the p-value from a t-test. Google it first. C
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">rtweedie</span>(<span class="at">N =</span> ..., <span class="at">mu =</span> ..., <span class="at">phi =</span> ..., <span class="at">power =</span> ...), <span class="at">mu =</span> ...)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">rtweedie</span>(<span class="at">N =</span> ..., <span class="at">mu =</span> ..., <span class="at">phi =</span> ..., <span class="at">power =</span> ...), <span class="at">mu =</span> ...)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -535,7 +588,7 @@ You must figure out how to extract the p-value from a t-test. Google it first. C
 <li>Create a function <code>MTweedieTests()</code>, that takes <code>M, N</code> and <code>alpha</code> as arguments. This function should call the <code>simTweedieTests()</code> function <code>M</code> times with a sample size of <code>N</code>. The function <code>MTweedieTests()</code> should then return percentage of tests where the <span class="math inline">p</span>-value is lower than <code>alpha</code> (e.g.&nbsp;if we run tests on <span class="math inline">M = 10</span> datasets, and have <span class="math inline">p</span>-values lower than <span class="math inline">\alpha = .05</span> in two of the tests, the function should return 0.2).</li>
 </ol>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -544,7 +597,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>This can be solved by making an empty vector of size <span class="math inline">M</span>, which we then fill with <span class="math inline">p</span>-values using a for-loop. If you want to try to make the code briefer, without using the for-loop explicitly, you can check out the function <code>replicate(M, fun(...))</code>. `<code>replicate()</code> works well for random number generating functions.</p>
 </div>

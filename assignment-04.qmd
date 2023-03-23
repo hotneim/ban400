@@ -111,6 +111,70 @@ And then you can make the `theoretical`-column using for instance a pipe and a `
 
 5. Fill in the value of the `st_dev`-column using a for-loop and the function you made in question 1.
 
+::: {.callout-note collapse="true" icon="false"}
+## Expand for a hint
+
+You must loop over all the rows of the data frame that you created in the last question, and fill in the standard deviations such as the one we calculated in question 3. That is: we can solve this by putting a *for loop inside a for loop*. In that case we must be careful to not mix up the two counting indices. 
+
+Your code might look something like this, assuming that you have defined the number `M` and that you have initialized the data frame in the previous question:
+
+```{r, eval = FALSE}
+
+for(i in 1:nrow(simexp)) {  # "Outer" for loop, using "i" as counting index
+  
+  # Input the code from question 3 to create a vector of sample means.
+  # You must, however change the counting index to something else ("j" for example)
+  # Within this "inner" loop, you must also pick out the correct N-value from the 
+  # data frame with "simexp$N[i]".
+  
+  # Insert the standard deviation of the sample means into the data frame.
+  # Can be something like this:
+  simexp$st_dev[i] <- sd(sample_means)
+  
+}
+```
+
+
+**NB!** It is good if some alarm bells go off here. Nesting for loops inside of each other is not something that we like, because they are so inefficient. A natural next step here is to see if we can get rid of one of them by vectorizing or some other technique (that might be slightly too advanced for us at this point).
+
+:::
+
+6. Make a graph where you compare the observed standard deviations with the theoretical value. 
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for a hint
+
+Here is a simple plot using `M = 200`; observed as solid line, theoretical as dashed line. Looks good!
+
+```{r, echo = FALSE, message = FALSE}
+library(dplyr)    # Contains the tibble-function
+library(ggplot2)
+M <- 200
+
+simexp <- tibble(N = seq(10, 200, by = 10),
+                 st_dev = NA,
+                 sigma = 1) %>% 
+  mutate(theoretical = sigma/sqrt(N))
+
+for(i in 1:nrow(simexp)) {
+  
+    sample_means <- rep(NA, M)
+    for(j in 1:M) {
+        sample_means[j] <- sim_norm(N = simexp$N[i])
+    }
+    
+    simexp$st_dev[i] <- sd(sample_means)
+}
+
+simexp %>% ggplot(aes(x = N, y = st_dev)) +
+  geom_line() +
+  geom_line(aes(x = N, y = theoretical), linetype = "dashed")
+
+```
+
+
+:::
+
 ## Problem 2 {.unnumbered}
 
 In the real world you will sometimes encounter data with strange distributions. One such example is insurance claims. For many insurance products, e.g. fire insurance, most customers will never have a claim. But occasionally a house may burn down, leading to a large claim because it must be rebuilt from the ground up. For the insurance industry it is vital that the expected claim cost is estimated correctly.
@@ -119,16 +183,16 @@ To see what claims data can look like, we can use the "tweedie"-package. We can 
 
 The function `rtweedie(n, mu, phi, power)` generates `n` observations from the tweedie distribution with the specified parameters. You can try to generate 10 insurance claims from the distribution with mean `mu` = 10 and shape parameters `phi` = 10 000 and `power` = 1.9 using the following line:
 
-```{r}
+```{r, warning = FALSE}
 library(tweedie)
 rtweedie(n = 10, mu = 10000, phi = 1000, power = 1.9)
 ```
 
 Most likely you will observe 10 zeros, each of which belong to the majority of houses that do not burn down in a given year. If you do observe a non-zero, however, this would represent the total amount claimed by a single (unlucky) insurance holder that year.
 
-So what is the expected value of the claim for each customer? The long-run average across all customers of the insurance company? The total amount of money that the company on average expects to pay out to their policy holders divided by the number of policy holders?
+So what is the expected value of the claim for each customer? The long-run average across all customers of the insurance company, i.e. the total amount of money that the company on average pays out to their policy holders divided by the number of policy holders and the number of years of data?
 
-We *know* the anwer to that question because we generate the observations from a known probability distribution: The answer is `mu` = 10 000. Knowing this number is obviously very important to the company, because it dictates that the price of each of the insurance policies should be something like
+We *know* the answer to this question in our particular case because we generate the observations from a known probability distribution: The answer is `mu` = 10 000. Knowing this number is obviously very important to the company, because it dictates that the price of each of the insurance policies should be something like
 
 $$10 000 + \text{Costs} + \textrm{Safety margin} + \textrm{Profits},$$ that is, the amount that the insurance company expects to pay back to the customer in damages, plus the costs of running the company, plus some safety margin to make sure that the natural fluctuations from year to year do not cause the company to lose money in bad years, plus some profits that make the whole endeavor worthwhile as a business.
 
