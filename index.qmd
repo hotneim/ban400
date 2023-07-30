@@ -1,6 +1,6 @@
 # Welcome! {.unnumbered}
 
-This is the companion website for the course **BAN400 - R Programming for Data Science**, given at The Norwegian School of Economics (NHH). The purpose of this website is to provide study material such as lecture videos, exercises and assignments for students taking the course. 
+This is the companion website for the course **BAN400 - R Programming for Data Science**, given at The Norwegian School of Economics (NHH). The purpose of this website is to provide study material such as lecture videos, exercises and assignments for students taking the course.
 
 BAN400 has previously consisted of two separate modules; one intensive one-week introduction to R that could be taken separately as a 2.5 ECTS course as BAN420, as well as the main course itself (pun intended), which, together with BAN420, completed the 7.5 ECTS unit BAN400.
 
@@ -9,6 +9,22 @@ From the fall semester of 2023, we do no longer offer the intensive option. BAN4
 All announcements and course administration such as homework delivery and feedback will be carried out through the course page at Canvas, which is the learning management system used by NHH. You will need to sign up to the course in order to gain access to the Canvas page.
 
 ## Schedule {.unnumbered}
- 
-## Practical information {.unnumbered}
 
+| Week number                    | Topic                        | Lecturer |
+|--------------------------------|------------------------------|----------|
+| **Part 1: The basics of R**    |                              |          |
+| 34                             | Introduction to R            | HO       |
+| 35                             | Tidy data                    | OPMH     |
+| 36                             | Plotting                     | HO       |
+| 37                             | Functions and loops          | OPMH     |
+| 38                             | Managing an R-project        | HO       |
+| **Part 2: Specialized topics** |                              |          |
+| 39                             | Git                          | HO       |
+| 40                             | Guest lecture                | PWC      |
+| 41                             | Iterations                   | OPMH     |
+| 42                             | Machine Learning             | HO       |
+| 43                             | Parallel computing           | OPMH     |
+| 44                             | Many models                  | HO       |
+| 45                             | Documentation and deployment | OPMH     |
+
+## Practical information {.unnumbered}
