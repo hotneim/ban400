@@ -54,7 +54,7 @@ sales[sales$cocoa > 0,]
 filter(sales, cocoa > 0)
 
 # or even better: combine dplyr and magrittr: 
-sales %>%
+sales %>% 
   filter(cocoa > 0)
 
 # Some governing principles in with dplyr/tidyverse functions: 
@@ -65,13 +65,13 @@ sales %>%
 #  - The result is a new data frame
 
 # Sorting the data with dplyr: 
-sales %>%
-  arrange(cocoa) %>%
+sales %>% 
+  arrange(cocoa) %>% 
   head
 
 # Sorting the data with several columns: 
-sales %>%
-  arrange(cocoa, orange, swix) %>%
+sales %>% 
+  arrange(cocoa, orange, swix) %>% 
   head
 ```
 
@@ -321,7 +321,6 @@ Let's wrap up this chapter with a final exercise:
     -   Number of transactions in total
     -   Total sales of each type of item
 
-
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for solution
 
@@ -357,5 +356,4 @@ sumstats <-
     sale.swix     = sum(swix    , na.rm = T)
   )
 ```
-
 :::

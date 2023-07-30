@@ -1,4 +1,3 @@
-
 # Introduction to R
 
 Welcome to the first taste of BAN400. We will start by downloading and installing the tools that we need to start coding, and then we will explore some of the most basic aspects of the R programming language. After most of the videos we have included a small problem that we encourage you to try before you move on to the next topic.
@@ -347,57 +346,67 @@ Find out what your working directory is now. What just happened? How is this use
 Opening RStudio by double clicking on the script file automatically sets the working directory to the location of the script file. Very useful when returning to a project.
 :::
 
-## The pipe operator {#pipe}
+## The pipe operators `%>%` and `|>` {#pipe}
 
-<iframe src="https://player.vimeo.com/video/539150179" width="640" height="347" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+Since version 4.1.0, R has included the pipe operator `|>`. A pipe operator allows you to write code that is closer to how we read English. To see how it works, consider the code below, that applies three functions to a vector:
 
-</iframe>
-
-We introduce the pipe operator `%>%`, which allows us to apply a sequence of functions in a practical way that allows us to read the code from left to right, just as we read normal text.
-
-If you installed the `dplyr`-package in the "Packages"-section, then you have already installed the `magrittr`-package that includes the pipe. The shortcut for the pipe in RStudio is `Ctrl - Shift - M` on Windows, and `Cmd - Shift - M` on a Mac.
-
-**We will use this technique extensively throughout the course!**
-
-```{r eval = FALSE}
-# For this lesson, you need to have magrittr installed. Run the line 
-# below if you don't have it already: 
-# install.packages("magrittr")
+```{r}
 
 # Create some data:
 x <- (-500):500
 
 # Want to calculate mean of sqrt of abs values of x...
 # one way: via temporary variables: 
-abs.x <- abs(x)
+abs.x <- abs(x)  
 sqrt.abs.x <- sqrt(abs.x)
 alt.1 <- mean(sqrt.abs.x)
 
-# ...or collapse them all with nested functions: 
+print(alt.1)
+```
+
+Assuming we only care about the final result `alt.1`, the script above creates two unnecessary variables in memory (`abs.x` and `sqrt.abs.x`), and clutters up the environment.
+
+We *could* instead nest the three function calls:
+
+```{r}
 alt.2 <- mean(sqrt(abs(x)))
+print(alt.2)
+```
 
-library(magrittr)
-# With Magrittr: 
-# x %>% f() is equivalent to  f(x)
-# Why would we want to do this: 
-#  - code becomes more easy to read
-#  - easier to develop code, particularly when dealing with data sets
+Nesting the function calls doesn't store the intermediary calculations, so we don't clutter up the environment. However, reading what is happening on this line is more challenging than it needs to be: you have to read from right to left. It the functions calls has more than one argument, you would also need to keep track of which of the right-parentheses belongs to which function.
 
-#  Example 1
-sqrt(2)
-2 %>% sqrt
+This is when the pipe operator comes to the rescue. The pipe "passes" whatever is on the left hand side to the right hand side of the expression. As a simple example, the `sqrt(2)` can be written in a pipe as:
 
-#  Example 2
+```{r}
+2 |> sqrt()
+```
+
+The script above can be read as "The number 2, *then* the square root". Pipes can also be used with multiple arguments. The two statements below gives the same answer:
+
+```{r}
 mean(c(1,2,NA), na.rm=T)
-c(1,2,NA) %>% mean(na.rm=T)
+c(1,2,NA) |> mean(na.rm=T)
+```
 
-# Example 3
-(-2)^2
--2 %>% .^2
+By default, the pipe operator inserts the value of the left hand side as the **first** argument in the function call on the right hand side, so e.g. `x |> mean(na.rm=TRUE)` is equivalent to `mean(x, na.rm=TRUE)`. If you want the value to be inserted as another argument, an underscore `_` may be used as a placeholder for the left hand side value. However, then the argument names must be named:
 
-# Example 4
-atan2(1,2)
-2 %>% atan2(1,.)
+```{r}
+atan2(x=1, y=2)
+
+2 |> atan2(x=1, y=_)
+```
+
+The Tidyverse-package `magrittr` also contains a pipe operator `%>%`. The Tidyverse-pipe behaves similarly to the `|>` in simple cases, however, it uses a period `.` as placeholder. The Tidyverse-pipe generally is more mature and has more features than the base-pipe `|>` (see [here](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/#-vs) for a more thorough comparison of the two).
+
+In this course we'll generally use the Tidyverse-pipe. The shortcut for the pipe in RStudio is `Ctrl - Shift - M` on Windows, and `Cmd - Shift - M` on a Mac.
+
+**We will use this technique extensively throughout the course!**
+
+```{r}
+library(magrittr)
+2 %>% . ^ 2
+
+2 %>% atan2(1, .)
 ```
 
 **Exercise:**
@@ -412,14 +421,23 @@ Use magrittr to calculate the equivalent of `alt.1` and `alt.2`
 </iframe>
 
 ```{r, eval = FALSE}
-alt.3 <- 
+alt.3 <-
   x %>% 
-  abs %>% 
-  sqrt %>% 
+  abs %>%
+  sqrt %>%
   mean
 
 alt.1
 alt.2
 alt.3
+```
+
+Alternatively, with the base-pipe. Note `|>` is more picky than `%>%` with parentheses after function calls.
+
+```{r}
+x |>
+  abs() |>
+  sqrt() |>
+  mean() 
 ```
 :::
