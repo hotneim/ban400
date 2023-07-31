@@ -29,9 +29,9 @@ See the video below for some more details regarding the tidyverse. Some formulat
 
 </iframe>
 
-First, we warm up with a first few functions from dplyr. Note how the syntax is similar to how we use the magrittr-pipe `%>%`. You can download the data set here: [data-geilo.xlsx](data-geilo.xlsx).
+First, we warm up with a first few functions from dplyr. Note how the syntax is similar to how we use the pipe \`\|\>. You can download the data set here: [data-geilo.xlsx](data-geilo.xlsx).
 
-```{r, include=FALSE}
+```{r}
 # Load libraries
 library(dplyr)
 library(magrittr)
@@ -232,18 +232,39 @@ sales %>%
 ```
 :::
 
+## Persistent or temporary `group_by`
+
+Applying a `group_by` to a data frame **keeps** the data frame grouped until **either** you have summarized the data frame **or** you apply `ungroup` to the data frame. This is important to be aware of, many of the Tidyverse-functions behave differently on grouped and ungrouped data sets, and it can be easy to forget to `ungroup`-it after it is no longer needed.
+
+Recently however, `dplyr`-functions support a separate `.by`-argument (or in some cases, `by`), that allows you to group the data frame directly in a function call instead of grouping in a separate step before. The grouping will then only apply to the called function, and doesn't have to be undone with a `ungroup` afterwards.
+
+As an example - two ways below of summing the number of cocoas bought by customer with more than two transactions. Both give the same results, but maybe in this case the `.by`-argument makes the code both more readable and condensed.
+
+```{r}
+sales |>
+  group_by(customer) |>
+  filter(n() > 2) |>
+  ungroup() |>
+  summarise(sum(cocoa))
+
+sales |>
+  filter(n() > 2, .by = customer) |>
+  summarise(sum(cocoa))
+
+```
+
 ## Joining data frames
 
 <iframe src="https://player.vimeo.com/video/562515738" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
-Finally, we will join data frames. See the [data wrangling cheat sheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf), under the header "Combine data sets".
+Finally, we will join data frames. See the [R4DS-book](data%20wrangling%20cheat%20sheet). Joins are necessary when we want to analyse two or more data sets jointly. In our simple example, we have two data sets: one with transactions, and one with customers:
 
-```{r, eval=FALSE}
+```{r}
 # Read in both sheets
-sales <- read_excel("../datasett/Geilo.xlsx", sheet="Sales")
-customers <- read_excel("../datasett/Geilo.xlsx", sheet="Customers")
+sales <- read_excel("data-geilo.xlsx", sheet="Sales")
+customers <- read_excel("data-geilo.xlsx", sheet="Customers")
 
 # See that sales stores transactions, as well as a link to a 
 # customer number: 
@@ -251,6 +272,34 @@ head(sales)
 
 # In the "customers"-file we find info on each customer: 
 head(customers)
+```
+
+`dplyr` has six join functions, but of these `left_join()` and `inner_join()` are probably the most useful. Both functions take need two data frames as arguments, and joins them together into a single data frame. By default, the functions will match together rows based on column names that occur in both data sets.
+
+-   `left_join()` returns all values from the **first** data frame, with all columns and values from the **second** data frame where there is a match between the two data sets. This means that we don't keep any records from the second data set that are unmatched to the first data set.
+
+-   `inner_join()` keeps **only** records that are matched in **both** data sets.
+
+See examples below, as well as the output produced.
+
+```{r}
+x <- tibble(id=c(1,2,3))
+y <- tibble(id=c(1,2,4), value=c("a","b","c"))
+
+x |> left_join(y)
+x |> right_join(y)
+x |> full_join(y)
+x |> inner_join(y)
+
+# Filtering joins: 
+x |> semi_join(y)
+x |> anti_join(y)
+```
+
+When joining, you should pay careful attention to the join conditions. In the joins above are equivalent to writing the join condition explicitly - which in the case below means that `id` from the first data set should be equal to `id` in the second data set to get a match. These join conditions may be exanded to join on e.g. inequalities and multiple columns with different names in the different data sets.
+
+```{r}
+x |> left_join(y, by=join_by(id==id))
 ```
 
 **Exercise:** Use the dplyr join verbs to create the following four different results:
@@ -267,46 +316,37 @@ head(customers)
 
 </iframe>
 
-```{r, eval=FALSE}
-
-sales %>%
-  left_join(customers, by="customer") %>%
-  group_by(hotel) %>% 
-  summarise(
-    sum_orange = sum(orange))
-
-  arrange(customer) %>%
-  head
+```{r}
 
 # 1: 
-sales %>%
-  left_join(customers, by="customer") %>%
-  arrange(customer) %>%
-  head
+sales |> 
+  left_join(customers, by=join_by(customer==customer)) |> 
+  arrange(customer) |> 
+  head()
 
 # 2: 
-sales %>%
-  semi_join(customers, by="customer") %>%
-  arrange(customer) %>%
-  head
+sales |> 
+  semi_join(customers, by=join_by(customer==customer)) |> 
+  arrange(customer) |> 
+  head()
 
 # 3: (why does this give different res. than is.na()?)
-sales %>%
-  anti_join(customers, by="customer") %>%
-  arrange(customer) %>%
-  head
+sales |> 
+  anti_join(customers, by=join_by(customer==customer)) |> 
+  arrange(customer) |> 
+  head()
 
 # 4:
 full <- 
-  sales %>%
-  full_join(customers, by = "customer")
+  sales  |> 
+  full_join(customers, by=join_by(customer==customer)) 
 
 ```
 :::
 
 ## Wrapping up
 
-A word of caution on tidyverse: `dplyr` is somewhat contested among R-users. Some claim it is very easy to learn (although I'm not aware of any studies). Critics argue that it is slow compared to `data.table.` `data.table`can (sometimes) beat Python/Pandas in terms of spee not, but `dplyr` can not do that. Note also that the tidyverse ecosystem in general is continually being updated. This means that if you try to run the commands from this course on a fresh install of R and Tidyverse in a few years, it might not work unless you update the syntax.
+A word of caution on tidyverse: `dplyr` is somewhat contested among R-users. Some claim it is very easy to learn (although I'm not aware of any studies). Critics argue that it is slow compared to `data.table.` `data.table`can (sometimes) beat Python/Pandas in terms of speed not, but `dplyr` can not do that. Note also that the tidyverse ecosystem in general is continually being updated. This means that if you try to run the commands from this course on a fresh install of R and Tidyverse in a few years, it might not work unless you update the syntax.
 
 Think about your usage of programming: If it is occasional scripting, ad-hoc reports etc, then speed is often not important, and occasionally changing syntax might not be an issue.
 
@@ -328,30 +368,27 @@ Let's wrap up this chapter with a final exercise:
 
 </iframe>
 
-```{r, eval=FALSE}
+```{r}
 # Why doesn't this work!?
 #(check e.g. customer nr 2!):
-full %>% 
-  arrange(customer) %>%
-  mutate(
-    customer=replace_na(customer, "Unregistered")
-  ) %>%
-  group_by(customer) %>%
+full |>  
+  arrange(customer) |> 
+  mutate(customer=replace_na(as.character(customer), "Unregistered")) |> 
+  group_by(customer) |> 
   summarise(count         = n(),
-            sale.orange   = sum(orange, na.rm=T),
+            sale.orange   = sum(orange  , na.rm=T),
             sale.cocoa    = sum(cocoa   , na.rm=T),
             sale.swix     = sum(swix    , na.rm=T))
 
 
 # A better way: 
-sumstats <-
-  full %>%
-  arrange(customer) %>%
-  mutate(customer = replace_na(customer, "Unregistered")) %>%
-  group_by(customer) %>%
+full |> 
+  arrange(customer) |> 
+  mutate(customer=replace_na(as.character(customer), "Unregistered")) |> 
+  group_by(customer) |> 
   summarise(
     count         = sum(!is.na(trans)),
-    sale.orange   = sum(orange, na.rm = T),
+    sale.orange   = sum(orange  , na.rm = T),
     sale.cocoa    = sum(cocoa   , na.rm = T),
     sale.swix     = sum(swix    , na.rm = T)
   )
