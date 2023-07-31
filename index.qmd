@@ -10,21 +10,26 @@ All announcements and course administration such as homework delivery and feedba
 
 ## Schedule {.unnumbered}
 
-| Week number                    | Topic                        | Lecturer |
-|--------------------------------|------------------------------|----------|
-| **Part 1: The basics of R**    |                              |          |
-| 34                             | Introduction to R            | HO       |
-| 35                             | Tidy data                    | OPMH     |
-| 36                             | Plotting                     | HO       |
-| 37                             | Functions and loops          | OPMH     |
-| 38                             | Managing an R-project        | HO       |
-| **Part 2: Specialized topics** |                              |          |
-| 39                             | Git                          | HO       |
-| 40                             | Guest lecture                | PWC      |
-| 41                             | Iterations                   | OPMH     |
-| 42                             | Machine Learning             | HO       |
-| 43                             | Parallel computing           | OPMH     |
-| 44                             | Many models                  | HO       |
-| 45                             | Documentation and deployment | OPMH     |
+### Part 1: The basics of R
+
+| Week number | Topic                 | Lecturer |
+|-------------|-----------------------|----------|
+| 34          | Introduction to R     | HO       |
+| 35          | Tidy data             | OPMH     |
+| 36          | Plotting              | HO       |
+| 37          | Functions and loops   | OPMH     |
+| 38          | Managing an R-project | HO       |
+
+### Part 2: Specialized topics
+
+| Week number | Topic                        | Lecturer |
+|-------------|------------------------------|----------|
+| 39          | Git                          | HO       |
+| 40          | Guest lecture                | PWC      |
+| 41          | Iterations                   | OPMH     |
+| 42          | Machine Learning             | HO       |
+| 43          | Parallel computing           | OPMH     |
+| 44          | Many models                  | HO       |
+| 45          | Documentation and deployment | OPMH     |
 
 ## Practical information {.unnumbered}

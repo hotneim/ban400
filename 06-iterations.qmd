@@ -1,0 +1,319 @@
+# purrr on Traffic data
+
+## Getting some data
+
+```{r, message=F}
+library(httr)
+library(jsonlite)
+library(ggplot2)
+library(DescTools)
+library(tidyverse)
+library(magrittr)
+library(rlang)
+library(lubridate)
+library(anytime)
+
+# Today we are going to work with some more advanced topics in 
+# terms of data handling and processing. We will play with an API
+# from Vegvesenet. Vegvesenet has an API we can query for data
+# on traffic volumes at many sensor stations in Norway. 
+# 
+# The API uses graphQL for requests. This is a relatively
+# new language we might see more of in the future?
+# 
+# Let's define a function where we can submit queries to an external API. 
+GQL <- function(query,
+                ...,
+                .token = NULL,
+                .variables = NULL,
+                .operationName = NULL,
+                .url = url) {
+  pbody <-
+    list(query = query,
+         variables = .variables,
+         operationName = .operationName)
+  if (is.null(.token)) {
+    res <- POST(.url, body = pbody, encode = "json", ...)
+  } else {
+    auth_header <- paste("bearer", .token)
+    res <-
+      POST(
+        .url,
+        body = pbody,
+        encode = "json",
+        add_headers(Authorization = auth_header),
+        ...
+      )
+  }
+  res <- content(res, as = "parsed", encoding = "UTF-8")
+  if (!is.null(res$errors)) {
+    warning(toJSON(res$errors))
+  }
+  res$data
+}
+
+
+# The URL we will use is stored below: 
+url <- "https://www.vegvesen.no/trafikkdata/api/"
+
+
+# Let's figure out which sensor stations that are operable. 
+# The query below extracts all the stations, with a date for 
+# when the station was in operation as well as a long/latitude. 
+qry <-
+  '
+{
+	trafficRegistrationPoints {
+		id
+		name
+		latestData {
+			volumeByDay
+		}
+		location {
+			coordinates {
+				latLon {
+					lat
+					lon
+				}
+			}
+		}
+	}
+}
+'
+
+# Allright - let's try submitting the query: 
+stations <-GQL(qry) 
+
+
+# We now have the a long list in memory - 11mb! - with just 
+# a little information on each station. We can note that this 
+# is a list, not a dataframe. For our purposes, it would be better if
+# the list was instead a data frame, with one row pr. sensor station. 
+
+
+# Note that the list only has one entry..   
+length(stations)
+
+
+# However, the list contains another list, called trafficRegistrationPoints. 
+# This list has almost 5000 entries. We can select this sublist using 
+# either $ or [[1]]. Note that when we subset a list, using [[i]] selects
+# the contents of the item [[i]]. 
+length(stations$trafficRegistrationPoints)
+length(stations[[1]])
+
+
+# Let's look at the first entry of this long list. We can see there is
+# a station ID, station name, date time of latest recording from the station
+# and coordinates. This looks like something that could fit well within 
+# a data frame, with columns id, name, latestdata, lat, and lon. The 
+# question is how!
+stations[[1]][[1]]
+
+# We could perhaps hope that we can force this list into a data frame. For
+# this we will use as_tibble: 
+stations[[1]][[1]] %>% 
+  as_tibble()
+
+
+# We now want to apply this as_tibble transformation to each of the stations, 
+# and combine them in a single data frame. We could do this with lapply, 
+# and then bind toghether the rows: 
+lapply(stations[[1]], . %>% as_tibble) %>% 
+  bind_rows
+```
+
+**Exercise:**
+
+Transform the list into a data frame, with at id and name as columns, and one row per station. We can fix the date time and locations columns later, but use one of the map-functions from `purrr`.
+
+<details>
+
+<summary>Solution</summary>
+
+```{r, message=F}
+# Using the map_df-function we traverse all the entries in the stations list, 
+# and transform these lists to data frames. 
+# 
+# There is still some work left to do with the date time and location 
+# columns. As you can see below, they are still in a list format. 
+stations[[1]] %>% 
+  map_df(~as_tibble(.))
+
+
+# We can try to pull out the insides of the contents of the latestData-
+# column. It is formatted as a list, but actually only contains one 
+# date time entry. 
+stations[[1]] %>% 
+  map_df(~as_tibble(.)) %>% 
+  head(1) %>% 
+  select(latestData) %>% 
+  pull
+
+```
+
+</details>
+
+**Exercise:**
+
+Mutate the contents of the latestData-columns, such that it is in a character format. You don't have to format it to a proper date time (yet..)
+
+<details>
+
+<summary>Solution</summary>
+
+```{r, message=F}
+# There are two complications to this one.. 
+# 1:  Similarly to the previous task, we want to apply a transformation
+#     to all entries of a list.. 
+# 2:  However at least one of the entries does not contain the list item
+#     "latestData". 
+#     
+# As you can see from the documentation, the map-functions are 
+# very flexible, and we can e.g. use them to extract named items
+# from a list. Below, we are asking map_chr to return the first item
+# of each sub list in latestData. However, this will fail if it 
+# meets an entry that does not have aything stored under latestdata!
+# stations[[1]] %>% 
+#   map_df(~as_tibble(.)) %>% 
+#   mutate(latestData = map_chr(latestData, 1))
+
+
+# We could write a custom "unlisting"-function.
+# The function below unlists the elements of latestData - if there are 
+# any elements there. If it the content is null, the function just
+# returns an empty character string. 
+unlist_safe <- 
+  function(x){
+    x <- unlist(x)
+    if(is.null(x)){
+      return(NA_character_)
+  }else{
+    return(x)
+  }
+}
+
+stations[[1]] %>% 
+  map_df(~as_tibble(.)) %>% 
+  mutate(latestData = map_chr(latestData, unlist_safe))
+
+
+# Alternatively, we can use the defaults in map_chr. It will 
+# now have a safe fallback value it can use if it doesn't 
+# find the element we are looking for in latestData. 
+# A simple solution is to use the .default-argument, and set this to missing: 
+stations[[1]] %>% 
+    map_df(~as_tibble(.)) %>% 
+    mutate(latestData = map_chr(latestData,1, .default=NA_character_)) 
+
+```
+
+</details>
+
+## Transforming time
+
+```{r, message=F}
+# Next, let's format the date format. Date formats can be tricky, but is
+# an obstacle you just have to learn to work with. We can reformat the 
+# latestData column into a date by simply using as.Date - however - 
+# we now have lost information on the time of day. Let's see if we 
+# can retain all the information in the column. 
+stations[[1]] %>% 
+  map_df(~as_tibble(.)) %>% 
+  mutate(latestData = map_chr(latestData, 1, .default=NA_character_)) %>% 
+  mutate(latestData = as.Date(latestData))
+
+
+# There are several functions we can use to transform the string into
+# a date time variable. as_datetime in lubridate works in this case. 
+# Note that the interpretation of dates may be dependent on the time zone
+# settings on your laptop. Here, we are explicitly stating that we want the
+# a Europe/Berlin tz on the variable: 
+stations[[1]] %>%
+  map_df( ~ as_tibble(.)) %>%
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) 
+
+```
+
+</details>
+
+**Exercise: Finalizing the transformation**
+
+Let's take on the final location variable. Complete the operation by unpacking the location column into *two* columns: `lat` and `lon`. You may use the functions you have already seen, or see of you can find mode specialized functions.
+
+Note: This a *nested* list i.e. the contents of a cell in "location" is a list with one entry. This list contains two other lists..
+
+The script should return a data frame similar to the one below (only the first few entries shown).
+
+```{r, message=F, eval=T, echo=FALSE}
+stations[[1]] %>%
+  map_df( ~ as_tibble(.)) %>%
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
+  unnest_wider(location) %>%
+  unnest_wider(latLon) %>% 
+  head %>% 
+  knitr::kable()
+
+stations[[1]] %>%
+    map_df( ~ as_tibble(.)) %>%
+    mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
+    mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>%
+    mutate(
+      lat=map_dbl(location,~.$latLon$lat), 
+      lon=map_dbl(location,~.$latLon$lon)
+      )
+
+
+stations[[1]] %>%
+    map_df( ~ as_tibble(.)) %>%
+    mutate(
+      latestData = 
+        as_datetime(
+          map_chr(latestData, 1, .default = NA_character_
+                  ),tz = "Europe/Berlin"
+          ),
+      lat=map_dbl(location,~.$latLon$lat), 
+      lon=map_dbl(location,~.$latLon$lon)
+      ) %>% 
+  select(-location)
+
+```
+
+</details>
+
+<details>
+
+<summary>Solution</summary>
+
+```{r, message=F, eval=T, echo=T}
+
+## We can use a similar solution we used before. First we use
+## unlist-safe to remove one level from the list, and then extract 
+## the contents using map_dbl - remember these are numbers, not text. 
+
+stations[[1]] %>% 
+  map_dfr(as_tibble) %>% 
+  mutate(latestData = map_chr(latestData, 1, .default = "")) %>% 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
+  mutate(location = map(location, unlist)) %>% 
+  mutate(
+    lat = map_dbl(location, "latLon.lat"),
+    lon = map_dbl(location, "latLon.lon")
+  ) %>% 
+  select(-location)
+
+## Alternatively, we can use unnest_wider twice. This one does some work
+## for us, and gives the same result: 
+
+stations[[1]] %>%
+  map_df( ~ as_tibble(.)) %>%
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
+  unnest_wider(location) %>%
+  unnest_wider(latLon)
+
+```
+
+</details>

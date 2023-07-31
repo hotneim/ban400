@@ -1,9 +1,86 @@
 # Assignment 2 {.unnumbered}
 
-**Maybe first add some of the straightforward exercises from r4ds?**
+The first part of the assignment is intended to give you to practice writing pipes using a Tidyverse data set where are are good online resources. You don't have to hand in the first part. The second part uses a survey data set, and should be handed in. 
 
+## Part 1
 
-For this homework you will practice your data wrangling skills using a survey data set. The data comes from the European Social Survey, and is available at [europeansocialsurvey.org] in various formats. Further, the data from ESS contains many variables with abbreviated/encoded names. The file contains survey responses from Norway in 2016. To get you started with the assignment, you may use the commands below to read in the data set. You may need to install the package `foreign` first in order to use the `read.dta` function. 
+We'll use a data set from Tidyverse of all flights departing from New York City. The data set can be installed as a package `install.packages("nycflights13")`. After calling `library(nycflights13)` you should have a data set `flights` available.
+
+You may want to skim over [R4DS](https://r4ds.hadley.nz/data-transform.html) on transformations. This chapter contains both a good introduction to the flights data as well as a recap on many of the concepts used in class on data wrangling.
+
+```{r}
+library(nycflights13) 
+library(dplyr)
+library(tidyr)
+flights
+```
+
+Assignment 1: Complete the first exercise of [4.2.5](https://jrnold.github.io/r4ds-exercise-solutions/transform.html) in R4DS (repeated below):
+
+In a single pipeline for each condition, find all flights that meet the condition:
+
+1.  Had an arrival delay of two or more hours
+2.  Flew to Houston (`IAH` or `HOU`)
+3.  Were operated by United, American, or Delta
+4.  Departed in summer (July, August, and September)
+5.  Arrived more than two hours late, but didn't leave late
+6.  Were delayed by at least an hour, but made up over 30 minutes in flight
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+See also [this](https://jrnold.github.io/r4ds-exercise-solutions/transform.html) solution manual for alternative ways of solving the assignments.
+
+```{r}
+# 1
+flights |> 
+  filter(arr_delay >= 120)
+
+# 2
+flights |> 
+  filter(dest %in% c("IAH", "HOU"))
+
+# 3
+flights |> 
+  filter(carrier %in% c("UA", "AA", "DL"))
+
+# 4
+flights |> 
+  filter(month %in% c(7, 8, 9))
+
+# 5
+flights |> 
+  filter(dep_delay <=0 ) |> 
+  filter(arr_delay >= 120)
+
+# 6
+flights |> 
+  filter(dep_delay >= 60) |> 
+  mutate(delay_flight_decrease = dep_delay - arr_delay) |> 
+  filter(delay_flight_decrease > 30)
+```
+:::
+
+Assignment 2: Answer the questions below
+
+1.  Speed is distance divided by airtime. Use the `planes` dataframe (included in the `nycflights13`-package) to find the *fastest* and *slowest* aircraft model measured by Your answer should be a tibble containing the fastest and slowest plane
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+```{r}
+# 1
+flights |> 
+  inner_join(planes, by=join_by(tailnum)) |> 
+  mutate(speed_kmh = 1.609344 * distance / (air_time/60)) |> 
+  summarise(avg_speed_kmh = mean(speed_kmh, na.rm=TRUE), .by=model) |> 
+  filter(avg_speed_kmh %in% c(max(avg_speed_kmh), min(avg_speed_kmh)))
+```
+:::
+
+## Part 2: Survey data
+
+For this homework you will practice your data wrangling skills using a survey data set. The data comes from the European Social Survey, and is available at \[europeansocialsurvey.org\] in various formats. Further, the data from ESS contains many variables with abbreviated/encoded names. The file contains survey responses from Norway in 2016. To get you started with the assignment, you may use the commands below to read in the data set. You may need to install the package `foreign` first in order to use the `read.dta` function.
 
 ```{r, eval=FALSE}
 library(foreign)
@@ -17,16 +94,14 @@ df <-
     income_decile = hinctnta)
 ```
 
-The variables of interest ``prtvtbno``, ``agea``, ``rlgdgr`` and ``hinctnta`` are defined in the attached documentation, together with  more information on the actual questions. To keep it simple, we rename them to `party`, `age`, `religiosity` and `income_decile`. 
+The variables of interest `prtvtbno`, `agea`, `rlgdgr` and `hinctnta` are defined in the attached documentation, together with more information on the actual questions. To keep it simple, we rename them to `party`, `age`, `religiosity` and `income_decile`.
 
-1. Provide summary statistics of age of respondents split by the party the respondents voted for last election. Who has the oldest/youngest voters? Where is the standard deviation of voters age the largest? Do not report numbers for parties with less than 25 respondents.
+1.  Provide summary statistics of age of respondents split by the party the respondents voted for last election. Who has the oldest/youngest voters? Where is the standard deviation of voters age the largest? Do not report numbers for parties with less than 25 respondents.
 
-2. The variables religiosity, income_decile and party are encoded as factors. Further, they contain some non-responses such as “Don’t know”, “Refusal” and “No answer”. Find a method for filtering out all the non-responses. How many respondents did not provide an eligible response to each of the questions? How many answered *both* the party and income question? 
+2.  The variables religiosity, income_decile and party are encoded as *factors* (take a look at `?factor` for en explanation). Further, they contain some non-responses such as "Don't know", "Refusal" and "No answer". Find a method for filtering out all the non-responses. How many respondents did not provide an eligible response to each of the questions? How many answered *both* the party and income question?
 
-3. Filter out all ineligible responses for both income and party. Calculate the *average* religiosity of each party. Provide your answer as a data frame with one row pr. party, sorted by average religiosity. 
+3.  Filter out all ineligible responses for both income and party. Calculate the *average* religiosity of each party. Provide your answer as a data frame with one row pr. party, sorted by average religiosity.
 
-4. (**Slightly trickier!**) For each party with more than 75 voters, calculate the ratio of the number of respondents in income deciles 9 and 10 over the number of respondents in income deciles 1 and 2. Which party has the highest high- to low-income voters?
+4.  (**Slightly trickier!**) For each party with more than 75 voters, calculate the ratio of the number of respondents in income deciles 9 and 10 over the number of respondents in income deciles 1 and 2. Which party has the highest high- to low-income voters?
 
-
-For completeness: When working with survey data, we usually have to apply weights to ensure estimates are representative of the population. This is because a survey sample may be a non-random sample of the general population. The survey data set provides the weights. You don’t have to worry about weights in this assignment, but please store the link “survey data -> weights?!?” in your mind for future work.
-
+For completeness: When working with survey data, we usually have to apply weights to ensure estimates are representative of the population. This is because a survey sample may be a non-random sample of the general population. The survey data set provides the weights. You don't have to worry about weights in this assignment, but please store the link "survey data -\> weights?!?" in your mind for future work.
