@@ -233,8 +233,6 @@ sales |>
   
 ```
 
-
-
 **Exercise:** How many cocoas were bought in total by customers who also bought more than two oranges? (Hint: How does *mutate* work on a grouped data frame?)
 
 ::: {.callout-note collapse="true" icon="false"}
@@ -277,7 +275,7 @@ sales |>
 
 ## Joining data frames
 
-<iframe src="https://player.vimeo.com/video/562515738" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+<iframe src="https://player.vimeo.com/video/851434094" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
