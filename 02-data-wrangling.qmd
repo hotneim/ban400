@@ -17,7 +17,7 @@ We will obviously use R to solve these problems, but we do have the choice betwe
 
 The tidyverse ([tidyverse.org](https://www.tidyverse.org/)) is a set of R packages that work very well together, follows a consistent logic, and that enables us to write extremely clean code. We have already touched upon the difference between data wrangling using base R and the tidyverse in [Chapter 1.9](01-intro-to-r.qmd#pipe).
 
-See the video below for some more details regarding the tidyverse. Some formulations in the video gives the impression that this material should be consumed on a specific *day*, but that are just some residue from a time when this part of the course was given intensively. You can find the cheat sheet [here](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf). See also [this](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) webpage for further information about one of the most central packages in tidyverse, `dplyr`.
+See the video below for some more details regarding the tidyverse. Some formulations in the video gives the impression that this material should be consumed on a specific *day*, but that are just some residue from a time when this part of the course was given intensively. You can find the cheat sheet [here](https://rstudio.github.io/cheatsheets/data-transformation.pdf). See also [this](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) webpage for further information about one of the most central packages in tidyverse, `dplyr`.
 
 <iframe src="https://player.vimeo.com/video/562515779" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
@@ -25,24 +25,20 @@ See the video below for some more details regarding the tidyverse. Some formulat
 
 ## The basics of `dplyr`
 
-<iframe src="https://player.vimeo.com/video/562515810" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+<iframe src="https://player.vimeo.com/video/851415283" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
-First, we warm up with a first few functions from dplyr. Note how the syntax is similar to how we use the pipe \`\|\>. You can download the data set here: [data-geilo.xlsx](data-geilo.xlsx).
+First, we warm up with a first few functions from dplyr. You can download the data set here: [data-geilo.xlsx](data-geilo.xlsx).
 
-```{r}
+```{r, message=FALSE}
 # Load libraries
 library(dplyr)
-library(magrittr)
 library(tidyr)
 library(readxl)
 
 # Import data from Excel-file
-sales <- 
-  read_excel(
-    "data-geilo.xlsx", 
-    sheet = "Sales")
+sales <- read_excel("data-geilo.xlsx", sheet = "Sales")
 
 # Look at data: 
 head(sales)
@@ -54,7 +50,7 @@ sales[sales$cocoa > 0,]
 filter(sales, cocoa > 0)
 
 # or even better: combine dplyr and magrittr: 
-sales %>% 
+sales |> 
   filter(cocoa > 0)
 
 # Some governing principles in with dplyr/tidyverse functions: 
@@ -65,14 +61,14 @@ sales %>%
 #  - The result is a new data frame
 
 # Sorting the data with dplyr: 
-sales %>% 
-  arrange(cocoa) %>% 
-  head
+sales |> 
+  arrange(cocoa) |> 
+  head()
 
 # Sorting the data with several columns: 
-sales %>% 
-  arrange(cocoa, orange, swix) %>% 
-  head
+sales |> 
+  arrange(cocoa, orange, swix) |> 
+  head()
 ```
 
 **Exercise:** Report the top of the dataset, sorted by
@@ -84,23 +80,23 @@ sales %>%
 You should obtain a result equal to the data frame below. Note we only show the first six entries of the result.
 
 ```{r, echo = FALSE}
-sales %>%
-  arrange(cocoa, desc(swix), desc(orange)) %>%
-  head
+sales |> 
+  arrange(cocoa, desc(swix), desc(orange)) |> 
+  head()
 ```
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for solution
 
 ```{r, eval = FALSE}
-sales %>%
-  arrange(cocoa, desc(swix), desc(orange)) %>%
-  head
+sales |> 
+  arrange(cocoa, desc(swix), desc(orange)) |> 
+  head()
 
 # Alternatively: 
- sales %>%
-   arrange(cocoa, -swix, -orange) %>%
-   head
+ sales |>
+   arrange(cocoa, -swix, -orange) |>
+   head()
  
 # Note however that (-) requires num. vectors. desc can take e.g. factors as well.)
 ```
@@ -108,7 +104,7 @@ sales %>%
 
 ## Selecting and creating new variables, and summarising a data frame
 
-<iframe src="https://player.vimeo.com/video/562515867" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+<iframe src="https://player.vimeo.com/video/851425721" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
@@ -116,23 +112,23 @@ sales %>%
 # Selecting some variables: 
 head(sales[,c("swix", "cocoa")])
 
-sales %>%
-  select(cocoa, swix) %>%
-  head
+sales |> 
+  select(cocoa, swix) |> 
+  head()
 
 # create new variables: 
-sales %>%
-  mutate(items = cocoa+swix+orange) %>%
-  head
+sales |> 
+  mutate(items = cocoa+swix+orange) |> 
+  head()
 
-sales %>%
+sales |> 
   transmute(
     items = cocoa+swix+orange,
-    trans = trans) %>%
-  head
+    trans = trans) |> 
+  head()
 
 # Summarise data: 
-sales %>%
+sales |> 
   summarise(sum_cocoa = sum(cocoa))
 
 # Assignment 1: how many items were sold in total?
@@ -156,15 +152,15 @@ sales %>%
 ```{r, eval=FALSE}
 # Exercise 1: 
 
-sales %>%
-  transmute(items = cocoa + swix + orange) %>%
+sales |> 
+  transmute(items = cocoa + swix + orange) |> 
   summarise(sum_items = sum(items))
 
 # Exercise 2: 
-sales %>%
-  filter(cocoa>0) %>%
+sales |> 
+  filter(cocoa>0) |> 
   transmute(
-    items = cocoa + swix + orange) %>%
+    items = cocoa + swix + orange) |> 
   summarise(
     max_items = max(items),
     min_items = min(items)
@@ -175,7 +171,7 @@ sales %>%
 
 ## Groups and summarise
 
-<iframe src="https://player.vimeo.com/video/562515689" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+<iframe src="https://player.vimeo.com/video/851426917" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
@@ -184,19 +180,19 @@ sales %>%
 sales
 
 # ..to this one: 
-sales %>% group_by(customer)
+sales  |> group_by(customer)
 
 # Note how we in the second command have added some meta-information on groups
 # to the data frame. Groups change the results we get when applying
 # functions to the data frame. See below: 
 
-sales %>%
+sales |> 
   summarise(
     sum.orange = sum(orange),
     no.trans = n()) 
 
-sales %>%
-  group_by(customer) %>%
+sales |> 
+  group_by(customer) |> 
   summarise(
     sum.orange = sum(orange),
     no.trans = n()) 
@@ -207,27 +203,53 @@ sales %>%
 # such functions we can use - just keep in mind that the function
 # should return one item per group (or just one item if you don't
 # have groups). 
-# 
+
 # Make sure you are aware of the difference between mutate and 
 # summarise: mutate *adds* a variable to the data frame, 
-# summarise aggregates it. 
+# summarise aggregates it. Look at the difference below on 
+# the result when we change from "summarise" to "mutate":
 
+sales |> 
+  group_by(customer) |> 
+  mutate(
+    sum_orange = sum(orange),
+    no_transactions = n()
+  )
+
+# Note also that the tibble we get after the mutate is still 
+# grouped by customer. That means that if we apply new
+# transformations to the tibble, dplyr-functions will in 
+# general still obey the grouping. If you want to remove
+# the grouping you can do that by applying ungroup to the 
+# data frame: 
+
+sales |> 
+  group_by(customer) |> 
+  mutate(
+    sum_orange = sum(orange),
+    no_transactions = n()
+  ) |> 
+  ungroup()
+  
 ```
+
+
 
 **Exercise:** How many cocoas were bought in total by customers who also bought more than two oranges? (Hint: How does *mutate* work on a grouped data frame?)
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for solution
 
-<iframe src="https://player.vimeo.com/video/562515902" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
+<iframe src="https://player.vimeo.com/video/851430723" width="640" height="388" frameborder="0" allow="autoplay; fullscreen" picture-in-picture>
 
 </iframe>
 
 ```{r, eval=FALSE}
-sales %>%
-  group_by(customer) %>%
-  mutate(sum.orange = sum(orange)) %>%
-  filter(sum.orange > 2) %>%
+sales |> 
+  group_by(customer) |> 
+  mutate(sum.orange = sum(orange)) |> 
+  filter(sum.orange > 2) |> 
+  ungroup() |>
   summarise(sum.cocoa = sum(cocoa))
 ```
 :::
