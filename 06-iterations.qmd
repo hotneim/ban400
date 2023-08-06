@@ -112,15 +112,15 @@ stations[[1]][[1]]
 
 # We could perhaps hope that we can force this list into a data frame. For
 # this we will use as_tibble: 
-stations[[1]][[1]] %>% 
+stations[[1]][[1]] |>  
   as_tibble()
 
 
 # We now want to apply this as_tibble transformation to each of the stations, 
 # and combine them in a single data frame. We could do this with lapply, 
 # and then bind toghether the rows: 
-lapply(stations[[1]], . %>% as_tibble) %>% 
-  bind_rows
+lapply(stations[[1]], . %>% as_tibble) |> 
+  bind_rows()
 ```
 
 **Exercise:**
@@ -137,18 +137,18 @@ Transform the list into a data frame, with at id and name as columns, and one ro
 # 
 # There is still some work left to do with the date time and location 
 # columns. As you can see below, they are still in a list format. 
-stations[[1]] %>% 
+stations[[1]] |> 
   map_df(~as_tibble(.))
 
 
 # We can try to pull out the insides of the contents of the latestData-
 # column. It is formatted as a list, but actually only contains one 
 # date time entry. 
-stations[[1]] %>% 
-  map_df(~as_tibble(.)) %>% 
-  head(1) %>% 
-  select(latestData) %>% 
-  pull
+stations[[1]] |>  
+  map_df(~as_tibble(.)) |> 
+  head(1) |>  
+  select(latestData) |>  
+  pull()
 
 ```
 
@@ -174,8 +174,8 @@ Mutate the contents of the latestData-columns, such that it is in a character fo
 # from a list. Below, we are asking map_chr to return the first item
 # of each sub list in latestData. However, this will fail if it 
 # meets an entry that does not have aything stored under latestdata!
-# stations[[1]] %>% 
-#   map_df(~as_tibble(.)) %>% 
+# stations[[1]] |> 
+#   map_df(~as_tibble(.)) |> 
 #   mutate(latestData = map_chr(latestData, 1))
 
 
@@ -193,8 +193,8 @@ unlist_safe <-
   }
 }
 
-stations[[1]] %>% 
-  map_df(~as_tibble(.)) %>% 
+stations[[1]] |> 
+  map_df(~as_tibble(.)) |> 
   mutate(latestData = map_chr(latestData, unlist_safe))
 
 
@@ -202,8 +202,8 @@ stations[[1]] %>%
 # now have a safe fallback value it can use if it doesn't 
 # find the element we are looking for in latestData. 
 # A simple solution is to use the .default-argument, and set this to missing: 
-stations[[1]] %>% 
-    map_df(~as_tibble(.)) %>% 
+stations[[1]] |> 
+    map_df(~as_tibble(.)) |> 
     mutate(latestData = map_chr(latestData,1, .default=NA_character_)) 
 
 ```
@@ -218,9 +218,9 @@ stations[[1]] %>%
 # latestData column into a date by simply using as.Date - however - 
 # we now have lost information on the time of day. Let's see if we 
 # can retain all the information in the column. 
-stations[[1]] %>% 
-  map_df(~as_tibble(.)) %>% 
-  mutate(latestData = map_chr(latestData, 1, .default=NA_character_)) %>% 
+stations[[1]] |> 
+  map_df(~as_tibble(.)) |> 
+  mutate(latestData = map_chr(latestData, 1, .default=NA_character_)) |> 
   mutate(latestData = as.Date(latestData))
 
 
@@ -229,9 +229,9 @@ stations[[1]] %>%
 # Note that the interpretation of dates may be dependent on the time zone
 # settings on your laptop. Here, we are explicitly stating that we want the
 # a Europe/Berlin tz on the variable: 
-stations[[1]] %>%
-  map_df( ~ as_tibble(.)) %>%
-  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
+stations[[1]] |> 
+  map_df( ~ as_tibble(.)) |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
   mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) 
 
 ```
@@ -247,27 +247,27 @@ Note: This a *nested* list i.e. the contents of a cell in "location" is a list w
 The script should return a data frame similar to the one below (only the first few entries shown).
 
 ```{r, message=F, eval=T, echo=FALSE}
-stations[[1]] %>%
-  map_df( ~ as_tibble(.)) %>%
-  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
-  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
-  unnest_wider(location) %>%
-  unnest_wider(latLon) %>% 
-  head %>% 
+stations[[1]] |> 
+  map_df( ~ as_tibble(.)) |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) |> 
+  unnest_wider(location) |> 
+  unnest_wider(latLon) |> 
+  head() |>  
   knitr::kable()
 
-stations[[1]] %>%
-    map_df( ~ as_tibble(.)) %>%
-    mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
-    mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>%
+stations[[1]] |> 
+    map_df( ~ as_tibble(.)) |> 
+    mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+    mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) |> 
     mutate(
       lat=map_dbl(location,~.$latLon$lat), 
       lon=map_dbl(location,~.$latLon$lon)
       )
 
 
-stations[[1]] %>%
-    map_df( ~ as_tibble(.)) %>%
+stations[[1]] |> 
+    map_df( ~ as_tibble(.)) |> 
     mutate(
       latestData = 
         as_datetime(
@@ -276,7 +276,7 @@ stations[[1]] %>%
           ),
       lat=map_dbl(location,~.$latLon$lat), 
       lon=map_dbl(location,~.$latLon$lon)
-      ) %>% 
+      ) |> 
   select(-location)
 
 ```
@@ -293,11 +293,11 @@ stations[[1]] %>%
 ## unlist-safe to remove one level from the list, and then extract 
 ## the contents using map_dbl - remember these are numbers, not text. 
 
-stations[[1]] %>% 
-  map_dfr(as_tibble) %>% 
-  mutate(latestData = map_chr(latestData, 1, .default = "")) %>% 
-  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
-  mutate(location = map(location, unlist)) %>% 
+stations[[1]] |> 
+  map_dfr(as_tibble) |>  
+  mutate(latestData = map_chr(latestData, 1, .default = ""))  |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin"))  |> 
+  mutate(location = map(location, unlist)) |>  
   mutate(
     lat = map_dbl(location, "latLon.lat"),
     lon = map_dbl(location, "latLon.lon")
@@ -307,11 +307,11 @@ stations[[1]] %>%
 ## Alternatively, we can use unnest_wider twice. This one does some work
 ## for us, and gives the same result: 
 
-stations[[1]] %>%
-  map_df( ~ as_tibble(.)) %>%
-  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) %>%
-  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) %>% 
-  unnest_wider(location) %>%
+stations[[1]] |> 
+  map_df( ~ as_tibble(.)) |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin"))  |> 
+  unnest_wider(location) |> 
   unnest_wider(latLon)
 
 ```
