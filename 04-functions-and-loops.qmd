@@ -343,9 +343,9 @@ stockprices |>
 
 ## Anonymous functions
 
-There are occasions where you might need smaller function for one-time use, and you don't want to add a function to your environment. In these cases it can make sense to create an *anonymous* function.
+There are occasions where you might need smaller function for one-time use, and you don't want to add a function to your environment. In these cases it can make sense to create an *anonymous* function (or *lambda*-functions, for those coming from Python). Presumably you won't need them until we on to more advanced topics, so for now it is useful to know that they exists.
 
-In the context of pipes, the syntax for defining an applying an anonymous function is:
+In the context of pipes, the syntax for defining and applying an anonymous function is:
 
 `{\(x) content of function}()`
 

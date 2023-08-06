@@ -10,7 +10,7 @@ All announcements and course administration such as homework delivery and feedba
 
 ## Schedule {.unnumbered}
 
-### Part 1: The basics of R
+### Part 1: The basics of R {.unnumbered}
 
 | Week number | Topic                 | Lecturer |
 |-------------|-----------------------|----------|
@@ -20,7 +20,7 @@ All announcements and course administration such as homework delivery and feedba
 | 37          | Functions and loops   | OPMH     |
 | 38          | Managing an R-project | HO       |
 
-### Part 2: Specialized topics
+### Part 2: Specialized topics {.unnumbered}
 
 | Week number | Topic                        | Lecturer |
 |-------------|------------------------------|----------|
