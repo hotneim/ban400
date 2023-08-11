@@ -1,5 +1,9 @@
 # Assignment 4 {.unnumbered}
 
+::: {.callout-note}
+This assignment is to be handed in as an `.R`-file through Canvas. Your answer will be reviewed by a teaching assistant *as well as two fellow students*. Do take the time to condsider the feedback. **You will also receive two random answers from fellow students for review**. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment. 
+:::
+
 In this assignment we will use what we have learned about functions and loops to explore some basic concepts that we may (or may not) remember from our basic statistics courses.
 
 ## Problem 1 {.unnumbered}
@@ -23,7 +27,6 @@ sim_norm <- function(N, mu = 0, sigma = 1) {
 }
 ```
 
-
 ```{r}
 sim_norm(N = 10)
 sim_norm(N = 10)
@@ -37,10 +40,9 @@ sim_norm(N = 10, mu = 15)
 sim_norm(N = 10, mu = 15)
 sim_norm(N = 10, mu = 15)
 ```
-
 :::
 
-2. Define a variable `M` and assign to it an integer, say `M <- 20`. Create an empty vector of length `M`, and use a for-loop to fill the vector with sample means from repeated applications of the function you made in question 1. Use whatever sample size that you wish. 
+2.  Define a variable `M` and assign to it an integer, say `M <- 20`. Create an empty vector of length `M`, and use a for-loop to fill the vector with sample means from repeated applications of the function you made in question 1. Use whatever sample size that you wish.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for some hints.
@@ -58,7 +60,7 @@ for(i in ...) {
 sample_means
 ```
 
-Using `N = 10`  and  `M = 20`  should  give something like this (however not with identical results because you will sample different numbers). 
+Using `N = 10` and `M = 20` should give something like this (however not with identical results because you will sample different numbers).
 
 ```{r, echo = FALSE}
 M <- 20
@@ -70,29 +72,27 @@ for(i in 1:M) {
 
 sample_means
 ```
-
 :::
 
-3. Calculate the standard deviation of all the sample means that you just calculated above. Compare it with the true value.
+3.  Calculate the standard deviation of all the sample means that you just calculated above. Compare it with the true value.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for a little hint.
 
 The theoretical value is $\sigma/\sqrt{n}$ as we saw in the introduction, or just $1/\sqrt{n}$ if you used the default value of `sigma = 1`.
-
 :::
 
 Now, we want to do a systematic experiment where we calculate the sample variance for a relatively large number of sample means (i.e. `M` relatively large) for different values of $N$. We would like to do that by creating a table with the following structure:
 
-|`N`|`st_dev`| `sigma`|`theoretical`|
-|-|------|-----------|----|
-|``10``|     | `1`|`1.3162278`||
-|$\ldots$| | $\ldots$ | $\ldots$ |
-|`200` | | `1`| `0.07071068`|
+| `N`      | `st_dev` | `sigma`  | `theoretical` |
+|----------|----------|----------|---------------|
+| `10`     |          | `1`      | `1.3162278`   |
+| $\ldots$ |          | $\ldots$ | $\ldots$      |
+| `200`    |          | `1`      | `0.07071068`  |
 
 The first column contains the sample size that we use for calculating the sample means, the second column is empty for now, but will eventually contain the empirical standard deviation of `M` means for that sample size, the third column contains the value of `sigma` that we have chosen for the experiment, and the final column contains the theoretical value for the standard deviation of the means ($\sigma/\sqrt{n}$).
 
-4. Create this table as a data frame (or a tibble) in R, with a suitable sequence of sample sizes
+4.  Create this table as a data frame (or a tibble) in R, with a suitable sequence of sample sizes
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for a hint
@@ -105,16 +105,16 @@ simexp <- tibble(N = ...the vector of N-values...,
                  st_dev = NA,
                  sigma = ...)
 ```
-And then you can make the `theoretical`-column using for instance a pipe and a `mutate()`.
 
+And then you can make the `theoretical`-column using for instance a pipe and a `mutate()`.
 :::
 
-5. Fill in the value of the `st_dev`-column using a for-loop and the function you made in question 1.
+5.  Fill in the value of the `st_dev`-column using a for-loop and the function you made in question 1.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for a hint
 
-You must loop over all the rows of the data frame that you created in the last question, and fill in the standard deviations such as the one we calculated in question 3. That is: we can solve this by putting a *for loop inside a for loop*. In that case we must be careful to not mix up the two counting indices. 
+You must loop over all the rows of the data frame that you created in the last question, and fill in the standard deviations such as the one we calculated in question 3. That is: we can solve this by putting a *for loop inside a for loop*. In that case we must be careful to not mix up the two counting indices.
 
 Your code might look something like this, assuming that you have defined the number `M` and that you have initialized the data frame in the previous question:
 
@@ -134,12 +134,10 @@ for(i in 1:nrow(simexp)) {  # "Outer" for loop, using "i" as counting index
 }
 ```
 
-
 **NB!** It is good if some alarm bells go off here. Nesting for loops inside of each other is not something that we like, because they are so inefficient. A natural next step here is to see if we can get rid of one of them by vectorizing or some other technique (that might be slightly too advanced for us at this point).
-
 :::
 
-6. Make a graph where you compare the observed standard deviations with the theoretical value. 
+6.  Make a graph where you compare the observed standard deviations with the theoretical value.
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for a hint
@@ -171,8 +169,6 @@ simexp %>% ggplot(aes(x = N, y = st_dev)) +
   geom_line(aes(x = N, y = theoretical), linetype = "dashed")
 
 ```
-
-
 :::
 
 ## Problem 2 {.unnumbered}

@@ -1,0 +1,8 @@
+---
+bibliography: references.bib
+number-offset: 8
+---
+
+# Parallel computing
+
+*Under construction*

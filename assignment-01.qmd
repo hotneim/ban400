@@ -1,5 +1,9 @@
 # Assignment 1 {.unnumbered}
 
+::: {.callout-note}
+This assignment is to be handed in as an `.R`-file through Canvas. Your answer will be reviewed by a teaching assistant *as well as two fellow students*. Do take the time to condsider the feedback. **You will also receive two random answers from fellow students for review**. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment. 
+:::
+
 ## Problem 1 {.unnumbered}
 
 We will look at the monthly returns on the NASDAQ composite stock index from August 2013 to June 2018, as well as the returns on 16 individual stocks listed on NASDAQ. The data is contained in the file [`data-nasdaq-returns.xls`](data-nasdaq-returns.xls), and has been collected from the Yahoo Finance website.

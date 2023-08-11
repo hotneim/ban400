@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
- <span class="menu-text">PART I</span></a>
+ <span class="menu-text">PART 1</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -207,8 +207,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">PART II</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">PART 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6. Git and Github</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-iterations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7. Iterations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-machine-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8. Machine learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-parallel-computing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9. Parallel computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-many-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10. many models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-documentation-and-deployment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11. Documentation and deployment</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
@@ -246,12 +289,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -280,6 +317,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="assignment-3" class="level1 unnumbered">
 <h1 class="unnumbered">Assignment 3</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This assignment is to be handed in as an <code>.R</code>-file through Canvas. Your answer will be reviewed by a teaching assistant <em>as well as two fellow students</em>. Do take the time to condsider the feedback. <strong>You will also receive two random answers from fellow students for review</strong>. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment.</p>
+</div>
+</div>
 <p>In this assignment we will visualize some of the data that was published <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-05-21">here</a> as part of the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday project</a>. There is one observation for each country of the world, and several interesting variables. One of them is the amount of mismanaged plastic waste in each country in a given year, and we will here build a plot using this data by adding more and more layers of complexity.</p>
 <p><a href="data-plastic.csv">Download the data here,</a> and load it into memory:</p>
 <div class="cell">
@@ -295,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="unnumbered anchored" data-anchor-id="step-1-a-basic-scatterplot-of-the-log-transformed-variables">Step 1: A basic scatterplot of the log-transformed variables</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-03_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-03_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -303,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="unnumbered anchored" data-anchor-id="step-2-make-the-dots-reflect-country-size-and-continent">Step 2: Make the dots reflect country size and continent</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-03_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -311,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="unnumbered anchored" data-anchor-id="step-3-fix-labels-add-theme-you-can-choose-whatever-you-want-change-color-palette">Step 3: Fix labels, add theme (you can choose whatever you want), change color palette</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-03_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -319,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="unnumbered anchored" data-anchor-id="step-4-add-text-labels-for-the-countries-and-a-smoother">Step 4: Add text labels for the countries and a smoother</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-03_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

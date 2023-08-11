@@ -12,24 +12,37 @@ All announcements and course administration such as homework delivery and feedba
 
 ### Part 1: The basics of R {.unnumbered}
 
-| Week number | Topic                 | Lecturer |
-|-------------|-----------------------|----------|
-| 34          | Introduction to R     | HO       |
-| 35          | Tidy data             | OPMH     |
-| 36          | Plotting              | HO       |
-| 37          | Functions and loops   | OPMH     |
-| 38          | Managing an R-project | HO       |
+```{r, echo = FALSE, message = FALSE}
+library(magrittr)
+options(knitr.kable.NA = '')
+readxl::read_excel("data-and-files/schedule_part1.xlsx") %>% 
+  knitr::kable() 
+```
 
 ### Part 2: Specialized topics {.unnumbered}
 
-| Week number | Topic                        | Lecturer |
-|-------------|------------------------------|----------|
-| 39          | Git                          | HO       |
-| 40          | Guest lecture                | PWC      |
-| 41          | Iterations                   | OPMH     |
-| 42          | Machine Learning             | HO       |
-| 43          | Parallel computing           | OPMH     |
-| 44          | Many models                  | HO       |
-| 45          | Documentation and deployment | OPMH     |
+```{r, echo = FALSE, message = FALSE}
+readxl::read_excel("data-and-files/schedule_part2.xlsx") %>% 
+  knitr::kable() 
+```
 
 ## Practical information {.unnumbered}
+
+- **The Compendium (This web page)**
+    - This page contains the study material needed for the course as well as links to other sources when needed. Most of the modules contain video lectures as well as comments, links and sometimes small exercises. 
+- **Text book**
+    - We will link to [R for Data Science (R4DS)](https://r4ds.hadley.nz/) by Hadley Wickham many times. This is a great reference to bookmark once and for all.
+- **Lectures** 
+    - Lectures are held on Tuesdays from 08:15 to 12:00. The lectures will have the same core content as this web page, but some lectures will contain additional discussions and coding workshops. 
+- **Assignments and course approval**
+    - Most lectures have an accompanying assignment. See the overview above for a detailed overview and deadlines. 
+    - The assignments from the first part of the course can be found here on this web page, and they must be handed in via Canvas. You must also complete two peer reviews for each of these assignments for approval.
+    - The remaining assignments will be administered via Github, please stand by for links and instructions for that. 
+    - **To obtain course approval (and hence to be eligible to take the exam), you must hand in:**
+        - **All four assignments from the first part of the course, and**
+        - **minimum four of the remaining five assignments.**
+    - Please make careful note of the deadlines. 
+- **Teaching assistants and seminar**
+    - The teaching assistants will give feedback on your written work.
+    - They will also run a weekly seminar, each Thursday at 08:15-10:00, mostly in **Aud J** (but with some exceptions). In the seminar the TAs will discuss the assignment from the previous week, and provide support for next week's assignment. 
+

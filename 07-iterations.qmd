@@ -1,3 +1,8 @@
+---
+bibliography: references.bib
+number-offset: 6
+---
+
 # purrr on Traffic data
 
 ## Getting some data

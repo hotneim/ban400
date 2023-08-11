@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BAN400 - R Programming for Data Science</title>
+<title>BAN400 - R Programming for Data Science – parallel-computing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./10-many-models.html" rel="next">
+<link href="./08-machine-learning.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -102,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course overview</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-git.html">PART 2</a></li><li class="breadcrumb-item"><a href="./09-parallel-computing.html">9. Parallel computing</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -124,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course overview</span></a>
   </div>
 </li>
@@ -172,13 +174,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">PART 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-git.html" class="sidebar-item-text sidebar-link">
@@ -199,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-parallel-computing.html" class="sidebar-item-text sidebar-link">
+  <a href="./09-parallel-computing.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">9. Parallel computing</span></a>
   </div>
 </li>
@@ -263,15 +265,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a>
-  <ul class="collapse">
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a>
-  <ul class="collapse">
-  <li><a href="#part-1-the-basics-of-r" id="toc-part-1-the-basics-of-r" class="nav-link" data-scroll-target="#part-1-the-basics-of-r">Part 1: The basics of R</a></li>
-  <li><a href="#part-2-specialized-topics" id="toc-part-2-specialized-topics" class="nav-link" data-scroll-target="#part-2-specialized-topics">Part 2: Specialized topics</a></li>
-  </ul></li>
-  <li><a href="#practical-information" id="toc-practical-information" class="nav-link" data-scroll-target="#practical-information">Practical information</a></li>
-  </ul></li>
+  <li><a href="#parallel-computing" id="toc-parallel-computing" class="nav-link active" data-scroll-target="#parallel-computing"><span class="header-section-number">9</span> Parallel computing</a></li>
   </ul>
 </nav>
     </div>
@@ -280,203 +274,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1>
-<p>This is the companion website for the course <strong>BAN400 - R Programming for Data Science</strong>, given at The Norwegian School of Economics (NHH). The purpose of this website is to provide study material such as lecture videos, exercises and assignments for students taking the course.</p>
-<p>BAN400 has previously consisted of two separate modules; one intensive one-week introduction to R that could be taken separately as a 2.5 ECTS course as BAN420, as well as the main course itself (pun intended), which, together with BAN420, completed the 7.5 ECTS unit BAN400.</p>
-<p>From the fall semester of 2023, we do no longer offer the intensive option. BAN400 is now offered as one regular course. We will, however, still make an explicit transition from Part 1, where we introduce basic programming, to Part 2 where we will learn a number of useful techniques that are particularly useful when working with data.</p>
-<p>All announcements and course administration such as homework delivery and feedback will be carried out through the course page at Canvas, which is the learning management system used by NHH. You will need to sign up to the course in order to gain access to the Canvas page.</p>
-<section id="schedule" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="schedule">Schedule</h2>
-<section id="part-1-the-basics-of-r" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="part-1-the-basics-of-r">Part 1: The basics of R</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">Week</th>
-<th style="text-align: left;">Lecture</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: left;">Lecturer</th>
-<th style="text-align: left;">Assignment</th>
-<th style="text-align: left;">Seminar</th>
-<th style="text-align: left;">Assignment due</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">34</td>
-<td style="text-align: left;">22.08 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./01-intro-to-r.html">Introduction to R</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;"><a href="./assignment-01.html">Assignment 1</a></td>
-<td style="text-align: left;">24.08 <em>08:15 - 10:00</em> (<strong>LAB1</strong>)</td>
-<td style="text-align: left;">29.08 (<em>07:00</em>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">35</td>
-<td style="text-align: left;">29.08 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="02-data.wrangling.qmd">Tidy data</a></td>
-<td style="text-align: left;">OPMH</td>
-<td style="text-align: left;"><a href="./assignment-02.html">Assignment 2</a></td>
-<td style="text-align: left;">31.08 <em>08:15 - 10:00</em> (<strong>LAB2</strong>)</td>
-<td style="text-align: left;">05.09 (<em>07:00</em>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">36</td>
-<td style="text-align: left;">05.09 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./03-graphics.html">Plotting</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;"><a href="./assignment-03.html">Assignment 3</a></td>
-<td style="text-align: left;">07.09 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;">12.09 (<em>07:00</em>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">37</td>
-<td style="text-align: left;">12.09 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./04-functions-and-loops.html">Functions and loops</a></td>
-<td style="text-align: left;">OPMH</td>
-<td style="text-align: left;"><a href="./assignment-04.html">Assignment 4</a></td>
-<td style="text-align: left;">14.09 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;">26.09 (<em>07:00</em>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">38</td>
-<td style="text-align: left;">19.09 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./05-project-organization.html">Project organization</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">21.09 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="part-2-specialized-topics" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="part-2-specialized-topics">Part 2: Specialized topics</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">Week</th>
-<th style="text-align: left;">Lecture</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: left;">Lecturer</th>
-<th style="text-align: left;">Assignment</th>
-<th style="text-align: left;">Seminar</th>
-<th style="text-align: left;">Assignment due</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">39</td>
-<td style="text-align: left;">26.09 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./06-git.html">Git and Github</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;">Git</td>
-<td style="text-align: left;">28.09 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;">10.10 (<em>07:00</em>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">40</td>
-<td style="text-align: left;">03.10 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;">Guest lecture by PWC</td>
-<td style="text-align: left;">PWC</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">05.10 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">41</td>
-<td style="text-align: left;">10.10 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./07-iterations.html">Iterations</a></td>
-<td style="text-align: left;">OPMH</td>
-<td style="text-align: left;">Iterations</td>
-<td style="text-align: left;">12.10 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;">17.10 (<em>07:00</em>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">42</td>
-<td style="text-align: left;">17.10 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./08-machine-learning.html">Machine learning</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;">Machine Learning</td>
-<td style="text-align: left;">19.10 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;">24.10 (<em>07:00</em>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">24.10 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./09-parallel-computing.html">Parallel computing</a></td>
-<td style="text-align: left;">OPMH</td>
-<td style="text-align: left;">Parallel computing</td>
-<td style="text-align: left;">26.10 <em>08:15 - 10:00</em> (<strong>LAB2</strong>)</td>
-<td style="text-align: left;">31.10 (<em>07:00</em>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">44</td>
-<td style="text-align: left;">31.10 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./10-many-models.html">Many models</a></td>
-<td style="text-align: left;">HO</td>
-<td style="text-align: left;">Many models</td>
-<td style="text-align: left;">02.11 <em>08:15 - 10:00</em> (<strong>LAB2</strong>)</td>
-<td style="text-align: left;">07.11 (<em>07:00</em>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">45</td>
-<td style="text-align: left;">07.11 <em>08:15 - 12:00</em> (<strong>Aud M</strong>)</td>
-<td style="text-align: left;"><a href="./11-documentation-and-deployment.html">Documentation and deployment</a></td>
-<td style="text-align: left;">OPMH</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">09.11 <em>08:15 - 10:00</em> (<strong>Aud J</strong>)</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-</section>
-<section id="practical-information" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="practical-information">Practical information</h2>
-<ul>
-<li><strong>The Compendium (This web page)</strong>
-<ul>
-<li>This page contains the study material needed for the course as well as links to other sources when needed. Most of the modules contain video lectures as well as comments, links and sometimes small exercises.</li>
-</ul></li>
-<li><strong>Text book</strong>
-<ul>
-<li>We will link to <a href="https://r4ds.hadley.nz/">R for Data Science (R4DS)</a> by Hadley Wickham many times. This is a great reference to bookmark once and for all.</li>
-</ul></li>
-<li><strong>Lectures</strong>
-<ul>
-<li>Lectures are held on Tuesdays from 08:15 to 12:00. The lectures will have the same core content as this web page, but some lectures will contain additional discussions and coding workshops.</li>
-</ul></li>
-<li><strong>Assignments and course approval</strong>
-<ul>
-<li>Most lectures have an accompanying assignment. See the overview above for a detailed overview and deadlines.</li>
-<li>The assignments from the first part of the course can be found here on this web page, and they must be handed in via Canvas. You must also complete two peer reviews for each of these assignments for approval.</li>
-<li>The remaining assignments will be administered via Github, please stand by for links and instructions for that.</li>
-<li><strong>To obtain course approval (and hence to be eligible to take the exam), you must hand in:</strong>
-<ul>
-<li><strong>All four assignments from the first part of the course, and</strong></li>
-<li><strong>minimum four of the remaining five assignments.</strong></li>
-</ul></li>
-<li>Please make careful note of the deadlines.</li>
-</ul></li>
-<li><strong>Teaching assistants and seminar</strong>
-<ul>
-<li>The teaching assistants will give feedback on your written work.</li>
-<li>They will also run a weekly seminar, each Thursday at 08:15-10:00, mostly in <strong>Aud J</strong> (but with some exceptions). In the seminar the TAs will discuss the assignment from the previous week, and provide support for next week’s assignment.</li>
-</ul></li>
-</ul>
+<section id="parallel-computing" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Parallel computing</h1>
+<p><em>Under construction</em></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -713,6 +515,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-machine-learning.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8. Machine learning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-many-models.html" class="pagination-link">
+        <span class="nav-page-text">10. many models</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

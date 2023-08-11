@@ -21,7 +21,7 @@ website:
       - href: index.qmd
         text: Course overview
       - text: "---"
-      - section: "PART I"
+      - section: "PART 1"
         contents:
         - href: 01-intro-to-r.qmd
           text: "1. Introduction to R"
@@ -33,7 +33,20 @@ website:
           text: "4. Functions and Loops"
         - href: 05-project-organization.qmd
           text: "5. Project organization"
-      - section: "PART II"
+      - section: "PART 2"
+        contents:
+        - href: 06-git.qmd
+          text: "6. Git and Github"
+        - href: 07-iterations.qmd
+          text: "7. Iterations"
+        - href: 08-machine-learning.qmd
+          text: "8. Machine learning"
+        - href: 09-parallel-computing.qmd
+          text: "9. Parallel computing"
+        - href: 10-many-models.qmd
+          text: "10. many models"
+        - href: 11-documentation-and-deployment.qmd
+          text: "11. Documentation and deployment"
       - text: "---"
       - section: "Assignments"
         contents:
@@ -45,8 +58,6 @@ website:
           text: "Assignment 3"
         - href: assignment-04.qmd
           text: "Assignment 4"
-      - href: references.qmd
-        text: "References"
 
 editor: visual
 

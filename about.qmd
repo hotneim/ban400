@@ -2,8 +2,10 @@
   title: "About"
 ---
 
-Please direct any feedback to the course instructors:
+This web page is written using Quarto and published via Github. The source code is loated here: [github.com/hotneim/ban400](https://github.com/hotneim/ban400/). Please direct any feedback to the course instructors:
 
 Håkon Otneim: `hakon.otneim@nhh.no`
 
 Ole-Petter Moe Hansen: `ole-petter.hansen@nhh.no`
+
+Thanks to Sondre Hølleland for some wonderful CSS-files. Check out his course at [holleland.github.io/BAN430](https://holleland.github.io/BAN430/).
