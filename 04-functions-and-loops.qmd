@@ -1,3 +1,7 @@
+---
+number-offset: 3
+---
+
 # Functions and Loops
 
 We will next introduce two vital programming techniques: functions and loops. With these techniques we will be able to leverage that we are working with a programming language, as opposed to manually moving around data in a spreadsheet. This will allow us to both do more calculations as well as writing more complex code.

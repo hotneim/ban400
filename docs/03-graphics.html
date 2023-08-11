@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -142,29 +113,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">BAN400 - R Programming for Data Science</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-to-r.html">PART I</a></li><li class="breadcrumb-item"><a href="./03-graphics.html">3. Graphics</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -172,108 +150,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
   </div>
 </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">PART I</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">PART I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">1. Introduction to R</a>
+  <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introduction to R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-data-wrangling.html" class="sidebar-item-text sidebar-link">2. Data Wrangling</a>
+  <a href="./02-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Data Wrangling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-graphics.html" class="sidebar-item-text sidebar-link active">3. Graphics</a>
+  <a href="./03-graphics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3. Graphics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-functions-and-loops.html" class="sidebar-item-text sidebar-link">4. Functions and Loops</a>
+  <a href="./04-functions-and-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Functions and Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-project-organization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Project organization</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">PART II</span>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">PART II</span></span>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Assignments</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">Assignment 1</a>
+  <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">Assignment 2</a>
+  <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-03.html" class="sidebar-item-text sidebar-link">Assignment 3</a>
+  <a href="./assignment-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">Assignment 4</a>
+  <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#graphics" id="toc-graphics" class="nav-link active" data-scroll-target="#graphics"><span class="toc-section-number">1</span>  Graphics</a>
+  <li><a href="#graphics" id="toc-graphics" class="nav-link active" data-scroll-target="#graphics"><span class="header-section-number">3</span> Graphics</a>
   <ul class="collapse">
-  <li><a href="#introduction-to-ggplot2" id="toc-introduction-to-ggplot2" class="nav-link" data-scroll-target="#introduction-to-ggplot2"><span class="toc-section-number">1.1</span>  Introduction to <code>ggplot2</code></a></li>
-  <li><a href="#wide-or-long-wideorlong" id="toc-wide-or-long-wideorlong" class="nav-link" data-scroll-target="#wide-or-long-wideorlong"><span class="toc-section-number">1.2</span>  Wide or long? (#wideorlong)</a></li>
-  <li><a href="#introducing-the-data" id="toc-introducing-the-data" class="nav-link" data-scroll-target="#introducing-the-data"><span class="toc-section-number">1.3</span>  Introducing the data</a></li>
-  <li><a href="#one-variable" id="toc-one-variable" class="nav-link" data-scroll-target="#one-variable"><span class="toc-section-number">1.4</span>  One variable</a></li>
-  <li><a href="#two-variables" id="toc-two-variables" class="nav-link" data-scroll-target="#two-variables"><span class="toc-section-number">1.5</span>  Two variables</a></li>
-  <li><a href="#scales-and-axes" id="toc-scales-and-axes" class="nav-link" data-scroll-target="#scales-and-axes"><span class="toc-section-number">1.6</span>  Scales and axes</a></li>
-  <li><a href="#visualizing-groups" id="toc-visualizing-groups" class="nav-link" data-scroll-target="#visualizing-groups"><span class="toc-section-number">1.7</span>  Visualizing groups</a></li>
-  <li><a href="#final-adjustments" id="toc-final-adjustments" class="nav-link" data-scroll-target="#final-adjustments"><span class="toc-section-number">1.8</span>  Final adjustments</a></li>
+  <li><a href="#introduction-to-ggplot2" id="toc-introduction-to-ggplot2" class="nav-link" data-scroll-target="#introduction-to-ggplot2"><span class="header-section-number">3.1</span> Introduction to <code>ggplot2</code></a></li>
+  <li><a href="#wide-or-long-wideorlong" id="toc-wide-or-long-wideorlong" class="nav-link" data-scroll-target="#wide-or-long-wideorlong"><span class="header-section-number">3.2</span> Wide or long? (#wideorlong)</a></li>
+  <li><a href="#introducing-the-data" id="toc-introducing-the-data" class="nav-link" data-scroll-target="#introducing-the-data"><span class="header-section-number">3.3</span> Introducing the data</a></li>
+  <li><a href="#one-variable" id="toc-one-variable" class="nav-link" data-scroll-target="#one-variable"><span class="header-section-number">3.4</span> One variable</a></li>
+  <li><a href="#two-variables" id="toc-two-variables" class="nav-link" data-scroll-target="#two-variables"><span class="header-section-number">3.5</span> Two variables</a></li>
+  <li><a href="#scales-and-axes" id="toc-scales-and-axes" class="nav-link" data-scroll-target="#scales-and-axes"><span class="header-section-number">3.6</span> Scales and axes</a></li>
+  <li><a href="#visualizing-groups" id="toc-visualizing-groups" class="nav-link" data-scroll-target="#visualizing-groups"><span class="header-section-number">3.7</span> Visualizing groups</a></li>
+  <li><a href="#final-adjustments" id="toc-final-adjustments" class="nav-link" data-scroll-target="#final-adjustments"><span class="header-section-number">3.8</span> Final adjustments</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -283,8 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<section id="graphics" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Graphics</h1>
+<section id="graphics" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Graphics</h1>
 <p>We will next explore the rich posibilities for making convincing visualizations in R; in particular using the <code>ggplot2</code>-package. We will start from the very basic syntax of making a plot, and then work our way towards making publication ready illustrations.</p>
 <p>There are a lot of online resources for <code>ggplot2</code>, for example:</p>
 <ul>
@@ -294,8 +292,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://robjhyndman.com/hyndsight/graphics/">Twenty rules for good graphics</a>, a useful blog post by statistician Rob Hyndman.</li>
 <li><a href="https://www.edwardtufte.com/tufte/">The books by Edward Tufte</a> are classic works in the more general topic of data visualization.</li>
 </ul>
-<section id="introduction-to-ggplot2" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="introduction-to-ggplot2"><span class="header-section-number">1.1</span> Introduction to <code>ggplot2</code></h2>
+<section id="introduction-to-ggplot2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction-to-ggplot2"><span class="header-section-number">3.1</span> Introduction to <code>ggplot2</code></h2>
 <iframe src="https://player.vimeo.com/video/546464330" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>We introduce the <code>ggplot2</code>-package and look at the basic syntax of that package and how it differs from the plotting engine that is built into the basic installation of R. Make sure that you have installed this package (using <code>install.package("ggplot2")</code>) before proceeding to the rest of the lesson.</p>
@@ -306,8 +304,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf">The <code>ggplot2</code> cheat sheet</a>; which is a superb quick-reference.</li>
 </ul>
 </section>
-<section id="wide-or-long-wideorlong" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="wide-or-long-wideorlong"><span class="header-section-number">1.2</span> Wide or long? (#wideorlong)</h2>
+<section id="wide-or-long-wideorlong" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="wide-or-long-wideorlong"><span class="header-section-number">3.2</span> Wide or long? (#wideorlong)</h2>
 <iframe src="https://player.vimeo.com/video/547403030" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>Not only is <code>ggplot2</code> picky in the sense that it only accepts data frames as the first argument to the <code>ggplot()</code>-function, we also need to be careful about the “shape” of the data frame. In this video we discuss the difference between storing data in the “wide” format versus the “long” format. We always prefer the latter when doing data science, in particular when using <code>ggplot2</code> for creating visualizations.</p>
@@ -342,8 +340,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="introducing-the-data" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="introducing-the-data"><span class="header-section-number">1.3</span> Introducing the data</h2>
+<section id="introducing-the-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="introducing-the-data"><span class="header-section-number">3.3</span> Introducing the data</h2>
 <iframe src="https://player.vimeo.com/video/552367790" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>We load the data that we are going to use in the lessons to follow. We look at hourly traffic volume over the <a href="https://en.wikipedia.org/wiki/Sotra_Bridge">Sotra bridge</a> during 2017 and 2018. This bridge is particularly vulnerable to traffic jams during rush hour, which we will look at in more detail through visualizations using <code>ggplot2</code>.</p>
@@ -354,11 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(traffic.df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="one-variable" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">1.4</span> One variable</h2>
-<div class="cell">
-
-</div>
+<section id="one-variable" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="one-variable"><span class="header-section-number">3.4</span> One variable</h2>
 <iframe src="https://player.vimeo.com/video/552817352" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>We look at some basic plots for visualizing a single variable. First, we make a histogram and a density plot for the continuous variable <code>hourly.volume</code>, and then we look at two different ways to make bar plots for a categorical variable, using <code>geom_bar()</code> and <code>geom_col()</code>. In the first of these cases we provide <code>ggplot()</code> with the raw data set, so that the occurrences in the categorical variable has to be counted before being presented in the plot. In the second case we provide the counts directly, which is something that easily happens in practice.</p>
@@ -398,12 +393,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Flip the coordinate system so that the bars become horizontal.</li>
 <li>Reverse the order of the bars, so that the tallest (or now: longest) bar comes first.</li>
 </ol>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Expand for solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -438,8 +433,8 @@ Expand for solution
 </div>
 </div>
 </section>
-<section id="two-variables" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">1.5</span> Two variables</h2>
+<section id="two-variables" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="two-variables"><span class="header-section-number">3.5</span> Two variables</h2>
 <iframe src="https://player.vimeo.com/video/552858986" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>We move on to look at a couple of alternatives when visualizing two variables. The first one is the scatter plot (using <code>geom_point()</code>) with some useful options, and the second one is to add text labels to a plot.</p>
@@ -471,8 +466,8 @@ Expand for solution
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="scales-and-axes" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="scales-and-axes"><span class="header-section-number">1.6</span> Scales and axes</h2>
+<section id="scales-and-axes" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="scales-and-axes"><span class="header-section-number">3.6</span> Scales and axes</h2>
 <iframe src="https://player.vimeo.com/video/553227142" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>Creating plots and graphs for various purposes takes more time than you think, not in the least because you may want to tweak all the small details so that it looks just perfect. The <code>ggplot2</code>-package (as well as various add-on packages) contain all the tools you will ever need for this (and many more). In this video we look at some ways to work with this. The most important thing in this lesson is perhaps not the functions that we use, but rather the process we follow when solving the problem using a combination of documentation, googling, trial and error.</p>
@@ -490,12 +485,12 @@ Expand for solution
 <p><strong>Exercise:</strong> Filter out the last 24 hours instead, and make one tick mark for each hour showing the time on a date + 24 hour format (i.e 31.12.2018 12:00, 31.12.2018 13:00, etc). Make adjustments that make the labels readable. Also, add points for each observation</p>
 <p><strong>Hint 1</strong>: look at the options we deleted when adjusting the size of the labels.</p>
 <p><strong>Hint 2</strong>: Look at <a href="https://www.r-bloggers.com/2013/08/date-formats-in-r/">this blog post</a> for more options when formatting date strings.</p>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Expand for solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -521,8 +516,8 @@ Expand for solution
 </div>
 </div>
 </section>
-<section id="visualizing-groups" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="visualizing-groups"><span class="header-section-number">1.7</span> Visualizing groups</h2>
+<section id="visualizing-groups" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="visualizing-groups"><span class="header-section-number">3.7</span> Visualizing groups</h2>
 <iframe src="https://player.vimeo.com/video/553260648" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>It is important in many situations to be able to visualize group membership, and in this lesson we see two such princinples: using colour in a single plot by mapping the group membership variable to the colour dimension of the plot, and one where we use <code>facet_wrap()</code> in order to make one panel for each group.</p>
@@ -558,12 +553,12 @@ Expand for solution
 <p><img src="03-graphics_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Expand for solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -582,8 +577,8 @@ Expand for solution
 </div>
 </div>
 </section>
-<section id="final-adjustments" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="final-adjustments"><span class="header-section-number">1.8</span> Final adjustments</h2>
+<section id="final-adjustments" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="final-adjustments"><span class="header-section-number">3.8</span> Final adjustments</h2>
 <iframe src="https://player.vimeo.com/video/553289047" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>We look at some options for making final adjustments to your plot in order to make them publication ready, including the possibility of including several plots to the same canvas by means of the <code>patchwork</code>-package.</p>
@@ -659,9 +654,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -726,6 +735,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

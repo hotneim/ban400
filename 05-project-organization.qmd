@@ -1,0 +1,49 @@
+---
+bibliography: references.bib
+number-offset: 4
+---
+
+# Project organization
+
+## Introduction
+
+In this module, we will not do so much R-coding, but rather reflect on how we should *organize* a coding project. If we spend some time now on identifying efficient, consistent and robust practices that work all the time, we do not have to use our creative energy later on topics such as folder structure and coding style. But this is not just a matter of practical convenience. It is critically important that our work is *reproducible*. @baumer2018lessons writes:
+
+> A reproducible workflow is one in which each step of the analytical process is clearly documented in such a way that someone -- and here it is better to imagine that person is *not* you -- can retrace your steps and verify the exact results that you presented. Since your workflow necessarily involves computing, that means that your computing workflow needs to be reproducible, and this immediately necessitates *scriptable* programs, as opposed to point-and-click, menu-driven software. There are many reasons not to use spreadsheet software (e.g. Microsoft Excel [... and here there is a reference to Broman and Woo, 2017, "*Data organization in spreadsheets*", for using this kind of software responsibly]), but chief among them is the fact that spreadsheet operations cannot be scripted. This means that it is generally impossible to produce truly reproducible work in that environment. A fundamental problem with spreadsheets is that they fail to distinguish between *data* and the presentation of those data. In a spreadsheet, everything is fair game: data can be overwritten or reformatted in a way that destroys the original precision, or simply garbled by automatic type conversion tools. Limitations imposed on the number of "Undo" commands further restrict one's ability to retrace steps.
+> 
+> If a program is scriptable, then the precise sequence of commands that load and transform the data, perform the analysis, and produce the plots can be recorded. **This need not be a history or transcript of the entire session, but rather should be the *minimal* set of commands needed to reproduce your analysis.** For even the most thoughtful programmer, a complete history will contain many irrelevant or incorrect commands that are not necessarily recorded in a sensible order. What reproducibility demands is a carefully edited recipe.
+
+
+<iframe src="https://player.vimeo.com/video/852258514?h=45850dc26a" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+Here are the data files that we will look at in this module: [project-organization-raw-data.zip](data-and-files/project-organization-raw-data.zip). Some of the most central topics in this module are also discussed in [Chapters 3, 5, 7 and 9 in R4DS](https://r4ds.hadley.nz/). 
+
+## Folder Structure
+
+We discuss the paper [A Quick Guide to Organizing Computational Biology Projects](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424) [@noble2009quick] in order to adopt a consistent folder structure that we can use for our projects.
+
+<iframe src="https://player.vimeo.com/video/852258490?h=ad2309e288" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+## Coding practice
+
+Next, we choose, and stick to, an accepted coding style. There are various options out there (and you can of course make your own informed choice in this matter). In the video, we consider some aspects of the [Tidyverse style guide](https://style.tidyverse.org/index.html). You can download the R-file that we work with here: [process_data.R](data-and-files/process_data.R).
+
+
+<iframe src="https://player.vimeo.com/video/852258425?h=9530e4b778" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+## RStudio Projects
+
+RStudio lets us create a handy little "project file" that we can put in the top level folder in our project. At the end of the video, we make some remarks about a packace called `here`, that we need to walk back on in the next video in order to solve a practical problem there.
+
+<iframe src="https://player.vimeo.com/video/852258388?h=ea1e6bc205" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+## Writing with Quarto
+
+Finally, we introduce a convenient system for writing technical reports: Quarto. The great advantage of writing with Quarto is that we no longer have to separate the tasks of writing and running code for producing some kind of result, and putting those results into a document. All of this can now be handled in one operation. Quarto is the successor of RMarkdown, which in turn is based on the well known Markdown format for writing. You can download Quarto here: [Quarto.org](https://quarto.org/), and you will find the reference guide on the same page.
+
+Again, you will notice that these videos were not planned out entirely before recording them, because we see the immediate use of the `here` -package for placing the document in its correct place in our folder structure. You can download the finished state of the project, including the quarto-file and the updated script, here: [newspaper-analysis.zip](data-and-files/newspaper-analysis.zip).
+
+
+<iframe src="https://player.vimeo.com/video/852258542?h=467c94d947" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+

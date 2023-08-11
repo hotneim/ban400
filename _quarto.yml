@@ -31,6 +31,8 @@ website:
           text: "3. Graphics"
         - href: 04-functions-and-loops.qmd
           text: "4. Functions and Loops"
+        - href: 05-project-organization.qmd
+          text: "5. Project organization"
       - section: "PART II"
       - text: "---"
       - section: "Assignments"
