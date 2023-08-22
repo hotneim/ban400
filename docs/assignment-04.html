@@ -367,30 +367,30 @@ Expand for some hints.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.285561</code></pre>
+<pre><code>[1] 0.4197164</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4098759</code></pre>
+<pre><code>[1] -0.124902</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.03017102</code></pre>
+<pre><code>[1] -0.08900855</code></pre>
 </div>
 </div>
 <p>… or with a different value of the population mean:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.85389</code></pre>
+<pre><code>[1] 14.99657</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.65223</code></pre>
+<pre><code>[1] 14.92681</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.22164</code></pre>
+<pre><code>[1] 14.97365</code></pre>
 </div>
 </div>
 </div>
@@ -425,10 +425,10 @@ Expand for some hints.
 <p>Using <code>N = 10</code> and <code>M = 20</code> should give something like this (however not with identical results because you will sample different numbers).</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.06546763 -0.09783641 -0.70867205  0.40711672  0.22725485 -0.16977667
- [7] -0.27552981  0.53012121 -0.26753335  0.14993528 -0.03619943  0.23722909
-[13] -0.31391507  0.11279796  0.18013791  0.33511167 -0.19090199  0.24078448
-[19] -0.26926670  0.18230116</code></pre>
+<pre><code> [1]  0.10821047  0.01428175  0.19035455 -0.21028317  0.16243977 -0.41400889
+ [7] -0.46046916 -0.52185869  0.16799046 -0.20905180  0.01631883 -0.27578479
+[13]  0.00317181  0.07889762  0.02767746  0.27953299  0.28771631 -0.28742777
+[19]  0.11824541  0.09666555</code></pre>
 </div>
 </div>
 </div>
@@ -564,7 +564,7 @@ Expand for a hint
 <p>Here is a simple plot using <code>M = 200</code>; observed as solid line, theoretical as dashed line. Looks good!</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-04_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-04_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -580,7 +580,8 @@ Expand for a hint
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tweedie)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rtweedie</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">10000</span>, <span class="at">phi =</span> <span class="dv">1000</span>, <span class="at">power =</span> <span class="fl">1.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 0 0 0 0 0</code></pre>
+<pre><code> [1]       0       0       0       0 4799868       0       0       0       0
+[10]       0</code></pre>
 </div>
 </div>
 <p>Most likely you will observe 10 zeros, each of which belong to the majority of houses that do not burn down in a given year. If you do observe a non-zero, however, this would represent the total amount claimed by a single (unlucky) insurance holder that year.</p>

@@ -1,7 +1,7 @@
 # Assignment 2 {.unnumbered}
 
-::: {.callout-note}
-This assignment is to be handed in as an `.R`-file through Canvas. Your answer will be reviewed by a teaching assistant *as well as two fellow students*. Do take the time to condsider the feedback. **You will also receive two random answers from fellow students for review**. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment. 
+::: callout-note
+This assignment is to be handed in as an `.R`-file through Canvas. Your answer will be reviewed by a teaching assistant *as well as two fellow students*. Do take the time to condsider the feedback. **You will also receive two random answers from fellow students for review**. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment.
 :::
 
 The first part of the assignment is intended to give you to practice writing pipes using a Tidyverse data set where are are good online resources. You don't have to hand in the first part. The second part uses a survey data set, and should be handed in.
@@ -84,7 +84,7 @@ flights |>
 
 ## Part 2: Survey data {.unnumbered}
 
-For this homework you will practice your data wrangling skills using a survey data set. The data comes from the European Social Survey, and is available at \[europeansocialsurvey.org\] in various formats. Further, the data from ESS contains many variables with abbreviated/encoded names. The file contains survey responses from Norway in 2016. To get you started with the assignment, you may use the commands below to read in the data set. You may need to install the package `foreign` first in order to use the `read.dta` function.
+For this homework you will practice your data wrangling skills using a survey data set that you can download here: [data-ESS8NO.dta](data-ESS8NO.dta). The data comes from the European Social Survey, and is available at \[europeansocialsurvey.org\] in various formats. Further, the data from ESS contains many variables with abbreviated/encoded names. The file contains survey responses from Norway in 2016. To get you started with the assignment, you may use the commands below to read in the data set. You may need to install the package `foreign` first in order to use the `read.dta` function.
 
 ```{r, eval=FALSE}
 library(foreign)
