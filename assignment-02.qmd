@@ -4,7 +4,7 @@
 This assignment is to be handed in as an `.R`-file through Canvas. Your answer will be reviewed by a teaching assistant *as well as two fellow students*. Do take the time to condsider the feedback. **You will also receive two random answers from fellow students for review**. Try to find one positive aspect as well as one suggestion for improvement in each of the answers. You must complete both peer reviews in order to pass the assignment.
 :::
 
-The first part of the assignment is intended to give you to practice writing pipes using a Tidyverse data set where are are good online resources. You don't have to hand in the first part. The second part uses a survey data set, and should be handed in.
+The first part of the assignment is intended to give you to practice writing pipes using a Tidyverse data set where there are good online resources. You don't have to hand in the first part. The second part uses a survey data set, and should be handed in.
 
 ## Part 1 {.unnumbered}
 
@@ -67,7 +67,7 @@ flights |>
 
 Assignment 2: Answer the questions below
 
-1.  Speed is distance divided by airtime. Use the `planes` dataframe (included in the `nycflights13`-package) to find the *fastest* and *slowest* aircraft model measured by Your answer should be a tibble containing the fastest and slowest plane
+1.  Speed is distance divided by airtime. Use the `planes` dataframe (included in the `nycflights13`-package) to find the *fastest* and *slowest* aircraft model measured by speed in average km/h. Your answer should be a tibble containing the fastest and slowest plane
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for solution
