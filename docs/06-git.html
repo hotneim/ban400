@@ -208,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-many-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10. many models</span></a>
+ <span class="menu-text">10. Many models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -265,7 +265,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link active" data-scroll-target="#git-and-github"><span class="header-section-number">6</span> Git and Github</a></li>
+  <li><a href="#git-and-github" id="toc-git-and-github" class="nav-link active" data-scroll-target="#git-and-github"><span class="header-section-number">6</span> Git and Github</a>
+  <ul class="collapse">
+  <li><a href="#setup-and-basic-commands" id="toc-setup-and-basic-commands" class="nav-link" data-scroll-target="#setup-and-basic-commands"><span class="header-section-number">6.1</span> Setup and basic commands</a></li>
+  <li><a href="#branching-and-conflict-resolution" id="toc-branching-and-conflict-resolution" class="nav-link" data-scroll-target="#branching-and-conflict-resolution"><span class="header-section-number">6.2</span> Branching and conflict resolution</a></li>
+  <li><a href="#online-repositories-on-github" id="toc-online-repositories-on-github" class="nav-link" data-scroll-target="#online-repositories-on-github"><span class="header-section-number">6.3</span> Online repositories on Github</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -276,9 +281,65 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="git-and-github" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Git and Github</h1>
-<p><em>Under construction</em></p>
+<p>We mentioned the need for <em>version control</em> in our previous module on project management. This is a central topic for any kind of software development. In this lesson we will learn the most popular system for version control, <em>git</em>, and see how we can use it for managing the progress of a project. This simplest way to think of this workflow is that we introduce a kind of “undo”-button for the entire project, by saving the state of our various files onto a timeline that we can navigate as we wish. But version control is so much more: we can use git to work on different <em>branches</em> of ideas, that we can <em>merge</em> into the project in a controlled way, we can formalize collaboration via online repositories, and we will see how open source development works via <em>forks</em> and <em>pull requests</em>.</p>
+<p><strong>You will use git and GitHub to complete the assignments in the course, so it is important that you learn this material now!</strong></p>
+<p>Please note that we will just briefly review the contents of the video lessons below in the beginning of our lecture. <strong>This means that you should work with the video lessons <em>before</em> we start the session at 10:15.</strong> We will use the remaining time for further discussion of central topics, including <em>Github Classroom</em>, which is the system that we will use to deliver the assignments for the rest of the semester. Maybe we will have time for a secret, but very fun activity in the end…</p>
+<p>Here are some slides that we will use for discussion in class: <a href="data-and-files/ban400-git-github.pdf">ban400-git-github.pdf</a>.</p>
+<p>We will follow this schedule in our lecture slot:</p>
+<table class="table-hover table">
+<caption></caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>08:15 - 10:00</td>
+<td>Complete watching the videos if you have not finished by this date. The instructor is available in the auditorium for discussion and support if you have any questions or errors that you would like to resolve.</td>
+</tr>
+<tr class="even">
+<td>10:15 - 11:00</td>
+<td>Brief review of the material. Discussion of workflow in data science projects.</td>
+</tr>
+<tr class="odd">
+<td>11:15 - 12:00</td>
+<td>We introduce two important concepts for code contribution to open source projects (the fork and the pull request). We will also introduce Github Classroom which we will use to administer the assignments in the course.</td>
+</tr>
+</tbody>
+</table>
+<p>Our brief treatment of Git and Github is by no means complete. Below follow a few extra sources for further reading:</p>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2">Pro Git</a> is a standard reference on the subject.</li>
+<li><a href="https://happygitwithr.com/">Happy Git with R</a> gives an R-specific introduction to Git, with special consideration to the possibility of integrating the basic features if Git directly into RStudio.</li>
+<li><a href="https://www.udemy.com/course/github-ultimate/">Github Ultimate</a> is a (paid) course at Udemy.com by Jason Taylor, that has served as inspiration for several of the videos for this seminar.</li>
+<li><a href="https://youtu.be/2sjqTHE0zok">This lecture at MIT</a> provides a basic introduction to the inner workings of Git as well as many of the commands that we cover in our seminar.</li>
+</ul>
+<section id="setup-and-basic-commands" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="setup-and-basic-commands"><span class="header-section-number">6.1</span> Setup and basic commands</h2>
+<p>In the video player below we set up git and learn the basic commands. Note that we have simplified the setup process from earlier years (specifically, we no longer use a third party tool for conflict resolution), which means that some of these videos are somewhat amputated.</p>
+<div style="padding:75% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/10619772/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
+</section>
+<section id="branching-and-conflict-resolution" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="branching-and-conflict-resolution"><span class="header-section-number">6.2</span> Branching and conflict resolution</h2>
+<p>We introduce some more advanced concepts for version control on your local computer:</p>
+<div style="padding:62.5% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/10619859/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
+</section>
+<section id="online-repositories-on-github" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="online-repositories-on-github"><span class="header-section-number">6.3</span> Online repositories on Github</h2>
+<p>Finally, we move our repository online using GitHub and see how we can use online version control to complement our workflow with tools for collaboration and project management.</p>
+<div style="padding:75% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/10619869/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
