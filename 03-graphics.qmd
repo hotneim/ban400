@@ -28,7 +28,7 @@ We can repeat the links that are mentioned at the end of the video:
 -   [Data Visualization: A Practical Introduction](https://socviz.co/), a well written free and online e-book.
 -   [The `ggplot2` cheat sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf); which is a superb quick-reference.
 
-## Wide or long? (#wideorlong)
+## Wide or long? {#wideorlong}
 
 <iframe src="https://player.vimeo.com/video/547403030" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
 
