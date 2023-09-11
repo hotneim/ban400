@@ -56,7 +56,7 @@ cumsum(x)
 
 **Exercise:**
 
-The Fibonacci sequence 1,1,2,3,5,8,13,... is defined by $F_n = F_{n-1}+F_{n-2}$ for $n>1$. This sequence possesses many mysterious qualities. Look at this remarkable picture for instance: https://en.wikipedia.org/wiki/Golden_ratio#/media/File:Golden_mean.png. It displays the ratio of subsequent Fibonacci numbers, i.e. $F_{n}/F_{n-1}$, that quickly converges to the golden ratio $\frac{1+\sqrt{5}}{2}= 1.618...$. Can you reproduce this figure in R?
+The Fibonacci sequence 1,1,2,3,5,8,13,... is defined by $F_n = F_{n-1}+F_{n-2}$ for $n>2$. This sequence possesses many mysterious qualities. Look at this remarkable [picture](https://en.wikipedia.org/wiki/Golden_ratio#/media/File:Golden_mean.png) for instance. It displays the ratio of subsequent Fibonacci numbers, i.e. $F_{n}/F_{n-1}$, that quickly converges to the golden ratio $\frac{1+\sqrt{5}}{2}= 1.618...$. Can you reproduce this figure in R?
 
 ::: {.callout-note collapse="true" icon="false"}
 ## Expand for solution
