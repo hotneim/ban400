@@ -311,7 +311,7 @@ plotStocks <- function(data) {
                             y = y,
                             label = stock),
               data =   
-                . |> 
+                data |> 
                 group_by(stock) |> 
                 summarize(x = tail(date, n = 1),
                           y = tail(close, n = 1)),

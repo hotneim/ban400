@@ -632,7 +632,7 @@ Expand for solution
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">y =</span> y,</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">label =</span> stock),</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span>   </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                . <span class="sc">|&gt;</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                data <span class="sc">|&gt;</span> </span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                <span class="fu">group_by</span>(stock) <span class="sc">|&gt;</span> </span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarize</span>(<span class="at">x =</span> <span class="fu">tail</span>(date, <span class="at">n =</span> <span class="dv">1</span>),</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="fu">tail</span>(close, <span class="at">n =</span> <span class="dv">1</span>)),</span>
