@@ -58,6 +58,12 @@ website:
           text: "Assignment 3"
         - href: assignment-04.qmd
           text: "Assignment 4"
+      - text: "---"
+      - section: "Other material"
+        contents:
+        - href: submit_assignments.qmd
+          text: "Submit assignments with Github Classroom"
+        
 
 editor: visual
 

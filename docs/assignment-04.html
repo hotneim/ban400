@@ -304,6 +304,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Other material</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./submit_assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Submit assignments with Github Classroom</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -367,30 +385,30 @@ Expand for some hints.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.07675123</code></pre>
+<pre><code>[1] 0.04961147</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2544533</code></pre>
+<pre><code>[1] 0.3396054</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.00534489</code></pre>
+<pre><code>[1] -0.2988132</code></pre>
 </div>
 </div>
 <p>… or with a different value of the population mean:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.14479</code></pre>
+<pre><code>[1] 14.52925</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.07367</code></pre>
+<pre><code>[1] 15.54425</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sim_norm</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">mu =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.05444</code></pre>
+<pre><code>[1] 15.32221</code></pre>
 </div>
 </div>
 </div>
@@ -425,10 +443,10 @@ Expand for some hints.
 <p>Using <code>N = 10</code> and <code>M = 20</code> should give something like this (however not with identical results because you will sample different numbers).</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.030072326 -0.362888977 -0.016470518 -0.128593251  0.297196433
- [6]  0.725082640 -0.691173765 -0.064094341 -0.264974284 -0.024367519
-[11]  0.352751845  0.147425561 -0.119817531 -0.318656816  0.006667681
-[16]  0.216609083 -0.183601770 -0.072019158 -0.308413511  0.315304006</code></pre>
+<pre><code> [1]  0.130359185 -0.386070251 -0.219097099 -0.108943831 -0.093365233
+ [6] -0.325845179  0.058902160  0.507779530 -0.678915356  0.360823944
+[11]  0.643385943 -0.009978614  0.006369919 -0.090561582 -0.135084112
+[16] -0.194740947 -0.282044260 -0.144865137 -0.348897629  0.317146278</code></pre>
 </div>
 </div>
 </div>
@@ -564,7 +582,7 @@ Expand for a hint
 <p>Here is a simple plot using <code>M = 200</code>; observed as solid line, theoretical as dashed line. Looks good!</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="assignment-04_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="assignment-04_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
