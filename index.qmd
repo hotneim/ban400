@@ -27,7 +27,7 @@ readxl::read_excel("data-and-files/schedule_part2.xlsx") %>%
 ```
 
 **NB!** Please read [this guide](submit_assignments.qmd) on submitting assignments through Github Classroom **before** clicking on the assignment links!
- 
+
 ## Practical information {.unnumbered}
 
 -   **The Compendium (This web page)**
