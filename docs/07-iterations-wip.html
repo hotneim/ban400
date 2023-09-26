@@ -441,11 +441,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the contents of the item [[i]]. </span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations<span class="sc">$</span>trafficRegistrationPoints)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6343</code></pre>
+<pre><code>[1] 6382</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6343</code></pre>
+<pre><code>[1] 6382</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's look at the first entry of this long list. We can see there is</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a station ID, station name, date time of latest recording from the station</span></span>
@@ -455,24 +455,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]][[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$id
-[1] "26181V320644"
+[1] "10601V704982"
 
 $name
-[1] "Bjoavegen ved Lundanesvegen"
+[1] "Fv2026 Bæreiavegen"
 
 $latestData
 $latestData$volumeByDay
-[1] "2023-06-09T00:00:00+02:00"
+[1] "2023-09-20T00:00:00+02:00"
 
 
 $location
 $location$coordinates
 $location$coordinates$latLon
 $location$coordinates$latLon$lat
-[1] 59.60979
+[1] 60.19051
 
 $location$coordinates$latLon$lon
-[1] 5.768648</code></pre>
+[1] 11.98039</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We could perhaps hope that we can force this list into a data frame. For</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this we will use as_tibble: </span></span>
@@ -480,9 +480,9 @@ $location$coordinates$latLon$lon
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
-  id           name                        latestData   location        
-  &lt;chr&gt;        &lt;chr&gt;                       &lt;named list&gt; &lt;named list&gt;    
-1 26181V320644 Bjoavegen ved Lundanesvegen &lt;chr [1]&gt;    &lt;named list [1]&gt;</code></pre>
+  id           name               latestData   location        
+  &lt;chr&gt;        &lt;chr&gt;              &lt;named list&gt; &lt;named list&gt;    
+1 10601V704982 Fv2026 Bæreiavegen &lt;chr [1]&gt;    &lt;named list [1]&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We now want to apply this as_tibble transformation to each of the stations, </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and combine them in a single data frame. We could do this with lapply, </span></span>
@@ -490,20 +490,20 @@ $location$coordinates$latLon$lon
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(stations[[<span class="dv">1</span>]], . <span class="sc">%&gt;%</span> as_tibble) <span class="sc">|&gt;</span> </span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                             latestData   location        
-   &lt;chr&gt;         &lt;chr&gt;                            &lt;named list&gt; &lt;named list&gt;    
- 1 26181V320644  Bjoavegen ved Lundanesvegen      &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 2 16167V181017  Havnegata nær Skomakergt         &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 3 56479V705299  Fv1814 Kurudvegen                &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 4 17915V320506  Øvre Eidevegen                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon           &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 6 51577V444292  Momoen                           &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 7 98747V44893   KV Ståggåvegen                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk         &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgående &lt;chr [1]&gt;    &lt;named list [1]&gt;
-10 77360V249592  Tingvoll 1                       &lt;chr [1]&gt;    &lt;named list [1]&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData   location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;named list&gt; &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 7 41429V72150   Garli                &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               &lt;chr [1]&gt;    &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             &lt;chr [1]&gt;    &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 </div>
 <p><strong>Exercise:</strong></p>
@@ -521,20 +521,20 @@ Solution
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">as_tibble</span>(.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                             latestData   location        
-   &lt;chr&gt;         &lt;chr&gt;                            &lt;named list&gt; &lt;named list&gt;    
- 1 26181V320644  Bjoavegen ved Lundanesvegen      &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 2 16167V181017  Havnegata nær Skomakergt         &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 3 56479V705299  Fv1814 Kurudvegen                &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 4 17915V320506  Øvre Eidevegen                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon           &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 6 51577V444292  Momoen                           &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 7 98747V44893   KV Ståggåvegen                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk         &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgående &lt;chr [1]&gt;    &lt;named list [1]&gt;
-10 77360V249592  Tingvoll 1                       &lt;chr [1]&gt;    &lt;named list [1]&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData   location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;named list&gt; &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 7 41429V72150   Garli                &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               &lt;chr [1]&gt;    &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             &lt;chr [1]&gt;    &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can try to pull out the insides of the contents of the latestData-</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column. It is formatted as a list, but actually only contains one </span></span>
@@ -546,7 +546,7 @@ Solution
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$volumeByDay
-[1] "2023-06-09T00:00:00+02:00"</code></pre>
+[1] "2023-09-20T00:00:00+02:00"</code></pre>
 </div>
 </div>
 </details>
@@ -591,20 +591,20 @@ Solution
 <span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">as_tibble</span>(.)) <span class="sc">|&gt;</span> </span>
 <span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, unlist_safe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                             latestData        location    
-   &lt;chr&gt;         &lt;chr&gt;                            &lt;chr&gt;             &lt;named list&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen      2023-06-09T00:00… &lt;named list&gt;
- 2 16167V181017  Havnegata nær Skomakergt         2023-06-10T00:00… &lt;named list&gt;
- 3 56479V705299  Fv1814 Kurudvegen                2023-08-23T00:00… &lt;named list&gt;
- 4 17915V320506  Øvre Eidevegen                   2023-07-24T00:00… &lt;named list&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon           2023-09-14T00:00… &lt;named list&gt;
- 6 51577V444292  Momoen                           2023-06-14T00:00… &lt;named list&gt;
- 7 98747V44893   KV Ståggåvegen                   2023-05-26T00:00… &lt;named list&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk         2023-09-14T00:00… &lt;named list&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgående 2023-09-14T00:00… &lt;named list&gt;
-10 77360V249592  Tingvoll 1                       2023-06-07T00:00… &lt;named list&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData                location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;chr&gt;                     &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05T00:00:00+02:00 &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           2023-06-21T00:00:00+02:00 &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        2023-07-05T00:00:00+02:00 &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       2023-07-04T00:00:00+02:00 &lt;named list [1]&gt;
+ 7 41429V72150   Garli                2023-07-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            2023-07-04T00:00:00+02:00 &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               2023-03-23T00:00:00+01:00 &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             2022-06-13T00:00:00+02:00 &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, we can use the defaults in map_chr. It will </span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># now have a safe fallback value it can use if it doesn't </span></span>
@@ -614,20 +614,20 @@ Solution
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map_df</span>(<span class="sc">~</span><span class="fu">as_tibble</span>(.)) <span class="sc">|&gt;</span> </span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData,<span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                             latestData        location    
-   &lt;chr&gt;         &lt;chr&gt;                            &lt;chr&gt;             &lt;named list&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen      2023-06-09T00:00… &lt;named list&gt;
- 2 16167V181017  Havnegata nær Skomakergt         2023-06-10T00:00… &lt;named list&gt;
- 3 56479V705299  Fv1814 Kurudvegen                2023-08-23T00:00… &lt;named list&gt;
- 4 17915V320506  Øvre Eidevegen                   2023-07-24T00:00… &lt;named list&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon           2023-09-14T00:00… &lt;named list&gt;
- 6 51577V444292  Momoen                           2023-06-14T00:00… &lt;named list&gt;
- 7 98747V44893   KV Ståggåvegen                   2023-05-26T00:00… &lt;named list&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk         2023-09-14T00:00… &lt;named list&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgående 2023-09-14T00:00… &lt;named list&gt;
-10 77360V249592  Tingvoll 1                       2023-06-07T00:00… &lt;named list&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData                location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;chr&gt;                     &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05T00:00:00+02:00 &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           2023-06-21T00:00:00+02:00 &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        2023-07-05T00:00:00+02:00 &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       2023-07-04T00:00:00+02:00 &lt;named list [1]&gt;
+ 7 41429V72150   Garli                2023-07-20T00:00:00+02:00 &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            2023-07-04T00:00:00+02:00 &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               2023-03-23T00:00:00+01:00 &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             2022-06-13T00:00:00+02:00 &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 </div>
 </details>
@@ -645,20 +645,20 @@ Solution
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as.Date</span>(latestData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                             latestData location        
-   &lt;chr&gt;         &lt;chr&gt;                            &lt;date&gt;     &lt;named list&gt;    
- 1 26181V320644  Bjoavegen ved Lundanesvegen      2023-06-09 &lt;named list [1]&gt;
- 2 16167V181017  Havnegata nær Skomakergt         2023-06-10 &lt;named list [1]&gt;
- 3 56479V705299  Fv1814 Kurudvegen                2023-08-23 &lt;named list [1]&gt;
- 4 17915V320506  Øvre Eidevegen                   2023-07-24 &lt;named list [1]&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon           2023-09-14 &lt;named list [1]&gt;
- 6 51577V444292  Momoen                           2023-06-14 &lt;named list [1]&gt;
- 7 98747V44893   KV Ståggåvegen                   2023-05-26 &lt;named list [1]&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk         2023-09-14 &lt;named list [1]&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgående 2023-09-14 &lt;named list [1]&gt;
-10 77360V249592  Tingvoll 1                       2023-06-07 &lt;named list [1]&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;date&gt;     &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20 &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20 &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05 &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           2023-06-21 &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        2023-07-05 &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       2023-07-04 &lt;named list [1]&gt;
+ 7 41429V72150   Garli                2023-07-20 &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            2023-07-04 &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               2023-03-23 &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             2022-06-13 &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are several functions we can use to transform the string into</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a date time variable. as_datetime in lubridate works in this case. </span></span>
@@ -670,20 +670,20 @@ Solution
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 4
-   id            name                           latestData          location    
-   &lt;chr&gt;         &lt;chr&gt;                          &lt;dttm&gt;              &lt;named list&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen    2023-06-09 00:00:00 &lt;named list&gt;
- 2 16167V181017  Havnegata nær Skomakergt       2023-06-10 00:00:00 &lt;named list&gt;
- 3 56479V705299  Fv1814 Kurudvegen              2023-08-23 00:00:00 &lt;named list&gt;
- 4 17915V320506  Øvre Eidevegen                 2023-07-24 00:00:00 &lt;named list&gt;
- 5 17664V3100937 Fv222 Hamar Skystasjon         2023-09-14 00:00:00 &lt;named list&gt;
- 6 51577V444292  Momoen                         2023-06-14 00:00:00 &lt;named list&gt;
- 7 98747V44893   KV Ståggåvegen                 2023-05-26 00:00:00 &lt;named list&gt;
- 8 97919V704825  Fv1752 Hamar tannklinikk       2023-09-14 00:00:00 &lt;named list&gt;
- 9 43362V3476463 Sandvollkrysset rampe nordgåe… 2023-09-14 00:00:00 &lt;named list&gt;
-10 77360V249592  Tingvoll 1                     2023-06-07 00:00:00 &lt;named list&gt;
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 4
+   id            name                 latestData          location        
+   &lt;chr&gt;         &lt;chr&gt;                &lt;dttm&gt;              &lt;named list&gt;    
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20 00:00:00 &lt;named list [1]&gt;
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20 00:00:00 &lt;named list [1]&gt;
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05 00:00:00 &lt;named list [1]&gt;
+ 4 82393V72362   Mørriaunet           2023-06-21 00:00:00 &lt;named list [1]&gt;
+ 5 79788V1175734 Vennerødveien        2023-07-05 00:00:00 &lt;named list [1]&gt;
+ 6 62515V2413630 Harran sentrum       2023-07-04 00:00:00 &lt;named list [1]&gt;
+ 7 41429V72150   Garli                2023-07-20 00:00:00 &lt;named list [1]&gt;
+ 8 08601V578614  Yttermoan            2023-07-04 00:00:00 &lt;named list [1]&gt;
+ 9 03275V971835  Gylder               2023-03-23 00:00:00 &lt;named list [1]&gt;
+10 25470V885656  Halsmoen             2022-06-13 00:00:00 &lt;named list [1]&gt;
+# ℹ 6,372 more rows</code></pre>
 </div>
 </div>
 
@@ -694,13 +694,6 @@ Solution
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 38%">
-<col style="width: 15%">
-<col style="width: 12%">
-<col style="width: 13%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">id</th>
@@ -712,81 +705,81 @@ Solution
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">26181V320644</td>
-<td style="text-align: left;">Bjoavegen ved Lundanesvegen</td>
-<td style="text-align: left;">2023-06-09</td>
-<td style="text-align: right;">59.60979</td>
-<td style="text-align: right;">5.768648</td>
+<td style="text-align: left;">10601V704982</td>
+<td style="text-align: left;">Fv2026 Bæreiavegen</td>
+<td style="text-align: left;">2023-09-20</td>
+<td style="text-align: right;">60.19051</td>
+<td style="text-align: right;">11.98039</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">16167V181017</td>
-<td style="text-align: left;">Havnegata nær Skomakergt</td>
-<td style="text-align: left;">2023-06-10</td>
-<td style="text-align: right;">59.72932</td>
-<td style="text-align: right;">10.244630</td>
+<td style="text-align: left;">34596V704982</td>
+<td style="text-align: left;">Fv2026 Lia barnehage</td>
+<td style="text-align: left;">2023-09-20</td>
+<td style="text-align: right;">60.18537</td>
+<td style="text-align: right;">11.98292</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">56479V705299</td>
-<td style="text-align: left;">Fv1814 Kurudvegen</td>
-<td style="text-align: left;">2023-08-23</td>
-<td style="text-align: right;">60.77904</td>
-<td style="text-align: right;">11.185774</td>
+<td style="text-align: left;">21241V704822</td>
+<td style="text-align: left;">Fv1752 Kornsiloen</td>
+<td style="text-align: left;">2023-07-05</td>
+<td style="text-align: right;">60.80331</td>
+<td style="text-align: right;">11.03435</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">17915V320506</td>
-<td style="text-align: left;">Øvre Eidevegen</td>
-<td style="text-align: left;">2023-07-24</td>
-<td style="text-align: right;">59.28023</td>
-<td style="text-align: right;">5.278127</td>
+<td style="text-align: left;">82393V72362</td>
+<td style="text-align: left;">Mørriaunet</td>
+<td style="text-align: left;">2023-06-21</td>
+<td style="text-align: right;">63.91087</td>
+<td style="text-align: right;">10.24197</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">17664V3100937</td>
-<td style="text-align: left;">Fv222 Hamar Skystasjon</td>
-<td style="text-align: left;">2023-09-14</td>
-<td style="text-align: right;">60.79153</td>
-<td style="text-align: right;">11.081107</td>
+<td style="text-align: left;">79788V1175734</td>
+<td style="text-align: left;">Vennerødveien</td>
+<td style="text-align: left;">2023-07-05</td>
+<td style="text-align: right;">59.27928</td>
+<td style="text-align: right;">10.24783</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">51577V444292</td>
-<td style="text-align: left;">Momoen</td>
-<td style="text-align: left;">2023-06-14</td>
-<td style="text-align: right;">59.80654</td>
-<td style="text-align: right;">11.389394</td>
+<td style="text-align: left;">62515V2413630</td>
+<td style="text-align: left;">Harran sentrum</td>
+<td style="text-align: left;">2023-07-04</td>
+<td style="text-align: right;">64.56050</td>
+<td style="text-align: right;">12.48977</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 6
+<pre><code># A tibble: 6,382 × 6
    id            name               latestData          location       lat   lon
    &lt;chr&gt;         &lt;chr&gt;              &lt;dttm&gt;              &lt;named list&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 26181V320644  Bjoavegen ved Lun… 2023-06-09 00:00:00 &lt;named list&gt;  59.6  5.77
- 2 16167V181017  Havnegata nær Sko… 2023-06-10 00:00:00 &lt;named list&gt;  59.7 10.2 
- 3 56479V705299  Fv1814 Kurudvegen  2023-08-23 00:00:00 &lt;named list&gt;  60.8 11.2 
- 4 17915V320506  Øvre Eidevegen     2023-07-24 00:00:00 &lt;named list&gt;  59.3  5.28
- 5 17664V3100937 Fv222 Hamar Skyst… 2023-09-14 00:00:00 &lt;named list&gt;  60.8 11.1 
- 6 51577V444292  Momoen             2023-06-14 00:00:00 &lt;named list&gt;  59.8 11.4 
- 7 98747V44893   KV Ståggåvegen     2023-05-26 00:00:00 &lt;named list&gt;  63.3 10.5 
- 8 97919V704825  Fv1752 Hamar tann… 2023-09-14 00:00:00 &lt;named list&gt;  60.8 11.0 
- 9 43362V3476463 Sandvollkrysset r… 2023-09-14 00:00:00 &lt;named list&gt;  60.4 10.6 
-10 77360V249592  Tingvoll 1         2023-06-07 00:00:00 &lt;named list&gt;  62.9  8.20
-# ℹ 6,333 more rows</code></pre>
+ 1 10601V704982  Fv2026 Bæreiavegen 2023-09-20 00:00:00 &lt;named list&gt;  60.2  12.0
+ 2 34596V704982  Fv2026 Lia barneh… 2023-09-20 00:00:00 &lt;named list&gt;  60.2  12.0
+ 3 21241V704822  Fv1752 Kornsiloen  2023-07-05 00:00:00 &lt;named list&gt;  60.8  11.0
+ 4 82393V72362   Mørriaunet         2023-06-21 00:00:00 &lt;named list&gt;  63.9  10.2
+ 5 79788V1175734 Vennerødveien      2023-07-05 00:00:00 &lt;named list&gt;  59.3  10.2
+ 6 62515V2413630 Harran sentrum     2023-07-04 00:00:00 &lt;named list&gt;  64.6  12.5
+ 7 41429V72150   Garli              2023-07-20 00:00:00 &lt;named list&gt;  62.9  10.1
+ 8 08601V578614  Yttermoan          2023-07-04 00:00:00 &lt;named list&gt;  64.7  12.8
+ 9 03275V971835  Gylder             2023-03-23 00:00:00 &lt;named list&gt;  59.5  10.8
+10 25470V885656  Halsmoen           2022-06-13 00:00:00 &lt;named list&gt;  67.1  15.4
+# ℹ 6,372 more rows</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 5
-   id            name                            latestData            lat   lon
-   &lt;chr&gt;         &lt;chr&gt;                           &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen     2023-06-09 00:00:00  59.6  5.77
- 2 16167V181017  Havnegata nær Skomakergt        2023-06-10 00:00:00  59.7 10.2 
- 3 56479V705299  Fv1814 Kurudvegen               2023-08-23 00:00:00  60.8 11.2 
- 4 17915V320506  Øvre Eidevegen                  2023-07-24 00:00:00  59.3  5.28
- 5 17664V3100937 Fv222 Hamar Skystasjon          2023-09-14 00:00:00  60.8 11.1 
- 6 51577V444292  Momoen                          2023-06-14 00:00:00  59.8 11.4 
- 7 98747V44893   KV Ståggåvegen                  2023-05-26 00:00:00  63.3 10.5 
- 8 97919V704825  Fv1752 Hamar tannklinikk        2023-09-14 00:00:00  60.8 11.0 
- 9 43362V3476463 Sandvollkrysset rampe nordgåen… 2023-09-14 00:00:00  60.4 10.6 
-10 77360V249592  Tingvoll 1                      2023-06-07 00:00:00  62.9  8.20
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 5
+   id            name                 latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20 00:00:00  60.2  12.0
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20 00:00:00  60.2  12.0
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05 00:00:00  60.8  11.0
+ 4 82393V72362   Mørriaunet           2023-06-21 00:00:00  63.9  10.2
+ 5 79788V1175734 Vennerødveien        2023-07-05 00:00:00  59.3  10.2
+ 6 62515V2413630 Harran sentrum       2023-07-04 00:00:00  64.6  12.5
+ 7 41429V72150   Garli                2023-07-20 00:00:00  62.9  10.1
+ 8 08601V578614  Yttermoan            2023-07-04 00:00:00  64.7  12.8
+ 9 03275V971835  Gylder               2023-03-23 00:00:00  59.5  10.8
+10 25470V885656  Halsmoen             2022-06-13 00:00:00  67.1  15.4
+# ℹ 6,372 more rows</code></pre>
 </div>
 </div>
 
@@ -810,20 +803,20 @@ Solution
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 5
-   id            name                            latestData            lat   lon
-   &lt;chr&gt;         &lt;chr&gt;                           &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen     2023-06-09 00:00:00  59.6  5.77
- 2 16167V181017  Havnegata nær Skomakergt        2023-06-10 00:00:00  59.7 10.2 
- 3 56479V705299  Fv1814 Kurudvegen               2023-08-23 00:00:00  60.8 11.2 
- 4 17915V320506  Øvre Eidevegen                  2023-07-24 00:00:00  59.3  5.28
- 5 17664V3100937 Fv222 Hamar Skystasjon          2023-09-14 00:00:00  60.8 11.1 
- 6 51577V444292  Momoen                          2023-06-14 00:00:00  59.8 11.4 
- 7 98747V44893   KV Ståggåvegen                  2023-05-26 00:00:00  63.3 10.5 
- 8 97919V704825  Fv1752 Hamar tannklinikk        2023-09-14 00:00:00  60.8 11.0 
- 9 43362V3476463 Sandvollkrysset rampe nordgåen… 2023-09-14 00:00:00  60.4 10.6 
-10 77360V249592  Tingvoll 1                      2023-06-07 00:00:00  62.9  8.20
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 5
+   id            name                 latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20 00:00:00  60.2  12.0
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20 00:00:00  60.2  12.0
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05 00:00:00  60.8  11.0
+ 4 82393V72362   Mørriaunet           2023-06-21 00:00:00  63.9  10.2
+ 5 79788V1175734 Vennerødveien        2023-07-05 00:00:00  59.3  10.2
+ 6 62515V2413630 Harran sentrum       2023-07-04 00:00:00  64.6  12.5
+ 7 41429V72150   Garli                2023-07-20 00:00:00  62.9  10.1
+ 8 08601V578614  Yttermoan            2023-07-04 00:00:00  64.7  12.8
+ 9 03275V971835  Gylder               2023-03-23 00:00:00  59.5  10.8
+10 25470V885656  Halsmoen             2022-06-13 00:00:00  67.1  15.4
+# ℹ 6,372 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Alternatively, we can use unnest_wider twice. This one does some work</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">## for us, and gives the same result: </span></span>
@@ -835,20 +828,20 @@ Solution
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(location) <span class="sc">|&gt;</span> </span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(latLon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,343 × 5
-   id            name                            latestData            lat   lon
-   &lt;chr&gt;         &lt;chr&gt;                           &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 26181V320644  Bjoavegen ved Lundanesvegen     2023-06-09 00:00:00  59.6  5.77
- 2 16167V181017  Havnegata nær Skomakergt        2023-06-10 00:00:00  59.7 10.2 
- 3 56479V705299  Fv1814 Kurudvegen               2023-08-23 00:00:00  60.8 11.2 
- 4 17915V320506  Øvre Eidevegen                  2023-07-24 00:00:00  59.3  5.28
- 5 17664V3100937 Fv222 Hamar Skystasjon          2023-09-14 00:00:00  60.8 11.1 
- 6 51577V444292  Momoen                          2023-06-14 00:00:00  59.8 11.4 
- 7 98747V44893   KV Ståggåvegen                  2023-05-26 00:00:00  63.3 10.5 
- 8 97919V704825  Fv1752 Hamar tannklinikk        2023-09-14 00:00:00  60.8 11.0 
- 9 43362V3476463 Sandvollkrysset rampe nordgåen… 2023-09-14 00:00:00  60.4 10.6 
-10 77360V249592  Tingvoll 1                      2023-06-07 00:00:00  62.9  8.20
-# ℹ 6,333 more rows</code></pre>
+<pre><code># A tibble: 6,382 × 5
+   id            name                 latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 10601V704982  Fv2026 Bæreiavegen   2023-09-20 00:00:00  60.2  12.0
+ 2 34596V704982  Fv2026 Lia barnehage 2023-09-20 00:00:00  60.2  12.0
+ 3 21241V704822  Fv1752 Kornsiloen    2023-07-05 00:00:00  60.8  11.0
+ 4 82393V72362   Mørriaunet           2023-06-21 00:00:00  63.9  10.2
+ 5 79788V1175734 Vennerødveien        2023-07-05 00:00:00  59.3  10.2
+ 6 62515V2413630 Harran sentrum       2023-07-04 00:00:00  64.6  12.5
+ 7 41429V72150   Garli                2023-07-20 00:00:00  62.9  10.1
+ 8 08601V578614  Yttermoan            2023-07-04 00:00:00  64.7  12.8
+ 9 03275V971835  Gylder               2023-03-23 00:00:00  59.5  10.8
+10 25470V885656  Halsmoen             2022-06-13 00:00:00  67.1  15.4
+# ℹ 6,372 more rows</code></pre>
 </div>
 </div>
 </details>
