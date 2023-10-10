@@ -5,4 +5,14 @@ number-offset: 7
 
 # Machine learning
 
-*Under construction*
+This course mainly concerns the programming aspect of data science. In other words, we deal with a lot of the infrastructure that is necessary to perform data science in practice. In this session, however, we will briefly visit a core topic: namely the statistical modelling that is used to produce predictions in data science. This is often labelled "machine learning" or "statistical learning" (and sometimes more vaguely as AI and other fancy terms...). We will only give a superficial treatment in this lecture. The topic is covered in detail in [BAN404 - Predictive Analytics with R](https://www.nhh.no/en/courses/predictive-analytics-with-r/), as well as [BAN430 - Forecasting](https://www.nhh.no/en/courses/forecasting/) (see also the [compendium](https://holleland.github.io/BAN430/) for that course, which provided the design for this web page), both of which are due to run in the spring.
+
+In the video below, we give a summary of the lecture part of this session.
+
+<div style="padding:62.72% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/872823815?badge=0&amp;autopause=0&amp;quality_selector=1&amp;progress_bar=1&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="video-ml-ban400"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+In the physical lecture, we will discuss the material above in more detail, as well as the code for estimating the models and making the plots in the slides. You will find the slides as well as the code (`ml-script.R`) in the following git-repository: [github.com/hotneim/ban400-lectures](https://github.com/hotneim/ban400-lectures).
+
+In the second half of the lecture we will do a further coding workshop on a different data set, and using a different class of models. You will find the code for that workshop in `ml-workshop.R`, located in the same repository.
+
+The assignment for this material is based on the code provided for this session.

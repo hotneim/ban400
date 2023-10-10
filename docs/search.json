@@ -333,7 +333,7 @@
     "href": "08-machine-learning.html",
     "title": "8 Machine learning",
     "section": "",
-    "text": "8 Machine learning\nUnder construction"
+    "text": "8 Machine learning\nThis course mainly concerns the programming aspect of data science. In other words, we deal with a lot of the infrastructure that is necessary to perform data science in practice. In this session, however, we will briefly visit a core topic: namely the statistical modelling that is used to produce predictions in data science. This is often labelled “machine learning” or “statistical learning” (and sometimes more vaguely as AI and other fancy terms…). We will only give a superficial treatment in this lecture. The topic is covered in detail in BAN404 - Predictive Analytics with R, as well as BAN430 - Forecasting (see also the compendium for that course, which provided the design for this web page), both of which are due to run in the spring.\nIn the video below, we give a summary of the lecture part of this session.\n\n\n\n\n\nIn the physical lecture, we will discuss the material above in more detail, as well as the code for estimating the models and making the plots in the slides. You will find the slides as well as the code (ml-script.R) in the following git-repository: github.com/hotneim/ban400-lectures.\nIn the second half of the lecture we will do a further coding workshop on a different data set, and using a different class of models. You will find the code for that workshop in ml-workshop.R, located in the same repository.\nThe assignment for this material is based on the code provided for this session."
   },
   {
     "objectID": "09-parallel-computing.html",
