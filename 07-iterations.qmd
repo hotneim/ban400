@@ -3,6 +3,445 @@ bibliography: references.bib
 number-offset: 6
 ---
 
-# Iterations
+# Iterations in R
 
-*Under construction*
+In this section, we'll discuss the contents of R4DS chapter [27](https://r4ds.hadley.nz/iteration). We have already covered writing loops. In this section we'll expand on that topic using specialized functions for iterating over objects. These functions are perhaps slightly more abstract than explicit loops. However, by using them we can write scripts that may be easier to understand than the bulkiness we would have had with explicit loops.
+
+We'll first get accustomed to some of the `purrr`-functions in a few simple examples, before moving on to applying the functions on a more interesting data set.
+
+## Introductory examples
+
+### Iterating over columns
+
+Lets start with creating a data set with some random numbers:
+
+```{r}
+library(purrr) 
+library(tidyverse)
+
+df <-
+  tibble(
+    a = rnorm(10),
+    b = rnorm(10),
+    c = rnorm(10),
+    d = rnorm(10),
+    e = rnorm(10)
+  )
+```
+
+Say we would like to calculate the median over all the columns in the data set. We could of course do this by typing up the following
+
+```{r}
+median(df$a) 
+median(df$b) 
+median(df$c) 
+median(df$d) 
+median(df$e)
+```
+
+In addition to being verbose, we would need to make changes to these lines if we were to add or subtract columns to our data frame. And further, if we wanted different metrics (e.g. column means as well as medians), we would have to write even more code.
+
+We can however write a function for iterating over columns. Consider the function below:
+
+```{r}
+col_summary <- function(df, fun) {
+  out <- vector("double", length(df))
+  for (i in seq_along(df)) {
+    out[i] <- fun(df[[i]])
+  }
+  out
+}
+```
+
+Note a few items:
+
+-   The loop iterates over `seq_along(df)`, which in our case evaluates to `1,2,3,4,5`. This is slightly more robust than iterating over `1:ncols(df)`, as also works for edge-cases where there are no columns in the data set.
+-   The second argument is a function name. The function applies the function given to each of the columns
+
+We can now call this function a few times, using different summary functions:
+
+```{r}
+col_summary(df, mean)
+col_summary(df, median)
+col_summary(df, sd)
+```
+
+With this method we can get summaries of all columns in the data frame, without needing to changing these lines if we add or subtract columns.
+
+### `map`-functions
+
+The package `purrr` comes with functions specifically designed for iterations. The example above could be solved with the function `map`. See how this also preserves the names of the columns
+
+```{r}
+map(df, mean)
+```
+
+The output from map-functions is a list. If you expect the return from the `map` call to be boolan, integer, double or character vectors, you can ensure you do indeed get such a vector in return by using `map_lgl, map_int, map_dbl` or `map_chr`-respectively.
+
+If we want the results as e.g. a data frame, we can combine them using an appropriate function - below all the column means are combined into a data frame with one row. Not also how we can add arguments to the function applied by `map` by adding arguments to the `map`-call:
+
+```{r}
+df |> 
+  map(mean, trim=.1) |> 
+  bind_cols()
+```
+
+When we call `map`, we need to supply a **single** function that will be applied to each of the objects we are iterating over. If we want to apply multiple functions at the same time, we could store this as a new function, and call this once. However, we can also call an anonymous function (see also the "Function" chapter of the compendium"):
+
+```{r}
+df |>
+  map(
+    {
+      \(x) mean(x) / sd(x)
+    }
+  ) |> 
+  bind_cols()
+
+```
+
+With map functions we can do a lot more interesting stuff than making column summaries. Run the code below yourself line by line. In the example below, we
+
+1.  Use a built-in data frame with cars
+2.  Split the data set into a **list** of data frames, split by the values of the `cyl`-column
+3.  Apply a linear regression model to each of the data frames separately
+4.  Summarize each of the regression models
+5.  Extract the $R^2$-statistic from each regression model
+6.  Combine the $R^2$-values into a data frame
+
+```{r}
+mtcars |>                       
+  split( ~ cyl) |>              
+  map({
+    \(x)lm(mpg ~ wt, data = x)
+  }) |>
+  map(summary) |>
+  map({
+    \(x) x$r.squared
+  }) |>
+  bind_cols()
+```
+
+The lambda function `\(x) x$r.squared` returns named element `r.squared` in `x`. This is a common operation, so the `map`-function can also be supplied with a character string instead of a function. The example below does the same as the example below, but with a name-argument instead of a function:
+
+```{r}
+mtcars |>  
+  split(~cyl) |> 
+  map({\(x)lm(mpg~wt, data=x) }) |> 
+  map(summary) |> 
+  map("r.squared")|>
+  bind_cols()
+```
+
+The map-functions also support integer values, in which case e.g. `map(x,2)` returns the second value of each item of `x`.
+
+### Dealing with errors
+
+The map-functions will generally give an error if they receive an error when applied to any of the items it is applied to. In the example below we get an error due to a character-entry in the list. This might seem frustrating, but it forces you to actively make a choice of how you want to deal with the errors.
+
+```{r, error=TRUE}
+x <- list(1, 10, "a")
+y <- x |> map(log)
+```
+
+We can wrap the function call in the function `safely`. This may be a useful tool when you are developing code, as it lets you see which records caused errors:
+
+```{r}
+y <- x |> map(safely(log))
+
+y |> 
+  map("error") |> 
+  map(is_null)
+```
+
+`possibly` is a different option. This function will insert a default value (`NA_real` below) in case the function call fails.
+
+```{r}
+x |> map(possibly(log, NA_real_))
+```
+
+### Iterating over multiple lists
+
+If we want to iterate over two lists (of the same length) simultaneously, we can do so by using `map2`:
+
+```{r}
+mu <- list(-10000, 0, 10000)
+sigma <- list(1, 5, 10)
+map2(mu,sigma,rnorm,n=5)
+```
+
+We can also iterate over more than two lists simultaneously. The lists then need to be combined in a single list, and the names of each list must match the names of the arguments in the function we want to apply.
+
+```{r}
+mu    <- list(-10000, 0, 100)
+sigma <- list(     1, 5,  10)
+n     <- list(     1, 10, 25)
+
+list(mean = mu,
+     sd = sigma,
+     n = n) |> 
+  pmap(rnorm)
+```
+
+## `purrr` and Traffic data
+
+### Getting some data
+
+Let's apply the `purrr`-functions on a more realistic data set. We will play with an API from Vegvesenet, the Norwegian governmental road authority. Vegvesenet has an API we can query for data on traffic volumes at many sensor stations in Norway.
+
+The API uses graphQL for requests. Let's define a function where we can submit queries to an external API (we will not spend time discussing the query language or the API any further..).
+
+```{r, message=F}
+library(httr)
+library(jsonlite)
+library(ggplot2)
+library(DescTools)
+library(tidyverse)
+library(magrittr)
+library(rlang)
+library(lubridate)
+library(anytime)
+
+GQL <- function(query,
+                ...,
+                .token = NULL,
+                .variables = NULL,
+                .operationName = NULL,
+                .url = url) {
+  pbody <-
+    list(query = query,
+         variables = .variables,
+         operationName = .operationName)
+  if (is.null(.token)) {
+    res <- POST(.url, body = pbody, encode = "json", ...)
+  } else {
+    auth_header <- paste("bearer", .token)
+    res <-
+      POST(
+        .url,
+        body = pbody,
+        encode = "json",
+        add_headers(Authorization = auth_header),
+        ...
+      )
+  }
+  res <- content(res, as = "parsed", encoding = "UTF-8")
+  if (!is.null(res$errors)) {
+    warning(toJSON(res$errors))
+  }
+  res$data
+}
+
+# The URL we will use is stored below: 
+url <- "https://www.vegvesen.no/trafikkdata/api/"
+
+
+# Let's figure out which sensor stations that are operable. 
+# The query below extracts all the stations, with a date for 
+# when the station was in operation as well as a long/latitude. 
+qry <-
+  '
+{
+	trafficRegistrationPoints {
+		id
+		name
+		latestData {
+			volumeByDay
+		}
+		location {
+			coordinates {
+				latLon {
+					lat
+					lon
+				}
+			}
+		}
+	}
+}
+'
+
+# Allright - let's try submitting the query: 
+stations <-GQL(qry)
+```
+
+We now have the a long list in memory - 14mb! - with just a little information on each station. We can note that this is a list, not a dataframe. For our purposes, it would be better if the list was instead a data frame, with one row pr. sensor station.
+
+Note that the list itself only contains one entry:
+
+```{r, message=F}
+length(stations)
+```
+
+...however, this first entry contains 6436 data points. You might get a slightly different answer, as Vegvesenet is changing the number of sensors. Note that when we subset a list, using `[[i]]` selects the contents of the item `i`, and `[i]` is a list.
+
+```{r}
+length(stations[[1]])
+```
+
+### Transforming list-columns
+
+Let's look at the first entry of this long list. We can see there is a station ID, station name, date time of latest recording from the station and coordinates. This looks like something that could fit well within a data frame, with columns `id`, `name`, `latestdata`, `lat`, and `lon`. The question is how! You might want to refer to [chapter 24](https://r4ds.hadley.nz/rectangling) of R4DS for more on hierarchical data.
+
+```{r, message=F}
+stations[[1]][[1]]
+```
+
+We could perhaps hope that we can force this list into a data frame. For this we will use as_tibble:
+
+```{r, message=F}
+stations[[1]][[1]] |>  
+  as_tibble()
+```
+
+**Exercise:**
+
+We now want to apply this as_tibble transformation to each of the stations, and combine them in a single data frame. Transform the list into a data frame, with at id and name as columns, and one row per station. We can fix the date time and locations columns later, but use one of the map-functions from `purrr`.
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+</iframe>
+
+Using the `map`-function we traverse all the entries in the stations list, and transform these lists to data frames. We can then combine the **list of data frames** into a single data frame by calling `list_rbind`.
+
+```{r}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind()
+```
+
+There is still some work left to do with the date time and location columns. As you can see below, they are still in a list format. We can try to pull out the insides of the contents of the `latestData`-column. It is formatted as a list, but actually only contains one date time entry.
+
+```{r}
+stations[[1]] |>  
+  map(as_tibble) |> 
+  list_rbind() |> 
+  head(1) |>  
+  select(latestData) |>  
+  pull()
+```
+:::
+
+**Exercise:**
+
+Mutate the contents of the `latestData`-columns, such that it is in a character format. You don't have to format it to a proper date time (yet..). This task has two complications: one is to apply transformation to all entries of the list - another is to deal with missing values - that might cause errors.
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+</iframe>
+
+We can use `map_chr`. This function will try its best to return a character vector (other variants support different return types).Below, we are asking `map_chr` to return the first item of each sub list in `latestData.` However, this will fail if it meets an entry that does not have anything stored under `latestdata`!
+
+```{r, error=TRUE}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |>
+  mutate(latestData = map_chr(latestData, 1))
+```
+
+We could write a custom "unlisting"-function. The function below unlists the elements of latestData - if there are any elements there. If it the content is null, the function just returns an empty character string.
+
+```{r}
+unlist_safe <- 
+  function(x){
+    x <- unlist(x)
+    if(is.null(x)){
+      return(NA_character_)
+  }else{
+    return(x)
+  }
+}
+
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, unlist_safe))
+```
+
+Alternatively, we can use the defaults in `map_chr`. It will now have a safe fallback value it can use if it doesn't find the element we are looking for in `latestData`. A simple solution is to use the `.default`-argument, and set this to missing:
+
+```{r}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(
+    latestData = map_chr(latestData,1, .default=NA_character_)
+  ) 
+```
+:::
+
+### Transforming time
+
+Next, let's format the date format. Date formats can be tricky, but is an obstacle you just have to learn to work with. We can reformat the `latestData` column into a date by simply using `as.Date` - however - we now have lost information on the time of day. Let's see if we can retain all the information in the column.
+
+```{r, message=F}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, 1, .default=NA_character_)) |> 
+  mutate(latestData = as.Date(latestData))
+```
+
+There are several functions we can use to transform the string into a date time variable. as_datetime in lubridate works in this case. Note that the interpretation of dates may be dependent on the time zone settings on your laptop. Here, we are explicitly stating that we want the a Europe/Berlin tz on the variable:
+
+```{r, message=F}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) 
+```
+
+**Exercise: Finalizing the transformation**
+
+Let's take on the final location variable. Complete the operation by unpacking the location column into *two* columns: `lat` and `lon`. You may use the functions you have already seen, or see of you can find mode specialized functions.
+
+Note: This a *nested* list i.e. the contents of a cell in `location` is a list with one entry. This list contains two other lists..
+
+The script should return a data frame similar to the one below (only the first few entries shown).
+
+```{r, message=F, eval=T, echo=FALSE}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin")) |> 
+  unnest_wider(location) |> 
+  unnest_wider(latLon) |> 
+  head() |>  
+  knitr::kable()
+```
+
+::: {.callout-note collapse="true" icon="false"}
+## Expand for solution
+
+</iframe>
+
+We can use a similar solution we used before. First we use unlist to remove one level from the list, and then extract the contents using `map_dbl` - remember these are numbers, not text.
+
+```{r, message=F, eval=T, echo=T}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, 1, .default = ""))  |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin"))  |> 
+  mutate(location = map(location, unlist)) |>  
+  mutate(
+    lat = map_dbl(location, "latLon.lat"),
+    lon = map_dbl(location, "latLon.lon")
+  ) %>% 
+  select(-location)
+```
+
+Alternatively, we can use `unnest_wider` twice. This one does some work for us, and gives the same result:
+
+```{r, message=F, eval=T, echo=T}
+stations[[1]] |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(latestData = map_chr(latestData, 1, .default = NA_character_)) |> 
+  mutate(latestData = as_datetime(latestData, tz = "Europe/Berlin"))  |> 
+  unnest_wider(location) |> 
+  unnest_wider(latLon)
+```
+:::

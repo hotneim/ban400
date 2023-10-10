@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -57,10 +91,27 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -107,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-git.html">PART 2</a></li><li class="breadcrumb-item"><a href="./07-iterations.html">7. Iterations</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -283,7 +334,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#iterations" id="toc-iterations" class="nav-link active" data-scroll-target="#iterations"><span class="header-section-number">7</span> Iterations</a></li>
+  <li><a href="#iterations-in-r" id="toc-iterations-in-r" class="nav-link active" data-scroll-target="#iterations-in-r"><span class="header-section-number">7</span> Iterations in R</a>
+  <ul class="collapse">
+  <li><a href="#introductory-examples" id="toc-introductory-examples" class="nav-link" data-scroll-target="#introductory-examples"><span class="header-section-number">7.1</span> Introductory examples</a>
+  <ul class="collapse">
+  <li><a href="#iterating-over-columns" id="toc-iterating-over-columns" class="nav-link" data-scroll-target="#iterating-over-columns"><span class="header-section-number">7.1.1</span> Iterating over columns</a></li>
+  <li><a href="#map-functions" id="toc-map-functions" class="nav-link" data-scroll-target="#map-functions"><span class="header-section-number">7.1.2</span> <code>map</code>-functions</a></li>
+  <li><a href="#dealing-with-errors" id="toc-dealing-with-errors" class="nav-link" data-scroll-target="#dealing-with-errors"><span class="header-section-number">7.1.3</span> Dealing with errors</a></li>
+  <li><a href="#iterating-over-multiple-lists" id="toc-iterating-over-multiple-lists" class="nav-link" data-scroll-target="#iterating-over-multiple-lists"><span class="header-section-number">7.1.4</span> Iterating over multiple lists</a></li>
+  </ul></li>
+  <li><a href="#purrr-and-traffic-data" id="toc-purrr-and-traffic-data" class="nav-link" data-scroll-target="#purrr-and-traffic-data"><span class="header-section-number">7.2</span> <code>purrr</code> and Traffic data</a>
+  <ul class="collapse">
+  <li><a href="#getting-some-data" id="toc-getting-some-data" class="nav-link" data-scroll-target="#getting-some-data"><span class="header-section-number">7.2.1</span> Getting some data</a></li>
+  <li><a href="#transforming-list-columns" id="toc-transforming-list-columns" class="nav-link" data-scroll-target="#transforming-list-columns"><span class="header-section-number">7.2.2</span> Transforming list-columns</a></li>
+  <li><a href="#transforming-time" id="toc-transforming-time" class="nav-link" data-scroll-target="#transforming-time"><span class="header-section-number">7.2.3</span> Transforming time</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -292,11 +358,763 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="iterations" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Iterations</h1>
-<p><em>Under construction</em></p>
+<section id="iterations-in-r" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Iterations in R</h1>
+<p>In this section, we’ll discuss the contents of R4DS chapter <a href="https://r4ds.hadley.nz/iteration">27</a>. We have already covered writing loops. In this section we’ll expand on that topic using specialized functions for iterating over objects. These functions are perhaps slightly more abstract than explicit loops. However, by using them we can write scripts that may be easier to understand than the bulkiness we would have had with explicit loops.</p>
+<p>We’ll first get accustomed to some of the <code>purrr</code>-functions in a few simple examples, before moving on to applying the functions on a more interesting data set.</p>
+<section id="introductory-examples" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introductory-examples"><span class="header-section-number">7.1</span> Introductory examples</h2>
+<section id="iterating-over-columns" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="iterating-over-columns"><span class="header-section-number">7.1.1</span> Iterating over columns</h3>
+<p>Lets start with creating a data set with some random numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">e =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Say we would like to calculate the median over all the columns in the data set. We could of course do this by typing up the following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>a) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1588141</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>b) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1219824</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.09261455</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>d) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1288768</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1398276</code></pre>
+</div>
+</div>
+<p>In addition to being verbose, we would need to make changes to these lines if we were to add or subtract columns to our data frame. And further, if we wanted different metrics (e.g.&nbsp;column means as well as medians), we would have to write even more code.</p>
+<p>We can however write a function for iterating over columns. Consider the function below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>col_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(df, fun) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"double"</span>, <span class="fu">length</span>(df))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(df)) {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    out[i] <span class="ot">&lt;-</span> <span class="fu">fun</span>(df[[i]])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note a few items:</p>
+<ul>
+<li>The loop iterates over <code>seq_along(df)</code>, which in our case evaluates to <code>1,2,3,4,5</code>. This is slightly more robust than iterating over <code>1:ncols(df)</code>, as also works for edge-cases where there are no columns in the data set.</li>
+<li>The second argument is a function name. The function applies the function given to each of the columns</li>
+</ul>
+<p>We can now call this function a few times, using different summary functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.06222054 -0.18867495  0.07203504 -0.25009983  0.06231187</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.15881412 -0.12198245 -0.09261455  0.12887675  0.13982763</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6996648 0.8885356 1.1279408 0.9472692 0.7300631</code></pre>
+</div>
+</div>
+<p>With this method we can get summaries of all columns in the data frame, without needing to changing these lines if we add or subtract columns.</p>
+</section>
+<section id="map-functions" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="map-functions"><span class="header-section-number">7.1.2</span> <code>map</code>-functions</h3>
+<p>The package <code>purrr</code> comes with functions specifically designed for iterations. The example above could be solved with the function <code>map</code>. See how this also preserves the names of the columns</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$a
+[1] -0.06222054
+
+$b
+[1] -0.1886749
+
+$c
+[1] 0.07203504
+
+$d
+[1] -0.2500998
+
+$e
+[1] 0.06231187</code></pre>
+</div>
+</div>
+<p>The output from map-functions is a list. If you expect the return from the <code>map</code> call to be boolan, integer, double or character vectors, you can ensure you do indeed get such a vector in return by using <code>map_lgl, map_int, map_dbl</code> or <code>map_chr</code>-respectively.</p>
+<p>If we want the results as e.g.&nbsp;a data frame, we can combine them using an appropriate function - below all the column means are combined into a data frame with one row. Not also how we can add arguments to the function applied by <code>map</code> by adding arguments to the <code>map</code>-call:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mean, <span class="at">trim=</span>.<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+        a      b       c      d      e
+    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 -0.0216 -0.164 0.00834 -0.212 0.0957</code></pre>
+</div>
+</div>
+<p>When we call <code>map</code>, we need to supply a <strong>single</strong> function that will be applied to each of the objects we are iterating over. If we want to apply multiple functions at the same time, we could store this as a new function, and call this once. However, we can also call an anonymous function (see also the “Function” chapter of the compendium”):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>      \(x) <span class="fu">mean</span>(x) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+        a      b      c      d      e
+    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 -0.0889 -0.212 0.0639 -0.264 0.0854</code></pre>
+</div>
+</div>
+<p>With map functions we can do a lot more interesting stuff than making column summaries. Run the code below yourself line by line. In the example below, we</p>
+<ol type="1">
+<li>Use a built-in data frame with cars</li>
+<li>Split the data set into a <strong>list</strong> of data frames, split by the values of the <code>cyl</code>-column</li>
+<li>Apply a linear regression model to each of the data frames separately</li>
+<li>Summarize each of the regression models</li>
+<li>Extract the <span class="math inline">R^2</span>-statistic from each regression model</li>
+<li>Combine the <span class="math inline">R^2</span>-values into a data frame</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span>                       </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>( <span class="sc">~</span> cyl) <span class="sc">|&gt;</span>              </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>({</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    \(x)<span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> x)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">|&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>({</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    \(x) x<span class="sc">$</span>r.squared</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+    `4`   `6`   `8`
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 0.509 0.465 0.423</code></pre>
+</div>
+</div>
+<p>The lambda function <code>\(x) x$r.squared</code> returns named element <code>r.squared</code> in <code>x</code>. This is a common operation, so the <code>map</code>-function can also be supplied with a character string instead of a function. The example below does the same as the example below, but with a name-argument instead of a function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span>  </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(<span class="sc">~</span>cyl) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>({\(x)<span class="fu">lm</span>(mpg<span class="sc">~</span>wt, <span class="at">data=</span>x) }) <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(summary) <span class="sc">|&gt;</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="st">"r.squared"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+    `4`   `6`   `8`
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 0.509 0.465 0.423</code></pre>
+</div>
+</div>
+<p>The map-functions also support integer values, in which case e.g.&nbsp;<code>map(x,2)</code> returns the second value of each item of <code>x</code>.</p>
+</section>
+<section id="dealing-with-errors" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="dealing-with-errors"><span class="header-section-number">7.1.3</span> Dealing with errors</h3>
+<p>The map-functions will generally give an error if they receive an error when applied to any of the items it is applied to. In the example below we get an error due to a character-entry in the list. This might seem frustrating, but it forces you to actively make a choice of how you want to deal with the errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="st">"a"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">map</span>(log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `map()`:
+ℹ In index: 3.
+Caused by error:
+! non-numeric argument to mathematical function</code></pre>
+</div>
+</div>
+<p>We can wrap the function call in the function <code>safely</code>. This may be a useful tool when you are developing code, as it lets you see which records caused errors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">map</span>(<span class="fu">safely</span>(log))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="sc">|&gt;</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="st">"error"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(is_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] TRUE
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] FALSE</code></pre>
+</div>
+</div>
+<p><code>possibly</code> is a different option. This function will insert a default value (<code>NA_real</code> below) in case the function call fails.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">map</span>(<span class="fu">possibly</span>(log, <span class="cn">NA_real_</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 0
+
+[[2]]
+[1] 2.302585
+
+[[3]]
+[1] NA</code></pre>
+</div>
+</div>
+</section>
+<section id="iterating-over-multiple-lists" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="iterating-over-multiple-lists"><span class="header-section-number">7.1.4</span> Iterating over multiple lists</h3>
+<p>If we want to iterate over two lists (of the same length) simultaneously, we can do so by using <code>map2</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="sc">-</span><span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10000</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(mu,sigma,rnorm,<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] -10002.603 -10000.182 -10000.297  -9999.715 -10000.456
+
+[[2]]
+[1]   0.1567408  -5.2921115   0.9674016 -10.3944524   5.5239795
+
+[[3]]
+[1] 10014.038 10003.787 10004.033  9988.233  9989.746</code></pre>
+</div>
+</div>
+<p>We can also iterate over more than two lists simultaneously. The lists then need to be combined in a single list, and the names of each list must match the names of the arguments in the function we want to apply.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="sc">-</span><span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">list</span>(     <span class="dv">1</span>, <span class="dv">5</span>,  <span class="dv">10</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">list</span>(     <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">25</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">mean =</span> mu,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">sd =</span> sigma,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> n) <span class="sc">|&gt;</span> </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(rnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] -10000.85
+
+[[2]]
+ [1] -7.7228006  7.0089048  2.2293329  2.9526156  0.8016055  0.1251404
+ [7] -0.5135086 -4.8968444 -8.1875104 -3.3199596
+
+[[3]]
+ [1]  94.05094  99.93789 117.73736  97.92451  96.50757  92.47947  82.69539
+ [8]  85.45335  80.86713 104.54482 111.26890 114.21097  83.52989 110.93234
+[15]  93.98607  98.43185 108.93055  91.58743 101.94402 107.45297  90.66189
+[22]  90.73928 116.22404 103.00546 113.18881</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="purrr-and-traffic-data" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="purrr-and-traffic-data"><span class="header-section-number">7.2</span> <code>purrr</code> and Traffic data</h2>
+<section id="getting-some-data" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="getting-some-data"><span class="header-section-number">7.2.1</span> Getting some data</h3>
+<p>Let’s apply the <code>purrr</code>-functions on a more realistic data set. We will play with an API from Vegvesenet, the Norwegian governmental road authority. Vegvesenet has an API we can query for data on traffic volumes at many sensor stations in Norway.</p>
+<p>The API uses graphQL for requests. Let’s define a function where we can submit queries to an external API (we will not spend time discussing the query language or the API any further..).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'jsonlite' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'DescTools' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'rlang' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(anytime)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>GQL <span class="ot">&lt;-</span> <span class="cf">function</span>(query,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                ...,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">.token =</span> <span class="cn">NULL</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">.variables =</span> <span class="cn">NULL</span>,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">.operationName =</span> <span class="cn">NULL</span>,</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">.url =</span> url) {</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  pbody <span class="ot">&lt;-</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">query =</span> query,</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">variables =</span> .variables,</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">operationName =</span> .operationName)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(.token)) {</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">POST</span>(.url, <span class="at">body =</span> pbody, <span class="at">encode =</span> <span class="st">"json"</span>, ...)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    auth_header <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"bearer"</span>, .token)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">POST</span>(</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>        .url,</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">body =</span> pbody,</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">encode =</span> <span class="st">"json"</span>,</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">add_headers</span>(<span class="at">Authorization =</span> auth_header),</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>        ...</span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">content</span>(res, <span class="at">as =</span> <span class="st">"parsed"</span>, <span class="at">encoding =</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(res<span class="sc">$</span>errors)) {</span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="fu">toJSON</span>(res<span class="sc">$</span>errors))</span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>  res<span class="sc">$</span>data</span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a><span class="co"># The URL we will use is stored below: </span></span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.vegvesen.no/trafikkdata/api/"</span></span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's figure out which sensor stations that are operable. </span></span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a><span class="co"># The query below extracts all the stations, with a date for </span></span>
+<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a><span class="co"># when the station was in operation as well as a long/latitude. </span></span>
+<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>qry <span class="ot">&lt;-</span></span>
+<span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">'</span></span>
+<span id="cb47-43"><a href="#cb47-43" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb47-44"><a href="#cb47-44" aria-hidden="true" tabindex="-1"></a><span class="st">    trafficRegistrationPoints {</span></span>
+<span id="cb47-45"><a href="#cb47-45" aria-hidden="true" tabindex="-1"></a><span class="st">        id</span></span>
+<span id="cb47-46"><a href="#cb47-46" aria-hidden="true" tabindex="-1"></a><span class="st">        name</span></span>
+<span id="cb47-47"><a href="#cb47-47" aria-hidden="true" tabindex="-1"></a><span class="st">        latestData {</span></span>
+<span id="cb47-48"><a href="#cb47-48" aria-hidden="true" tabindex="-1"></a><span class="st">            volumeByDay</span></span>
+<span id="cb47-49"><a href="#cb47-49" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
+<span id="cb47-50"><a href="#cb47-50" aria-hidden="true" tabindex="-1"></a><span class="st">        location {</span></span>
+<span id="cb47-51"><a href="#cb47-51" aria-hidden="true" tabindex="-1"></a><span class="st">            coordinates {</span></span>
+<span id="cb47-52"><a href="#cb47-52" aria-hidden="true" tabindex="-1"></a><span class="st">                latLon {</span></span>
+<span id="cb47-53"><a href="#cb47-53" aria-hidden="true" tabindex="-1"></a><span class="st">                    lat</span></span>
+<span id="cb47-54"><a href="#cb47-54" aria-hidden="true" tabindex="-1"></a><span class="st">                    lon</span></span>
+<span id="cb47-55"><a href="#cb47-55" aria-hidden="true" tabindex="-1"></a><span class="st">                }</span></span>
+<span id="cb47-56"><a href="#cb47-56" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
+<span id="cb47-57"><a href="#cb47-57" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
+<span id="cb47-58"><a href="#cb47-58" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb47-59"><a href="#cb47-59" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb47-60"><a href="#cb47-60" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb47-61"><a href="#cb47-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-62"><a href="#cb47-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Allright - let's try submitting the query: </span></span>
+<span id="cb47-63"><a href="#cb47-63" aria-hidden="true" tabindex="-1"></a>stations <span class="ot">&lt;-</span><span class="fu">GQL</span>(qry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We now have the a long list in memory - 14mb! - with just a little information on each station. We can note that this is a list, not a dataframe. For our purposes, it would be better if the list was instead a data frame, with one row pr. sensor station.</p>
+<p>Note that the list itself only contains one entry:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>…however, this first entry contains 6436 data points. You might get a slightly different answer, as Vegvesenet is changing the number of sensors. Note that when we subset a list, using <code>[[i]]</code> selects the contents of the item <code>i</code>, and <code>[i]</code> is a list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6470</code></pre>
+</div>
+</div>
+</section>
+<section id="transforming-list-columns" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="transforming-list-columns"><span class="header-section-number">7.2.2</span> Transforming list-columns</h3>
+<p>Let’s look at the first entry of this long list. We can see there is a station ID, station name, date time of latest recording from the station and coordinates. This looks like something that could fit well within a data frame, with columns <code>id</code>, <code>name</code>, <code>latestdata</code>, <code>lat</code>, and <code>lon</code>. The question is how! You might want to refer to <a href="https://r4ds.hadley.nz/rectangling">chapter 24</a> of R4DS for more on hierarchical data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]][[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$id
+[1] "19851V72569"
+
+$name
+[1] "Gunnesveien"
+
+$latestData
+$latestData$volumeByDay
+[1] "2023-07-04T00:00:00+02:00"
 
 
+$location
+$location$coordinates
+$location$coordinates$latLon
+$location$coordinates$latLon$lat
+[1] 62.83949
+
+$location$coordinates$latLon$lon
+[1] 9.896194</code></pre>
+</div>
+</div>
+<p>We could perhaps hope that we can force this list into a data frame. For this we will use as_tibble:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]][[<span class="dv">1</span>]] <span class="sc">|&gt;</span>  </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  id          name        latestData   location        
+  &lt;chr&gt;       &lt;chr&gt;       &lt;named list&gt; &lt;named list&gt;    
+1 19851V72569 Gunnesveien &lt;chr [1]&gt;    &lt;named list [1]&gt;</code></pre>
+</div>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>We now want to apply this as_tibble transformation to each of the stations, and combine them in a single data frame. Transform the list into a data frame, with at id and name as columns, and one row per station. We can fix the date time and locations columns later, but use one of the map-functions from <code>purrr</code>.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+<p>Using the <code>map</code>-function we traverse all the entries in the stations list, and transform these lists to data frames. We can then combine the <strong>list of data frames</strong> into a single data frame by calling <code>list_rbind</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 4
+   id            name                         latestData   location        
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;named list&gt; &lt;named list&gt;    
+ 1 19851V72569   "Gunnesveien"                &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 2 23208V930330  "Eiby"                       &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 3 08835V929043  "Ekhaugen"                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 4 69234V3243720 "Sletner"                    &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 6 40694V443946  "Søndre Støvin"              &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 7 00960V444255  "Gullhaug"                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 8 04770V181323  "Eikerveien 71 "             &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 9 43008V249226  "FV5962 S1D1 m2362"          &lt;chr [1]&gt;    &lt;named list [1]&gt;
+10 29062V249226  "FV5962 S1D1 m1600"          &lt;chr [1]&gt;    &lt;named list [1]&gt;
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+<p>There is still some work left to do with the date time and location columns. As you can see below, they are still in a list format. We can try to pull out the insides of the contents of the <code>latestData</code>-column. It is formatted as a list, but actually only contains one date time entry.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span>  </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(latestData) <span class="sc">|&gt;</span>  </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$volumeByDay
+[1] "2023-07-04T00:00:00+02:00"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>Mutate the contents of the <code>latestData</code>-columns, such that it is in a character format. You don’t have to format it to a proper date time (yet..). This task has two complications: one is to apply transformation to all entries of the list - another is to deal with missing values - that might cause errors.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+<p>We can use <code>map_chr</code>. This function will try its best to return a character vector (other variants support different return types).Below, we are asking <code>map_chr</code> to return the first item of each sub list in <code>latestData.</code> However, this will fail if it meets an entry that does not have anything stored under <code>latestdata</code>!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `mutate()`:
+ℹ In argument: `latestData = map_chr(latestData, 1)`.
+Caused by error in `map_chr()`:
+ℹ In index: 514.
+ℹ With name: volumeByDay.
+Caused by error:
+! Result must be length 1, not 0.</code></pre>
+</div>
+</div>
+<p>We could write a custom “unlisting”-function. The function below unlists the elements of latestData - if there are any elements there. If it the content is null, the function just returns an empty character string.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>unlist_safe <span class="ot">&lt;-</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x){</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">unlist</span>(x)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.null</span>(x)){</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="cn">NA_character_</span>)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, unlist_safe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 4
+   id            name                         latestData            location    
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;chr&gt;                 &lt;named list&gt;
+ 1 19851V72569   "Gunnesveien"                2023-07-04T00:00:00+… &lt;named list&gt;
+ 2 23208V930330  "Eiby"                       2023-09-18T00:00:00+… &lt;named list&gt;
+ 3 08835V929043  "Ekhaugen"                   2019-09-26T00:00:00+… &lt;named list&gt;
+ 4 69234V3243720 "Sletner"                    2023-06-14T00:00:00+… &lt;named list&gt;
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06T00:00:00+… &lt;named list&gt;
+ 6 40694V443946  "Søndre Støvin"              2023-05-26T00:00:00+… &lt;named list&gt;
+ 7 00960V444255  "Gullhaug"                   2023-05-08T00:00:00+… &lt;named list&gt;
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16T00:00:00+… &lt;named list&gt;
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04T00:00:00+… &lt;named list&gt;
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02T00:00:00+… &lt;named list&gt;
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+<p>Alternatively, we can use the defaults in <code>map_chr</code>. It will now have a safe fallback value it can use if it doesn’t find the element we are looking for in <code>latestData</code>. A simple solution is to use the <code>.default</code>-argument, and set this to missing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData,<span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 4
+   id            name                         latestData            location    
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;chr&gt;                 &lt;named list&gt;
+ 1 19851V72569   "Gunnesveien"                2023-07-04T00:00:00+… &lt;named list&gt;
+ 2 23208V930330  "Eiby"                       2023-09-18T00:00:00+… &lt;named list&gt;
+ 3 08835V929043  "Ekhaugen"                   2019-09-26T00:00:00+… &lt;named list&gt;
+ 4 69234V3243720 "Sletner"                    2023-06-14T00:00:00+… &lt;named list&gt;
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06T00:00:00+… &lt;named list&gt;
+ 6 40694V443946  "Søndre Støvin"              2023-05-26T00:00:00+… &lt;named list&gt;
+ 7 00960V444255  "Gullhaug"                   2023-05-08T00:00:00+… &lt;named list&gt;
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16T00:00:00+… &lt;named list&gt;
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04T00:00:00+… &lt;named list&gt;
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02T00:00:00+… &lt;named list&gt;
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="transforming-time" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="transforming-time"><span class="header-section-number">7.2.3</span> Transforming time</h3>
+<p>Next, let’s format the date format. Date formats can be tricky, but is an obstacle you just have to learn to work with. We can reformat the <code>latestData</code> column into a date by simply using <code>as.Date</code> - however - we now have lost information on the time of day. Let’s see if we can retain all the information in the column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as.Date</span>(latestData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 4
+   id            name                         latestData location        
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;date&gt;     &lt;named list&gt;    
+ 1 19851V72569   "Gunnesveien"                2023-07-04 &lt;named list [1]&gt;
+ 2 23208V930330  "Eiby"                       2023-09-18 &lt;named list [1]&gt;
+ 3 08835V929043  "Ekhaugen"                   2019-09-26 &lt;named list [1]&gt;
+ 4 69234V3243720 "Sletner"                    2023-06-14 &lt;named list [1]&gt;
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 &lt;named list [1]&gt;
+ 6 40694V443946  "Søndre Støvin"              2023-05-26 &lt;named list [1]&gt;
+ 7 00960V444255  "Gullhaug"                   2023-05-08 &lt;named list [1]&gt;
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16 &lt;named list [1]&gt;
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 &lt;named list [1]&gt;
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 &lt;named list [1]&gt;
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+<p>There are several functions we can use to transform the string into a date time variable. as_datetime in lubridate works in this case. Note that the interpretation of dates may be dependent on the time zone settings on your laptop. Here, we are explicitly stating that we want the a Europe/Berlin tz on the variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 4
+   id            name                         latestData          location    
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;named list&gt;
+ 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00 &lt;named list&gt;
+ 2 23208V930330  "Eiby"                       2023-09-18 00:00:00 &lt;named list&gt;
+ 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00 &lt;named list&gt;
+ 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00 &lt;named list&gt;
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00 &lt;named list&gt;
+ 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00 &lt;named list&gt;
+ 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00 &lt;named list&gt;
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00 &lt;named list&gt;
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00 &lt;named list&gt;
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00 &lt;named list&gt;
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+<p><strong>Exercise: Finalizing the transformation</strong></p>
+<p>Let’s take on the final location variable. Complete the operation by unpacking the location column into <em>two</em> columns: <code>lat</code> and <code>lon</code>. You may use the functions you have already seen, or see of you can find mode specialized functions.</p>
+<p>Note: This a <em>nested</em> list i.e.&nbsp;the contents of a cell in <code>location</code> is a list with one entry. This list contains two other lists..</p>
+<p>The script should return a data frame similar to the one below (only the first few entries shown).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 38%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">id</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">latestData</th>
+<th style="text-align: right;">lat</th>
+<th style="text-align: right;">lon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">19851V72569</td>
+<td style="text-align: left;">Gunnesveien</td>
+<td style="text-align: left;">2023-07-04</td>
+<td style="text-align: right;">62.83949</td>
+<td style="text-align: right;">9.896194</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">23208V930330</td>
+<td style="text-align: left;">Eiby</td>
+<td style="text-align: left;">2023-09-18</td>
+<td style="text-align: right;">69.87403</td>
+<td style="text-align: right;">23.180681</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">08835V929043</td>
+<td style="text-align: left;">Ekhaugen</td>
+<td style="text-align: left;">2019-09-26</td>
+<td style="text-align: right;">69.68400</td>
+<td style="text-align: right;">30.014458</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">69234V3243720</td>
+<td style="text-align: left;">Sletner</td>
+<td style="text-align: left;">2023-06-14</td>
+<td style="text-align: right;">59.87811</td>
+<td style="text-align: right;">11.241229</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11230V704826</td>
+<td style="text-align: left;">Fv187 Ringgata - Coop Prix</td>
+<td style="text-align: left;">2023-10-06</td>
+<td style="text-align: right;">60.79885</td>
+<td style="text-align: right;">11.088156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">40694V443946</td>
+<td style="text-align: left;">Søndre Støvin</td>
+<td style="text-align: left;">2023-05-26</td>
+<td style="text-align: right;">59.93331</td>
+<td style="text-align: right;">11.143171</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+<p>We can use a similar solution we used before. First we use unlist to remove one level from the list, and then extract the contents using <code>map_dbl</code> - remember these are numbers, not text.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="st">""</span>))  <span class="sc">|&gt;</span> </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>))  <span class="sc">|&gt;</span> </span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">map</span>(location, unlist)) <span class="sc">|&gt;</span>  </span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">map_dbl</span>(location, <span class="st">"latLon.lat"</span>),</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">map_dbl</span>(location, <span class="st">"latLon.lon"</span>)</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 5
+   id            name                         latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00  62.8  9.90
+ 2 23208V930330  "Eiby"                       2023-09-18 00:00:00  69.9 23.2 
+ 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00  69.7 30.0 
+ 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00  59.9 11.2 
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00  60.8 11.1 
+ 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00  59.9 11.1 
+ 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00  60.1 11.0 
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00  59.9  9.93
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00  62.6  6.08
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00  62.6  6.09
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+<p>Alternatively, we can use <code>unnest_wider</code> twice. This one does some work for us, and gives the same result:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>))  <span class="sc">|&gt;</span> </span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(location) <span class="sc">|&gt;</span> </span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(latLon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,470 × 5
+   id            name                         latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00  62.8  9.90
+ 2 23208V930330  "Eiby"                       2023-09-18 00:00:00  69.9 23.2 
+ 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00  69.7 30.0 
+ 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00  59.9 11.2 
+ 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00  60.8 11.1 
+ 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00  59.9 11.1 
+ 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00  60.1 11.0 
+ 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00  59.9  9.93
+ 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00  62.6  6.08
+10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00  62.6  6.09
+# ℹ 6,460 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
