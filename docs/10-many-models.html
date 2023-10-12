@@ -62,6 +62,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -295,7 +311,17 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="many-models" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Many models</h1>
-<p><em>Under construction</em></p>
+<p>In this lesson we will do something naughty; we will estimate a huge number of simple models to a data set. You may recall from your basic courses in statistics and econometrics that, as a general rule, we need to have some sort of a plan before we try to build for instance a linear regression model to explain variation in <span class="math inline">Y</span> using a (generally unknown sub-)set of explanatory variables <span class="math inline">X_1, \ldots, X_p</span>. We do not want just to fit models until we get something interesting (tempting as it may be) because the results may then be entirely co-incidental, see <a href="https://www.tylervigen.com/spurious-correlations">this</a> web page for several absurd examples of spurious correlations that are found by just trawling the web for time series that are similar.</p>
+<p>We will of course not in any way suggest that the algorithm</p>
+<pre><code>while(model not interesting) {keep looking}</code></pre>
+<p>is anything other than cheating. We will however explore the other extreme from conservative inferential regression model building: What if we fit all possible models? <em>Everything</em>. This may result in some interesting insights because we interpret the estimated models more like derived data points that can be analyzed statistically in their own right rather than the result of a model-building exercise.</p>
+<p>This lesson follows Chapter 25 of <a href="https://r4ds.had.co.nz/"><em>the first edition of</em> R for Data Science</a> (in the second edition, this chapter is taken out) by Hadley Wickham. In the video window at the bottom of this page we go through the main script file for this lesson. At the end of the video we also discuss the assignment questions for this week (and you will see that this video was not recorded this year, but the main content is the same).</p>
+<p>If you want to explore these ideas a bit more conceptually, you can read the paper <a href="https://www.nber.org/papers/w6252"><em>I just ran four million regressions</em></a> by Xavier X. Sala-i-Martin.</p>
+<div style="padding:60.95% 0 0 0;position:relative;">
+<iframe src="https://player.vimeo.com/video/642707682?badge=0&amp;autopause=0&amp;quality_selector=1&amp;progress_bar=1&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="BAN400: Many models">
+</iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
 
 
 </section>

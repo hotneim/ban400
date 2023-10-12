@@ -5,4 +5,18 @@ number-offset: 9
 
 # Many models
 
-*Under construction*
+In this lesson we will do something naughty; we will estimate a huge number of simple models to a data set. You may recall from your basic courses in statistics and econometrics that, as a general rule, we need to have some sort of a plan before we try to build for instance a linear regression model to explain variation in $Y$ using a (generally unknown sub-)set of explanatory variables $X_1, \ldots, X_p$. We do not want just to fit models until we get something interesting (tempting as it may be) because the results may then be entirely co-incidental, see [this](https://www.tylervigen.com/spurious-correlations) web page for several absurd examples of spurious correlations that are found by just trawling the web for time series that are similar.
+
+We will of course not in any way suggest that the algorithm
+
+```
+while(model not interesting) {keep looking}
+```
+
+is anything other than cheating. We will however explore the other extreme from conservative inferential regression model building: What if we fit all possible models? *Everything*. This may result in some interesting insights because we interpret the estimated models more like derived data points that can be analyzed statistically in their own right rather than the result of a model-building exercise.
+
+This lesson follows Chapter 25 of [*the first edition of* R for Data Science](https://r4ds.had.co.nz/) (in the second edition, this chapter is taken out) by Hadley Wickham. In the video window at the bottom of this page we go through the main script file for this lesson. At the end of the video we also discuss the assignment questions for this week (and you will see that this video was not recorded this year, but the main content is the same).
+
+If you want to explore these ideas a bit more conceptually, you can read the paper [*I just ran four million regressions*](https://www.nber.org/papers/w6252) by Xavier X. Sala-i-Martin.
+
+<div style="padding:60.95% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/642707682?badge=0&amp;autopause=0&amp;quality_selector=1&amp;progress_bar=1&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="BAN400: Many models"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>

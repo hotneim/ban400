@@ -394,23 +394,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>a) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1588141</code></pre>
+<pre><code>[1] -0.4584541</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>b) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.1219824</code></pre>
+<pre><code>[1] -0.3561454</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09261455</code></pre>
+<pre><code>[1] -0.5727684</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>d) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1288768</code></pre>
+<pre><code>[1] -0.5410255</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1398276</code></pre>
+<pre><code>[1] 0.3502155</code></pre>
 </div>
 </div>
 <p>In addition to being verbose, we would need to make changes to these lines if we were to add or subtract columns to our data frame. And further, if we wanted different metrics (e.g.&nbsp;column means as well as medians), we would have to write even more code.</p>
@@ -433,15 +433,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.06222054 -0.18867495  0.07203504 -0.25009983  0.06231187</code></pre>
+<pre><code>[1] -0.3622177 -0.3777316 -0.3786779 -0.4984573  0.0894613</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.15881412 -0.12198245 -0.09261455  0.12887675  0.13982763</code></pre>
+<pre><code>[1] -0.4584541 -0.3561454 -0.5727684 -0.5410255  0.3502155</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6996648 0.8885356 1.1279408 0.9472692 0.7300631</code></pre>
+<pre><code>[1] 0.8740333 1.0758489 0.8945480 0.9793898 0.7389910</code></pre>
 </div>
 </div>
 <p>With this method we can get summaries of all columns in the data frame, without needing to changing these lines if we add or subtract columns.</p>
@@ -453,19 +453,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$a
-[1] -0.06222054
+[1] -0.3622177
 
 $b
-[1] -0.1886749
+[1] -0.3777316
 
 $c
-[1] 0.07203504
+[1] -0.3786779
 
 $d
-[1] -0.2500998
+[1] -0.4984573
 
 $e
-[1] 0.06231187</code></pre>
+[1] 0.0894613</code></pre>
 </div>
 </div>
 <p>The output from map-functions is a list. If you expect the return from the <code>map</code> call to be boolan, integer, double or character vectors, you can ensure you do indeed get such a vector in return by using <code>map_lgl, map_int, map_dbl</code> or <code>map_chr</code>-respectively.</p>
@@ -476,9 +476,9 @@ $e
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-        a      b       c      d      e
-    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 -0.0216 -0.164 0.00834 -0.212 0.0957</code></pre>
+       a      b      c      d     e
+   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 -0.349 -0.376 -0.423 -0.497 0.180</code></pre>
 </div>
 </div>
 <p>When we call <code>map</code>, we need to supply a <strong>single</strong> function that will be applied to each of the objects we are iterating over. If we want to apply multiple functions at the same time, we could store this as a new function, and call this once. However, we can also call an anonymous function (see also the “Function” chapter of the compendium”):</p>
@@ -492,9 +492,9 @@ $e
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-        a      b      c      d      e
-    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 -0.0889 -0.212 0.0639 -0.264 0.0854</code></pre>
+       a      b      c      d     e
+   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 -0.414 -0.351 -0.423 -0.509 0.121</code></pre>
 </div>
 </div>
 <p>With map functions we can do a lot more interesting stuff than making column summaries. Run the code below yourself line by line. In the example below, we</p>
@@ -596,13 +596,13 @@ Caused by error:
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(mu,sigma,rnorm,<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -10002.603 -10000.182 -10000.297  -9999.715 -10000.456
+[1]  -9999.677 -10003.084 -10000.605  -9999.157 -10000.377
 
 [[2]]
-[1]   0.1567408  -5.2921115   0.9674016 -10.3944524   5.5239795
+[1]  3.879527  1.878195  7.092627 -3.496100  3.317957
 
 [[3]]
-[1] 10014.038 10003.787 10004.033  9988.233  9989.746</code></pre>
+[1]  9998.202 10012.167  9990.237 10001.785  9991.840</code></pre>
 </div>
 </div>
 <p>We can also iterate over more than two lists simultaneously. The lists then need to be combined in a single list, and the names of each list must match the names of the arguments in the function we want to apply.</p>
@@ -617,17 +617,17 @@ Caused by error:
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(rnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -10000.85
+[1] -10002.09
 
 [[2]]
- [1] -7.7228006  7.0089048  2.2293329  2.9526156  0.8016055  0.1251404
- [7] -0.5135086 -4.8968444 -8.1875104 -3.3199596
+ [1] -0.8553480  0.9366360 -0.4950821  2.5837503 -6.9474872  3.5161338
+ [7] -8.5047997 -3.9111232 -3.5250974  6.2800680
 
 [[3]]
- [1]  94.05094  99.93789 117.73736  97.92451  96.50757  92.47947  82.69539
- [8]  85.45335  80.86713 104.54482 111.26890 114.21097  83.52989 110.93234
-[15]  93.98607  98.43185 108.93055  91.58743 101.94402 107.45297  90.66189
-[22]  90.73928 116.22404 103.00546 113.18881</code></pre>
+ [1]  87.82904 108.84753  92.53013  99.89480  91.18119 104.65772 111.90717
+ [8]  91.51976  84.79268  90.75745 104.61221 101.97341 100.39839  85.72613
+[15]  96.72461 103.07482 105.33388  97.37387  92.91584  97.21955  81.53775
+[22]  87.89177 100.34502 114.83682  74.11606</code></pre>
 </div>
 </div>
 </section>
@@ -731,7 +731,7 @@ Caused by error:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6470</code></pre>
+<pre><code>[1] 6497</code></pre>
 </div>
 </div>
 </section>
@@ -742,24 +742,24 @@ Caused by error:
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>stations[[<span class="dv">1</span>]][[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$id
-[1] "19851V72569"
+[1] "48291V72686"
 
 $name
-[1] "Gunnesveien"
+[1] "Bjørklivegen"
 
 $latestData
 $latestData$volumeByDay
-[1] "2023-07-04T00:00:00+02:00"
+[1] "2023-06-07T00:00:00+02:00"
 
 
 $location
 $location$coordinates
 $location$coordinates$latLon
 $location$coordinates$latLon$lat
-[1] 62.83949
+[1] 63.26584
 
 $location$coordinates$latLon$lon
-[1] 9.896194</code></pre>
+[1] 10.52636</code></pre>
 </div>
 </div>
 <p>We could perhaps hope that we can force this list into a data frame. For this we will use as_tibble:</p>
@@ -768,9 +768,9 @@ $location$coordinates$latLon$lon
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
-  id          name        latestData   location        
-  &lt;chr&gt;       &lt;chr&gt;       &lt;named list&gt; &lt;named list&gt;    
-1 19851V72569 Gunnesveien &lt;chr [1]&gt;    &lt;named list [1]&gt;</code></pre>
+  id          name         latestData   location        
+  &lt;chr&gt;       &lt;chr&gt;        &lt;named list&gt; &lt;named list&gt;    
+1 48291V72686 Bjørklivegen &lt;chr [1]&gt;    &lt;named list [1]&gt;</code></pre>
 </div>
 </div>
 <p><strong>Exercise:</strong></p>
@@ -794,20 +794,20 @@ Expand for solution
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 4
-   id            name                         latestData   location        
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;named list&gt; &lt;named list&gt;    
- 1 19851V72569   "Gunnesveien"                &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 2 23208V930330  "Eiby"                       &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 3 08835V929043  "Ekhaugen"                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 4 69234V3243720 "Sletner"                    &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 6 40694V443946  "Søndre Støvin"              &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 7 00960V444255  "Gullhaug"                   &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 8 04770V181323  "Eikerveien 71 "             &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 9 43008V249226  "FV5962 S1D1 m2362"          &lt;chr [1]&gt;    &lt;named list [1]&gt;
-10 29062V249226  "FV5962 S1D1 m1600"          &lt;chr [1]&gt;    &lt;named list [1]&gt;
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 4
+   id            name                           latestData   location        
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;named list&gt; &lt;named list&gt;    
+ 1 48291V72686   "Bjørklivegen"                 &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 2 84814V72700   "Uglmoene"                     &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 5 00461V72592   "Vikaveien"                    &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 6 88096V2172080 "Løvås "                       &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 8 02229V705297  "Fv225 Kongsvegen"             &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" &lt;chr [1]&gt;    &lt;named list [1]&gt;
+10 20356V704789  "Fv1702 Heggen"                &lt;chr [1]&gt;    &lt;named list [1]&gt;
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 <p>There is still some work left to do with the date time and location columns. As you can see below, they are still in a list format. We can try to pull out the insides of the contents of the <code>latestData</code>-column. It is formatted as a list, but actually only contains one date time entry.</p>
@@ -820,7 +820,7 @@ Expand for solution
 <span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$volumeByDay
-[1] "2023-07-04T00:00:00+02:00"</code></pre>
+[1] "2023-06-07T00:00:00+02:00"</code></pre>
 </div>
 </div>
 </div>
@@ -851,7 +851,7 @@ Expand for solution
 <pre><code>Error in `mutate()`:
 ℹ In argument: `latestData = map_chr(latestData, 1)`.
 Caused by error in `map_chr()`:
-ℹ In index: 514.
+ℹ In index: 540.
 ℹ With name: volumeByDay.
 Caused by error:
 ! Result must be length 1, not 0.</code></pre>
@@ -874,20 +874,20 @@ Caused by error:
 <span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, unlist_safe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 4
-   id            name                         latestData            location    
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;chr&gt;                 &lt;named list&gt;
- 1 19851V72569   "Gunnesveien"                2023-07-04T00:00:00+… &lt;named list&gt;
- 2 23208V930330  "Eiby"                       2023-09-18T00:00:00+… &lt;named list&gt;
- 3 08835V929043  "Ekhaugen"                   2019-09-26T00:00:00+… &lt;named list&gt;
- 4 69234V3243720 "Sletner"                    2023-06-14T00:00:00+… &lt;named list&gt;
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06T00:00:00+… &lt;named list&gt;
- 6 40694V443946  "Søndre Støvin"              2023-05-26T00:00:00+… &lt;named list&gt;
- 7 00960V444255  "Gullhaug"                   2023-05-08T00:00:00+… &lt;named list&gt;
- 8 04770V181323  "Eikerveien 71 "             2023-03-16T00:00:00+… &lt;named list&gt;
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04T00:00:00+… &lt;named list&gt;
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02T00:00:00+… &lt;named list&gt;
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 4
+   id            name                           latestData          location    
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;chr&gt;               &lt;named list&gt;
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07T00:00:0… &lt;named list&gt;
+ 2 84814V72700   "Uglmoene"                     2023-07-23T00:00:0… &lt;named list&gt;
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18T00:00:0… &lt;named list&gt;
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16T00:00:0… &lt;named list&gt;
+ 5 00461V72592   "Vikaveien"                    2023-08-25T00:00:0… &lt;named list&gt;
+ 6 88096V2172080 "Løvås "                       2023-10-12T00:00:0… &lt;named list&gt;
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27T00:00:0… &lt;named list&gt;
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28T00:00:0… &lt;named list&gt;
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26T00:00:0… &lt;named list&gt;
+10 20356V704789  "Fv1702 Heggen"                2023-09-14T00:00:0… &lt;named list&gt;
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 <p>Alternatively, we can use the defaults in <code>map_chr</code>. It will now have a safe fallback value it can use if it doesn’t find the element we are looking for in <code>latestData</code>. A simple solution is to use the <code>.default</code>-argument, and set this to missing:</p>
@@ -899,20 +899,20 @@ Caused by error:
 <span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData,<span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)</span>
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 4
-   id            name                         latestData            location    
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;chr&gt;                 &lt;named list&gt;
- 1 19851V72569   "Gunnesveien"                2023-07-04T00:00:00+… &lt;named list&gt;
- 2 23208V930330  "Eiby"                       2023-09-18T00:00:00+… &lt;named list&gt;
- 3 08835V929043  "Ekhaugen"                   2019-09-26T00:00:00+… &lt;named list&gt;
- 4 69234V3243720 "Sletner"                    2023-06-14T00:00:00+… &lt;named list&gt;
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06T00:00:00+… &lt;named list&gt;
- 6 40694V443946  "Søndre Støvin"              2023-05-26T00:00:00+… &lt;named list&gt;
- 7 00960V444255  "Gullhaug"                   2023-05-08T00:00:00+… &lt;named list&gt;
- 8 04770V181323  "Eikerveien 71 "             2023-03-16T00:00:00+… &lt;named list&gt;
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04T00:00:00+… &lt;named list&gt;
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02T00:00:00+… &lt;named list&gt;
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 4
+   id            name                           latestData          location    
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;chr&gt;               &lt;named list&gt;
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07T00:00:0… &lt;named list&gt;
+ 2 84814V72700   "Uglmoene"                     2023-07-23T00:00:0… &lt;named list&gt;
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18T00:00:0… &lt;named list&gt;
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16T00:00:0… &lt;named list&gt;
+ 5 00461V72592   "Vikaveien"                    2023-08-25T00:00:0… &lt;named list&gt;
+ 6 88096V2172080 "Løvås "                       2023-10-12T00:00:0… &lt;named list&gt;
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27T00:00:0… &lt;named list&gt;
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28T00:00:0… &lt;named list&gt;
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26T00:00:0… &lt;named list&gt;
+10 20356V704789  "Fv1702 Heggen"                2023-09-14T00:00:0… &lt;named list&gt;
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -929,20 +929,20 @@ Caused by error:
 <span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as.Date</span>(latestData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 4
-   id            name                         latestData location        
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;date&gt;     &lt;named list&gt;    
- 1 19851V72569   "Gunnesveien"                2023-07-04 &lt;named list [1]&gt;
- 2 23208V930330  "Eiby"                       2023-09-18 &lt;named list [1]&gt;
- 3 08835V929043  "Ekhaugen"                   2019-09-26 &lt;named list [1]&gt;
- 4 69234V3243720 "Sletner"                    2023-06-14 &lt;named list [1]&gt;
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 &lt;named list [1]&gt;
- 6 40694V443946  "Søndre Støvin"              2023-05-26 &lt;named list [1]&gt;
- 7 00960V444255  "Gullhaug"                   2023-05-08 &lt;named list [1]&gt;
- 8 04770V181323  "Eikerveien 71 "             2023-03-16 &lt;named list [1]&gt;
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 &lt;named list [1]&gt;
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 &lt;named list [1]&gt;
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 4
+   id            name                           latestData location        
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;date&gt;     &lt;named list&gt;    
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07 &lt;named list [1]&gt;
+ 2 84814V72700   "Uglmoene"                     2023-07-23 &lt;named list [1]&gt;
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18 &lt;named list [1]&gt;
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16 &lt;named list [1]&gt;
+ 5 00461V72592   "Vikaveien"                    2023-08-25 &lt;named list [1]&gt;
+ 6 88096V2172080 "Løvås "                       2023-10-12 &lt;named list [1]&gt;
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27 &lt;named list [1]&gt;
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28 &lt;named list [1]&gt;
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26 &lt;named list [1]&gt;
+10 20356V704789  "Fv1702 Heggen"                2023-09-14 &lt;named list [1]&gt;
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 <p>There are several functions we can use to transform the string into a date time variable. as_datetime in lubridate works in this case. Note that the interpretation of dates may be dependent on the time zone settings on your laptop. Here, we are explicitly stating that we want the a Europe/Berlin tz on the variable:</p>
@@ -953,20 +953,20 @@ Caused by error:
 <span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 4
-   id            name                         latestData          location    
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;named list&gt;
- 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00 &lt;named list&gt;
- 2 23208V930330  "Eiby"                       2023-09-18 00:00:00 &lt;named list&gt;
- 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00 &lt;named list&gt;
- 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00 &lt;named list&gt;
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00 &lt;named list&gt;
- 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00 &lt;named list&gt;
- 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00 &lt;named list&gt;
- 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00 &lt;named list&gt;
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00 &lt;named list&gt;
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00 &lt;named list&gt;
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 4
+   id            name                           latestData          location    
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;dttm&gt;              &lt;named list&gt;
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07 00:00:00 &lt;named list&gt;
+ 2 84814V72700   "Uglmoene"                     2023-07-23 00:00:00 &lt;named list&gt;
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18 00:00:00 &lt;named list&gt;
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16 00:00:00 &lt;named list&gt;
+ 5 00461V72592   "Vikaveien"                    2023-08-25 00:00:00 &lt;named list&gt;
+ 6 88096V2172080 "Løvås "                       2023-10-12 00:00:00 &lt;named list&gt;
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27 00:00:00 &lt;named list&gt;
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28 00:00:00 &lt;named list&gt;
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26 00:00:00 &lt;named list&gt;
+10 20356V704789  "Fv1702 Heggen"                2023-09-14 00:00:00 &lt;named list&gt;
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 <p><strong>Exercise: Finalizing the transformation</strong></p>
@@ -977,11 +977,11 @@ Caused by error:
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 38%">
-<col style="width: 15%">
-<col style="width: 12%">
-<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 35%">
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 13%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -994,46 +994,46 @@ Caused by error:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">19851V72569</td>
-<td style="text-align: left;">Gunnesveien</td>
-<td style="text-align: left;">2023-07-04</td>
-<td style="text-align: right;">62.83949</td>
-<td style="text-align: right;">9.896194</td>
+<td style="text-align: left;">48291V72686</td>
+<td style="text-align: left;">Bjørklivegen</td>
+<td style="text-align: left;">2023-06-07</td>
+<td style="text-align: right;">63.26584</td>
+<td style="text-align: right;">10.52636</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">23208V930330</td>
-<td style="text-align: left;">Eiby</td>
-<td style="text-align: left;">2023-09-18</td>
-<td style="text-align: right;">69.87403</td>
-<td style="text-align: right;">23.180681</td>
+<td style="text-align: left;">84814V72700</td>
+<td style="text-align: left;">Uglmoene</td>
+<td style="text-align: left;">2023-07-23</td>
+<td style="text-align: right;">63.25657</td>
+<td style="text-align: right;">11.10764</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">08835V929043</td>
-<td style="text-align: left;">Ekhaugen</td>
-<td style="text-align: left;">2019-09-26</td>
-<td style="text-align: right;">69.68400</td>
-<td style="text-align: right;">30.014458</td>
+<td style="text-align: left;">81531V704884</td>
+<td style="text-align: left;">Fv1856 Besterudvegen 1</td>
+<td style="text-align: left;">2023-08-18</td>
+<td style="text-align: right;">60.77407</td>
+<td style="text-align: right;">11.11736</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">69234V3243720</td>
-<td style="text-align: left;">Sletner</td>
-<td style="text-align: left;">2023-06-14</td>
-<td style="text-align: right;">59.87811</td>
-<td style="text-align: right;">11.241229</td>
+<td style="text-align: left;">42945V705298</td>
+<td style="text-align: left;">Fv1812 Stenbakkvegen 51</td>
+<td style="text-align: left;">2023-08-16</td>
+<td style="text-align: right;">60.77360</td>
+<td style="text-align: right;">11.16552</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">11230V704826</td>
-<td style="text-align: left;">Fv187 Ringgata - Coop Prix</td>
-<td style="text-align: left;">2023-10-06</td>
-<td style="text-align: right;">60.79885</td>
-<td style="text-align: right;">11.088156</td>
+<td style="text-align: left;">00461V72592</td>
+<td style="text-align: left;">Vikaveien</td>
+<td style="text-align: left;">2023-08-25</td>
+<td style="text-align: right;">62.67677</td>
+<td style="text-align: right;">11.45819</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">40694V443946</td>
-<td style="text-align: left;">Søndre Støvin</td>
-<td style="text-align: left;">2023-05-26</td>
-<td style="text-align: right;">59.93331</td>
-<td style="text-align: right;">11.143171</td>
+<td style="text-align: left;">88096V2172080</td>
+<td style="text-align: left;">Løvås</td>
+<td style="text-align: left;">2023-10-12</td>
+<td style="text-align: right;">59.58332</td>
+<td style="text-align: right;">10.17529</td>
 </tr>
 </tbody>
 </table>
@@ -1066,20 +1066,20 @@ Expand for solution
 <span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 5
-   id            name                         latestData            lat   lon
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00  62.8  9.90
- 2 23208V930330  "Eiby"                       2023-09-18 00:00:00  69.9 23.2 
- 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00  69.7 30.0 
- 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00  59.9 11.2 
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00  60.8 11.1 
- 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00  59.9 11.1 
- 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00  60.1 11.0 
- 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00  59.9  9.93
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00  62.6  6.08
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00  62.6  6.09
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 5
+   id            name                           latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07 00:00:00  63.3 10.5 
+ 2 84814V72700   "Uglmoene"                     2023-07-23 00:00:00  63.3 11.1 
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18 00:00:00  60.8 11.1 
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16 00:00:00  60.8 11.2 
+ 5 00461V72592   "Vikaveien"                    2023-08-25 00:00:00  62.7 11.5 
+ 6 88096V2172080 "Løvås "                       2023-10-12 00:00:00  59.6 10.2 
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27 00:00:00  60.2 12.0 
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28 00:00:00  60.8 11.1 
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26 00:00:00  59.5  5.30
+10 20356V704789  "Fv1702 Heggen"                2023-09-14 00:00:00  60.8 11.0 
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 <p>Alternatively, we can use <code>unnest_wider</code> twice. This one does some work for us, and gives the same result:</p>
@@ -1092,20 +1092,20 @@ Expand for solution
 <span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(location) <span class="sc">|&gt;</span> </span>
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(latLon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,470 × 5
-   id            name                         latestData            lat   lon
-   &lt;chr&gt;         &lt;chr&gt;                        &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 19851V72569   "Gunnesveien"                2023-07-04 00:00:00  62.8  9.90
- 2 23208V930330  "Eiby"                       2023-09-18 00:00:00  69.9 23.2 
- 3 08835V929043  "Ekhaugen"                   2019-09-26 00:00:00  69.7 30.0 
- 4 69234V3243720 "Sletner"                    2023-06-14 00:00:00  59.9 11.2 
- 5 11230V704826  "Fv187 Ringgata - Coop Prix" 2023-10-06 00:00:00  60.8 11.1 
- 6 40694V443946  "Søndre Støvin"              2023-05-26 00:00:00  59.9 11.1 
- 7 00960V444255  "Gullhaug"                   2023-05-08 00:00:00  60.1 11.0 
- 8 04770V181323  "Eikerveien 71 "             2023-03-16 00:00:00  59.9  9.93
- 9 43008V249226  "FV5962 S1D1 m2362"          2023-07-04 00:00:00  62.6  6.08
-10 29062V249226  "FV5962 S1D1 m1600"          2023-07-02 00:00:00  62.6  6.09
-# ℹ 6,460 more rows</code></pre>
+<pre><code># A tibble: 6,497 × 5
+   id            name                           latestData            lat   lon
+   &lt;chr&gt;         &lt;chr&gt;                          &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 48291V72686   "Bjørklivegen"                 2023-06-07 00:00:00  63.3 10.5 
+ 2 84814V72700   "Uglmoene"                     2023-07-23 00:00:00  63.3 11.1 
+ 3 81531V704884  "Fv1856 Besterudvegen 1"       2023-08-18 00:00:00  60.8 11.1 
+ 4 42945V705298  "Fv1812 Stenbakkvegen 51"      2023-08-16 00:00:00  60.8 11.2 
+ 5 00461V72592   "Vikaveien"                    2023-08-25 00:00:00  62.7 11.5 
+ 6 88096V2172080 "Løvås "                       2023-10-12 00:00:00  59.6 10.2 
+ 7 96395V704982  "Fv2026 Utsiktsvegen"          2023-09-27 00:00:00  60.2 12.0 
+ 8 02229V705297  "Fv225 Kongsvegen"             2023-09-28 00:00:00  60.8 11.1 
+ 9 89063V319821  "Tittelsnesvn. v fylkesgrense" 2023-04-26 00:00:00  59.5  5.30
+10 20356V704789  "Fv1702 Heggen"                2023-09-14 00:00:00  60.8 11.0 
+# ℹ 6,487 more rows</code></pre>
 </div>
 </div>
 </div>
