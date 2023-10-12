@@ -15,7 +15,7 @@ while(model not interesting) {keep looking}
 
 is anything other than cheating. We will however explore the other extreme from conservative inferential regression model building: What if we fit all possible models? *Everything*. This may result in some interesting insights because we interpret the estimated models more like derived data points that can be analyzed statistically in their own right rather than the result of a model-building exercise.
 
-This lesson follows Chapter 25 of [*the first edition of* R for Data Science](https://r4ds.had.co.nz/) (in the second edition, this chapter is taken out) by Hadley Wickham. In the video window at the bottom of this page we go through the main script file for this lesson. At the end of the video we also discuss the assignment questions for this week (and you will see that this video was not recorded this year, but the main content is the same).
+This lesson follows Chapter 25 of [*the first edition of* R for Data Science](https://r4ds.had.co.nz/) (in the second edition, this chapter is taken out) by Hadley Wickham. In the video window at the bottom of this page we go through the main script file for this lesson. At the end of the video we also discuss the assignment questions for this week (and you will see that this video was not recorded this year, but the main content is the same). The script for the lesson is available in [this repository](https://github.com/hotneim/ban400-lectures).
 
 If you want to explore these ideas a bit more conceptually, you can read the paper [*I just ran four million regressions*](https://www.nber.org/papers/w6252) by Xavier X. Sala-i-Martin.
 

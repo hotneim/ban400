@@ -394,23 +394,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>a) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.4584541</code></pre>
+<pre><code>[1] 0.1616716</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>b) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.3561454</code></pre>
+<pre><code>[1] -0.2440021</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.5727684</code></pre>
+<pre><code>[1] -0.04535087</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>d) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.5410255</code></pre>
+<pre><code>[1] -0.3153951</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3502155</code></pre>
+<pre><code>[1] 0.05967607</code></pre>
 </div>
 </div>
 <p>In addition to being verbose, we would need to make changes to these lines if we were to add or subtract columns to our data frame. And further, if we wanted different metrics (e.g.&nbsp;column means as well as medians), we would have to write even more code.</p>
@@ -433,15 +433,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.3622177 -0.3777316 -0.3786779 -0.4984573  0.0894613</code></pre>
+<pre><code>[1]  0.232089595 -0.035271143  0.007910764 -0.055260713  0.120130657</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.4584541 -0.3561454 -0.5727684 -0.5410255  0.3502155</code></pre>
+<pre><code>[1]  0.16167160 -0.24400210 -0.04535087 -0.31539509  0.05967607</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8740333 1.0758489 0.8945480 0.9793898 0.7389910</code></pre>
+<pre><code>[1] 1.2120381 1.1844983 0.5937459 0.8954716 1.1554732</code></pre>
 </div>
 </div>
 <p>With this method we can get summaries of all columns in the data frame, without needing to changing these lines if we add or subtract columns.</p>
@@ -453,19 +453,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$a
-[1] -0.3622177
+[1] 0.2320896
 
 $b
-[1] -0.3777316
+[1] -0.03527114
 
 $c
-[1] -0.3786779
+[1] 0.007910764
 
 $d
-[1] -0.4984573
+[1] -0.05526071
 
 $e
-[1] 0.0894613</code></pre>
+[1] 0.1201307</code></pre>
 </div>
 </div>
 <p>The output from map-functions is a list. If you expect the return from the <code>map</code> call to be boolan, integer, double or character vectors, you can ensure you do indeed get such a vector in return by using <code>map_lgl, map_int, map_dbl</code> or <code>map_chr</code>-respectively.</p>
@@ -476,9 +476,9 @@ $e
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-       a      b      c      d     e
-   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 -0.349 -0.376 -0.423 -0.497 0.180</code></pre>
+      a       b        c      d     e
+  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 0.165 -0.0154 -0.00131 -0.160 0.120</code></pre>
 </div>
 </div>
 <p>When we call <code>map</code>, we need to supply a <strong>single</strong> function that will be applied to each of the objects we are iterating over. If we want to apply multiple functions at the same time, we could store this as a new function, and call this once. However, we can also call an anonymous function (see also the “Function” chapter of the compendium”):</p>
@@ -492,9 +492,9 @@ $e
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-       a      b      c      d     e
-   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 -0.414 -0.351 -0.423 -0.509 0.121</code></pre>
+      a       b      c       d     e
+  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 0.191 -0.0298 0.0133 -0.0617 0.104</code></pre>
 </div>
 </div>
 <p>With map functions we can do a lot more interesting stuff than making column summaries. Run the code below yourself line by line. In the example below, we</p>
@@ -596,13 +596,13 @@ Caused by error:
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(mu,sigma,rnorm,<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1]  -9999.677 -10003.084 -10000.605  -9999.157 -10000.377
+[1]  -9999.087 -10000.750 -10000.991 -10000.633  -9998.447
 
 [[2]]
-[1]  3.879527  1.878195  7.092627 -3.496100  3.317957
+[1]  3.771634  2.072742  6.172401 -4.144708  2.154828
 
 [[3]]
-[1]  9998.202 10012.167  9990.237 10001.785  9991.840</code></pre>
+[1]  9991.951  9980.172  9994.918  9992.800 10019.074</code></pre>
 </div>
 </div>
 <p>We can also iterate over more than two lists simultaneously. The lists then need to be combined in a single list, and the names of each list must match the names of the arguments in the function we want to apply.</p>
@@ -617,17 +617,17 @@ Caused by error:
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(rnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -10002.09
+[1] -9999.5
 
 [[2]]
- [1] -0.8553480  0.9366360 -0.4950821  2.5837503 -6.9474872  3.5161338
- [7] -8.5047997 -3.9111232 -3.5250974  6.2800680
+ [1] -3.4642307 -3.3725867  2.8419466  0.1763047 -2.7098557 -2.5515407
+ [7] -3.3874443 -7.0137258 -0.1816498 -0.3456434
 
 [[3]]
- [1]  87.82904 108.84753  92.53013  99.89480  91.18119 104.65772 111.90717
- [8]  91.51976  84.79268  90.75745 104.61221 101.97341 100.39839  85.72613
-[15]  96.72461 103.07482 105.33388  97.37387  92.91584  97.21955  81.53775
-[22]  87.89177 100.34502 114.83682  74.11606</code></pre>
+ [1]  92.11387 107.61742  84.53438  96.98481 100.55640 117.77835  89.83487
+ [8]  84.12184 117.04366 106.26729  93.90142  92.43464  91.31199 101.45793
+[15]  94.70129  98.73269 114.50116 119.25859  93.72235 103.54083 110.62973
+[22]  91.28332 113.37760  96.44905  99.21649</code></pre>
 </div>
 </div>
 </section>
