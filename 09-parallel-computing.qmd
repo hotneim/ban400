@@ -21,6 +21,8 @@ Assuming the car dealership:
 
 The question should be answered separately for different lead times, and with different potential start-dates for the dealership. 
 
+You can find the data set with NOK/BTC exhange rates here: [parallel_data.Rdata](parallel_data.Rdata)
+
 ```{r}
 library(tidyverse)
 
