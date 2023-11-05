@@ -3,6 +3,11 @@ bibliography: references.bib
 number-offset: 10
 ---
 
-# Documentation and deployment
+# Documentation, reproducability and deployment
 
-*Under construction*
+In this lecture we'll discuss documentation and reproducability. We'll walk through the following slides in class, and work on a small in-class assignment at the end. 
+
+- [Documentation and code standards](presentations/documentation.pptx)
+- [Reproducability](presentations/reproducability.pptx)
+- [A simple webservice example](presentations/containerizing.html)
+

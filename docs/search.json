@@ -422,9 +422,9 @@
   {
     "objectID": "11-documentation-and-deployment.html",
     "href": "11-documentation-and-deployment.html",
-    "title": "11 Documentation and deployment",
+    "title": "BAN400 - R Programming for Data Science",
     "section": "",
-    "text": "11 Documentation and deployment\nUnder construction"
+    "text": "11 Documentation, reproducability and deployment\nIn this lecture we’ll discuss documentation and reproducability. We’ll walk through the following slides in class, and work on a small in-class assignment at the end.\n\nDocumentation and code standards\nReproducability\nA simple webservice example"
   },
   {
     "objectID": "assignment-01.html",
