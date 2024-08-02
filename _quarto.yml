@@ -45,8 +45,10 @@ website:
           text: "9. Parallel computing"
         - href: 10-many-models.qmd
           text: "10. Many models"
+        - href: 12-making-maps.qmd
+          text: "11. Making maps"
         - href: 11-documentation-and-deployment.qmd
-          text: "11. Documentation and deployment"
+          text: "12. Documentation and deployment"
       - text: "---"
       - section: "Assignments"
         contents:

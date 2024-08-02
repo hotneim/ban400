@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>project-organization – BAN400 - R Programming for Data Science</title>
+<title>making-maps – BAN400 - R Programming for Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./06-git.html" rel="next">
-<link href="./04-functions-and-loops.html" rel="prev">
+<link href="./11-documentation-and-deployment.html" rel="next">
+<link href="./10-many-models.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -132,7 +112,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-to-r.html">PART 1</a></li><li class="breadcrumb-item"><a href="./05-project-organization.html">5. Project organization</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-git.html">PART 2</a></li><li class="breadcrumb-item"><a href="./12-making-maps.html">11. Making maps</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -161,13 +141,13 @@ div.csl-indent {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">PART 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">
@@ -194,7 +174,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-project-organization.html" class="sidebar-item-text sidebar-link active">
+  <a href="./05-project-organization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5. Project organization</span></a>
   </div>
 </li>
@@ -202,13 +182,13 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">PART 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-git.html" class="sidebar-item-text sidebar-link">
@@ -241,7 +221,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-making-maps.html" class="sidebar-item-text sidebar-link">
+  <a href="./12-making-maps.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">11. Making maps</span></a>
   </div>
 </li>
@@ -317,14 +297,7 @@ div.csl-indent {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#project-organization" id="toc-project-organization" class="nav-link active" data-scroll-target="#project-organization"><span class="header-section-number">5</span> Project organization</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
-  <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure"><span class="header-section-number">5.2</span> Folder Structure</a></li>
-  <li><a href="#coding-practice" id="toc-coding-practice" class="nav-link" data-scroll-target="#coding-practice"><span class="header-section-number">5.3</span> Coding practice</a></li>
-  <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects"><span class="header-section-number">5.4</span> RStudio Projects</a></li>
-  <li><a href="#writing-with-quarto" id="toc-writing-with-quarto" class="nav-link" data-scroll-target="#writing-with-quarto"><span class="header-section-number">5.5</span> Writing with Quarto</a></li>
-  </ul></li>
+  <li><a href="#making-maps" id="toc-making-maps" class="nav-link active" data-scroll-target="#making-maps"><span class="header-section-number">11</span> Making Maps</a></li>
   </ul>
 </nav>
     </div>
@@ -334,57 +307,14 @@ div.csl-indent {
 
 
 
-<section id="project-organization" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Project organization</h1>
-<section id="introduction" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
-<p>In this module, we will not do so much R-coding, but rather reflect on how we should <em>organize</em> a coding project. If we spend some time now on identifying efficient, consistent and robust practices that work all the time, we do not have to use our creative energy later on topics such as folder structure and coding style. But this is not just a matter of practical convenience. It is critically important that our work is <em>reproducible</em>. <span class="citation" data-cites="baumer2018lessons">Baumer (<a href="#ref-baumer2018lessons" role="doc-biblioref">2018</a>)</span> writes:</p>
-<blockquote class="blockquote">
-<p>A reproducible workflow is one in which each step of the analytical process is clearly documented in such a way that someone – and here it is better to imagine that person is <em>not</em> you – can retrace your steps and verify the exact results that you presented. Since your workflow necessarily involves computing, that means that your computing workflow needs to be reproducible, and this immediately necessitates <em>scriptable</em> programs, as opposed to point-and-click, menu-driven software. There are many reasons not to use spreadsheet software (e.g.&nbsp;Microsoft Excel [… and here there is a reference to Broman and Woo, 2017, “<em>Data organization in spreadsheets</em>”, for using this kind of software responsibly]), but chief among them is the fact that spreadsheet operations cannot be scripted. This means that it is generally impossible to produce truly reproducible work in that environment. A fundamental problem with spreadsheets is that they fail to distinguish between <em>data</em> and the presentation of those data. In a spreadsheet, everything is fair game: data can be overwritten or reformatted in a way that destroys the original precision, or simply garbled by automatic type conversion tools. Limitations imposed on the number of “Undo” commands further restrict one’s ability to retrace steps.</p>
-<p>If a program is scriptable, then the precise sequence of commands that load and transform the data, perform the analysis, and produce the plots can be recorded. <strong>This need not be a history or transcript of the entire session, but rather should be the <em>minimal</em> set of commands needed to reproduce your analysis.</strong> For even the most thoughtful programmer, a complete history will contain many irrelevant or incorrect commands that are not necessarily recorded in a sensible order. What reproducibility demands is a carefully edited recipe.</p>
-</blockquote>
-<iframe src="https://player.vimeo.com/video/852258514?h=45850dc26a" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-<p>Here are the data files that we will look at in this module: <a href="data-and-files/project-organization-raw-data.zip">project-organization-raw-data.zip</a>. Some of the most central topics in this module are also discussed in <a href="https://r4ds.hadley.nz/">Chapters 3, 5, 7 and 9 in R4DS</a>.</p>
-</section>
-<section id="folder-structure" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="folder-structure"><span class="header-section-number">5.2</span> Folder Structure</h2>
-<p>We discuss the paper <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects</a> <span class="citation" data-cites="noble2009quick">(<a href="#ref-noble2009quick" role="doc-biblioref">Noble 2009</a>)</span> in order to adopt a consistent folder structure that we can use for our projects.</p>
-<iframe src="https://player.vimeo.com/video/852258490?h=ad2309e288" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-</section>
-<section id="coding-practice" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="coding-practice"><span class="header-section-number">5.3</span> Coding practice</h2>
-<p>Next, we choose, and stick to, an accepted coding style. There are various options out there (and you can of course make your own informed choice in this matter). In the video, we consider some aspects of the <a href="https://style.tidyverse.org/index.html">Tidyverse style guide</a>. You can download the R-file that we work with here: <a href="data-and-files/process_data.R">process_data.R</a>.</p>
-<iframe src="https://player.vimeo.com/video/852258425?h=9530e4b778" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-</section>
-<section id="rstudio-projects" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="rstudio-projects"><span class="header-section-number">5.4</span> RStudio Projects</h2>
-<p>RStudio lets us create a handy little “project file” that we can put in the top level folder in our project. At the end of the video, we make some remarks about a packace called <code>here</code>, that we need to walk back on in the next video in order to solve a practical problem there.</p>
-<iframe src="https://player.vimeo.com/video/852258388?h=ea1e6bc205" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-</section>
-<section id="writing-with-quarto" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="writing-with-quarto"><span class="header-section-number">5.5</span> Writing with Quarto</h2>
-<p>Finally, we introduce a convenient system for writing technical reports: Quarto. The great advantage of writing with Quarto is that we no longer have to separate the tasks of writing and running code for producing some kind of result, and putting those results into a document. All of this can now be handled in one operation. Quarto is the successor of RMarkdown, which in turn is based on the well known Markdown format for writing. You can download Quarto here: <a href="https://quarto.org/">Quarto.org</a>, and you will find the reference guide on the same page.</p>
-<p>Again, you will notice that these videos were not planned out entirely before recording them, because we see the immediate use of the <code>here</code> -package for placing the document in its correct place in our folder structure. You can download the finished state of the project, including the quarto-file and the updated script, here: <a href="data-and-files/newspaper-analysis.zip">newspaper-analysis.zip</a>.</p>
-<iframe src="https://player.vimeo.com/video/852258542?h=467c94d947" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
-
+<section id="making-maps" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Making Maps</h1>
+<p>Under construction</p>
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-baumer2018lessons" class="csl-entry" role="listitem">
-Baumer, Benjamin S. 2018. <span>“Lessons from Between the White Lines for Isolated Data Scientists.”</span> <em>The American Statistician</em> 72 (1): 66–71.
-</div>
-<div id="ref-noble2009quick" class="csl-entry" role="listitem">
-Noble, William Stafford. 2009. <span>“A Quick Guide to Organizing Computational Biology Projects.”</span> <em>PLoS Computational Biology</em> 5 (7): e1000424.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -807,13 +737,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./04-functions-and-loops.html" class="pagination-link" aria-label="4. Functions and Loops">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. Functions and Loops</span>
+      <a href="./10-many-models.html" class="pagination-link" aria-label="10. Many models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">10. Many models</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06-git.html" class="pagination-link" aria-label="6. Git and Github">
-        <span class="nav-page-text">6. Git and Github</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11-documentation-and-deployment.html" class="pagination-link" aria-label="12. Documentation and deployment">
+        <span class="nav-page-text">12. Documentation and deployment</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
