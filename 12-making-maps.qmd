@@ -5,4 +5,178 @@ number-offset: 10
 
 # Making Maps
 
-Under construction
+The study of *spatial data* is important in many empirical problems. This is data that contains information about the spatial distribution of various phenomena. If we use the spread of disease as an example, this would mean that we not only know who is sick (the cross-section), when they are sick (time series, or temporal variation), but also where people are sick, which is the spatial dimension. There are fancy statistical models for this kind of data (in the same way as there are fancy statistical models for time series), but we will limit ourselves to the descriptive analysis of spatial data, which basically means that we will make maps.
+
+On one hand, making maps adds a level of complexity to our coding skills because we are basically trying to plot information that is distributed on a globe onto a flat surface giving rise to different projections and coordinate systems. On the other hand we will still be able to use well known techniques of data wrangling and plotting that we have learned earlier in the course, because we will use a package (`sf`) that plays well with the principles of tidy data that we use in the `tidyverse` as well as the syntax of `ggplot2`.  
+
+## Drawing geographical features on a map
+
+First of all, we load the basic packages that we need; the `tidyverse` for everything tidy (including `ggplot2`) and the `here`-package for easy project management (a finished script containing the code for this lesson as well as all data and material is available [in this git repository](https://github.com/hotneim/ban400-makingmaps)). 
+
+```{r, message = FALSE}
+library(tidyverse)
+library(here)
+```
+
+In the simplest of terms, making a map is not much more than making a two-dimensional plot; we can plot $x$ againsy $y$, longitude against latitude. Let us first define two points in a data frame and plot them in a simple figure:
+
+```{r}
+points <- tibble(x = c(5.209806, 5.205498),
+                 y = c(59.92981, 59.92997))
+map <- 
+  points %>% 
+  ggplot(aes(x, y)) + 
+  geom_point(size = 4, colour = "red", alpha = .5)
+map
+```
+
+This is a map, I guess we can say, as these two points represent two geographical points in the world, definde by the lat-lon coordinates (degrees north of the equator and degrees east of the zero-meridian). We can also draw a line between them, which is the path we would take when travelling between these points:
+
+```{r}
+map + geom_line()
+```
+
+But of course, in the real world (at least in this part of the world), no road just goes straight from one point to the next. In order to represent the actual road that exists out there, we can for instance use a new series of points. In order to capture the road realistically, we probably need quite a few of them, so we store them in a file and read the data in the usual way:
+
+```{r}
+road <- here("data", "road.csv") %>% read_csv(show_col_types = F)
+```
+
+Let us replace the straight line with the new representation of the road, that corresponds to the physical terrain. We start by plotting the points so that we can appreciate the resolution of the information that we have.
+
+```{r}
+map + geom_point(aes(x, y), data = road, size = .7, alpha = .2)
+```
+Or, by rather drawing a line:
+
+```{r}
+map + geom_line(aes(x, y), data = road, alpha = .6)
+```
+
+This is just a very small tile of the earth. In fact, we can calculate the geographical distance between these two points if we have the `geoshpere` package installed, and we see that it is just around 240 meters:
+
+```{r}
+geosphere::distm(points[1,], points[2,])
+```
+
+The two locations and the road between them are located on a small island, and we want to draw the island on the map as well:
+
+```{r}
+island <- 
+  here("data", "island.csv") %>% 
+  read_csv(col_names = c('x', 'y'), 
+           col_select = c(1, 2),
+           show_col_types = F)
+
+island_map <-
+  map + 
+  geom_point(aes(x, y), data = road, size = .5, alpha = .1) +
+  geom_point(aes(x, y), data = island, size = .5, alpha = .1)
+
+island_map
+```
+
+Okey, this can pass as a nice little map over an island with two points of interest and a road between these points. But still, this is inconvenient for a number of different reasons:
+
+1. According to recent studies of the earth, the longitudes and latitudes does not appear to define a regular Eucledian coordinate system. (The earth is round; the geographical distance you need to travel to go one degree east depends on your latitude). This has consequences for how we draw the map on a flat surface and gives rise to the concept of map projections ([https://en.wikipedia.org/wiki/Map_projection](https://en.wikipedia.org/wiki/Map_projection)). When treating the geographical coordinates simply as x and y as above we lose any concept of this.
+2. Why did we not use `geom_line()` to draw the island above? Try it, it looks very strange. This is because the points in the file that we supplied do not have the point in the correct order travelling around the circumference. But R or `ggplot2` does not know this, there is no understanding in the system now that the points define an island -- the line goes from one point to the next.
+3. Of course, we do not want to just draw maps, we probably want to associate some data to the geographical shapes that we want to visualize in some way. Say we have several islands like the one above with information about the sheep population on each island, and we want to color them according to this number. Not obvious if we store the island coastlines as plain $x$- and $y$-coordinates.
+4. Above, we are explicitly dealing with the spatial resolution of the coastline; we have more than 11,000 entries in a file to describe this small island. In a map of the whole country, this is way too much because we would need several gigabytes (terabytes?) to describe everything at this resolution. Islands of this size might not be needed at all. Do we want to deal with these considerations manually? No.
+5. Map data from official sources are not provided in the format of csv-files, but rather in specialized formats for geographical information. We need to be able to work with such formats.
+6. And we can just forget about advanced spatial joining (join houses defined by lat-lon-coordinates with islands or municipalities), spatial filtering (only keep houses that have coordinates within the boundary of an island or a municipality), or by creating intersections or unions between several geographical areas.
+
+Luckily, there is a way to easily and elegantly deal with all of these issues. Enter the `sf`-package, co-authored by Professor Emeritus at NHH Roger Bivand:
+
+```{r, message = FALSE}
+library(sf)
+```
+
+This package will allow us to work with geographical data within the framework of the tidyverse for data wrangling and `ggplot2` for visualizations.
+
+Let us start by converting the coordinates of our two houses to a data frame with a "geometry" column, describing their locations. Before we do that, we decide once and for all on a coordinate reference system that we will use on the remainder of our session. I find it a good practice to explicitly define all objects with a reference system, both the objects that we create, and also the objects that we will import later. The following choice is fairly standard and the system used for GPS. Read more details on this in Section 17.3.2 in [Modern Data Science for R](https://mdsr-book.github.io/mdsr2e/) (but this is very complicated to fully understand, not needed for our purposes). Let us store our choice in a variable so that we can apply it to various geographical objects later on:
+
+```{r}
+crs <- 4326
+```
+
+We can convert the data frame containing the two points to a geometric object using the following function. We supply the points as the first argument, we specify which columns containg the latitudes and longitudes, respectively, using the `coords` argument, and then we specify the coordinate reference system using the `crs` argument, where we simply supply the variable that we defined above. 
+
+```{r}
+points_sf <- st_as_sf(points, 
+                      coords = c("x", "y"),
+                      crs = crs)
+```
+
+This results in a data frame with one column called `geometry`, which has the type `POINT`. When we print out the object, we also see more information about the object printed at the top. `WGS 84` is a general designation of the coordinate system of which `4326` is a special case. 
+
+```{r}
+points_sf
+```
+
+The `sf` packages comes with a special `ggplot2` function that is incredibly useful:
+
+```{r}
+map_sf <- points_sf %>% ggplot() + geom_sf(aes(geometry = geometry))
+map_sf
+```
+
+That was very basic indeed! We will fix this to become a better map a little bit later. For now, let us convert the road to a geometry as well:
+
+```{r}
+road_sf <- 
+  # Convert to points
+  st_as_sf(road, 
+           coords = c("x", "y"), 
+           crs = crs) %>% 
+  # Merge into a single geometry (one road is one row in the data frame)
+  summarise(do_union = FALSE) %>% 
+  # Convert to a line
+  st_cast("LINESTRING") 
+```
+
+Here is the object that we now created. Note that this conversion leads to a data frame with one column (the geometry column) and only one row. This single cell contains the whole road, and we can imagine (and we will see later) that this format will be very useful. For instance, we could have several roads collected efficiently in this manner -- one road per row of data. 
+
+```{r}
+road_sf
+```
+
+We add the road to the plot:
+
+```{r}
+map_sf + geom_sf(aes(geometry = geometry), data = road_sf)
+```
+
+We press on, and do the same thing with the countour of the island, which we convert to a `POLYGON`, that is, a closed shape. We draw the map immediately after:
+
+```{r}
+island_sf <- 
+  # Convert to points
+  st_as_sf(island, 
+           coords = c("x", "y"), 
+           crs = crs) %>% 
+  # Merge into a single geometry (one road is one row in the data frame)
+  summarise(do_union = FALSE) %>% 
+  # Convert to a polygon
+  st_cast("POLYGON") 
+
+map_sf + 
+  geom_sf(aes(geometry = geometry), data = road_sf) +
+  geom_sf(aes(geometry = geometry), fill = "#00000020", data = island_sf)
+```
+
+Very nice! Let us wrap up this initial case by making some finishing touches to the plot:
+
+```{r}
+island_sf %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(fill = "gray") +
+  geom_sf(aes(geometry = geometry), data = road_sf, linetype = "dotted") +
+  geom_sf(aes(geometry = geometry), data = points_sf, shape = 3, size = 2) +
+  theme_minimal() + 
+  theme(axis.text = element_text(color = "gray"))
+```
+
+
+## Plotting geographical data
+
+## Downloading and using official map data

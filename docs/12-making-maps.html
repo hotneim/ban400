@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -69,6 +103,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -297,7 +374,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#making-maps" id="toc-making-maps" class="nav-link active" data-scroll-target="#making-maps"><span class="header-section-number">11</span> Making Maps</a></li>
+  <li><a href="#making-maps" id="toc-making-maps" class="nav-link active" data-scroll-target="#making-maps"><span class="header-section-number">11</span> Making Maps</a>
+  <ul class="collapse">
+  <li><a href="#drawing-geographical-features-on-a-map" id="toc-drawing-geographical-features-on-a-map" class="nav-link" data-scroll-target="#drawing-geographical-features-on-a-map"><span class="header-section-number">11.1</span> Drawing geographical features on a map</a></li>
+  <li><a href="#plotting-geographical-data" id="toc-plotting-geographical-data" class="nav-link" data-scroll-target="#plotting-geographical-data"><span class="header-section-number">11.2</span> Plotting geographical data</a></li>
+  <li><a href="#downloading-and-using-official-map-data" id="toc-downloading-and-using-official-map-data" class="nav-link" data-scroll-target="#downloading-and-using-official-map-data"><span class="header-section-number">11.3</span> Downloading and using official map data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -309,9 +391,238 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="making-maps" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Making Maps</h1>
-<p>Under construction</p>
+<p>The study of <em>spatial data</em> is important in many empirical problems. This is data that contains information about the spatial distribution of various phenomena. If we use the spread of disease as an example, this would mean that we not only know who is sick (the cross-section), when they are sick (time series, or temporal variation), but also where people are sick, which is the spatial dimension. There are fancy statistical models for this kind of data (in the same way as there are fancy statistical models for time series), but we will limit ourselves to the descriptive analysis of spatial data, which basically means that we will make maps.</p>
+<p>On one hand, making maps adds a level of complexity to our coding skills because we are basically trying to plot information that is distributed on a globe onto a flat surface giving rise to different projections and coordinate systems. On the other hand we will still be able to use well known techniques of data wrangling and plotting that we have learned earlier in the course, because we will use a package (<code>sf</code>) that plays well with the principles of tidy data that we use in the <code>tidyverse</code> as well as the syntax of <code>ggplot2</code>.</p>
+<section id="drawing-geographical-features-on-a-map" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="drawing-geographical-features-on-a-map"><span class="header-section-number">11.1</span> Drawing geographical features on a map</h2>
+<p>First of all, we load the basic packages that we need; the <code>tidyverse</code> for everything tidy (including <code>ggplot2</code>) and the <code>here</code>-package for easy project management (a finished script containing the code for this lesson as well as all data and material is available <a href="https://github.com/hotneim/ban400-makingmaps">in this git repository</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the simplest of terms, making a map is not much more than making a two-dimensional plot; we can plot <span class="math inline">x</span> againsy <span class="math inline">y</span>, longitude against latitude. Let us first define two points in a data frame and plot them in a simple figure:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">5.209806</span>, <span class="fl">5.205498</span>),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">59.92981</span>, <span class="fl">59.92997</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  points <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is a map, I guess we can say, as these two points represent two geographical points in the world, definde by the lat-lon coordinates (degrees north of the equator and degrees east of the zero-meridian). We can also draw a line between them, which is the path we would take when travelling between these points:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>map <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>But of course, in the real world (at least in this part of the world), no road just goes straight from one point to the next. In order to represent the actual road that exists out there, we can for instance use a new series of points. In order to capture the road realistically, we probably need quite a few of them, so we store them in a file and read the data in the usual way:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>road <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"road.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">read_csv</span>(<span class="at">show_col_types =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let us replace the straight line with the new representation of the road, that corresponds to the physical terrain. We start by plotting the points so that we can appreciate the resolution of the information that we have.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>map <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, y), <span class="at">data =</span> road, <span class="at">size =</span> .<span class="dv">7</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Or, by rather drawing a line:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>map <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(x, y), <span class="at">data =</span> road, <span class="at">alpha =</span> .<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is just a very small tile of the earth. In fact, we can calculate the geographical distance between these two points if we have the <code>geoshpere</code> package installed, and we see that it is just around 240 meters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>geosphere<span class="sc">::</span><span class="fu">distm</span>(points[<span class="dv">1</span>,], points[<span class="dv">2</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 241.5535</code></pre>
+</div>
+</div>
+<p>The two locations and the road between them are located on a small island, and we want to draw the island on the map as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>island <span class="ot">&lt;-</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"island.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">'x'</span>, <span class="st">'y'</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">show_col_types =</span> F)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>island_map <span class="ot">&lt;-</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  map <span class="sc">+</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, y), <span class="at">data =</span> road, <span class="at">size =</span> .<span class="dv">5</span>, <span class="at">alpha =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(x, y), <span class="at">data =</span> island, <span class="at">size =</span> .<span class="dv">5</span>, <span class="at">alpha =</span> .<span class="dv">1</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>island_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Okey, this can pass as a nice little map over an island with two points of interest and a road between these points. But still, this is inconvenient for a number of different reasons:</p>
+<ol type="1">
+<li>According to recent studies of the earth, the longitudes and latitudes does not appear to define a regular Eucledian coordinate system. (The earth is round; the geographical distance you need to travel to go one degree east depends on your latitude). This has consequences for how we draw the map on a flat surface and gives rise to the concept of map projections (<a href="https://en.wikipedia.org/wiki/Map_projection">https://en.wikipedia.org/wiki/Map_projection</a>). When treating the geographical coordinates simply as x and y as above we lose any concept of this.</li>
+<li>Why did we not use <code>geom_line()</code> to draw the island above? Try it, it looks very strange. This is because the points in the file that we supplied do not have the point in the correct order travelling around the circumference. But R or <code>ggplot2</code> does not know this, there is no understanding in the system now that the points define an island – the line goes from one point to the next.</li>
+<li>Of course, we do not want to just draw maps, we probably want to associate some data to the geographical shapes that we want to visualize in some way. Say we have several islands like the one above with information about the sheep population on each island, and we want to color them according to this number. Not obvious if we store the island coastlines as plain <span class="math inline">x</span>- and <span class="math inline">y</span>-coordinates.</li>
+<li>Above, we are explicitly dealing with the spatial resolution of the coastline; we have more than 11,000 entries in a file to describe this small island. In a map of the whole country, this is way too much because we would need several gigabytes (terabytes?) to describe everything at this resolution. Islands of this size might not be needed at all. Do we want to deal with these considerations manually? No.</li>
+<li>Map data from official sources are not provided in the format of csv-files, but rather in specialized formats for geographical information. We need to be able to work with such formats.</li>
+<li>And we can just forget about advanced spatial joining (join houses defined by lat-lon-coordinates with islands or municipalities), spatial filtering (only keep houses that have coordinates within the boundary of an island or a municipality), or by creating intersections or unions between several geographical areas.</li>
+</ol>
+<p>Luckily, there is a way to easily and elegantly deal with all of these issues. Enter the <code>sf</code>-package, co-authored by Professor Emeritus at NHH Roger Bivand:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This package will allow us to work with geographical data within the framework of the tidyverse for data wrangling and <code>ggplot2</code> for visualizations.</p>
+<p>Let us start by converting the coordinates of our two houses to a data frame with a “geometry” column, describing their locations. Before we do that, we decide once and for all on a coordinate reference system that we will use on the remainder of our session. I find it a good practice to explicitly define all objects with a reference system, both the objects that we create, and also the objects that we will import later. The following choice is fairly standard and the system used for GPS. Read more details on this in Section 17.3.2 in <a href="https://mdsr-book.github.io/mdsr2e/">Modern Data Science for R</a> (but this is very complicated to fully understand, not needed for our purposes). Let us store our choice in a variable so that we can apply it to various geographical objects later on:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="dv">4326</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can convert the data frame containing the two points to a geometric object using the following function. We supply the points as the first argument, we specify which columns containg the latitudes and longitudes, respectively, using the <code>coords</code> argument, and then we specify the coordinate reference system using the <code>crs</code> argument, where we simply supply the variable that we defined above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(points, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">crs =</span> crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This results in a data frame with one column called <code>geometry</code>, which has the type <code>POINT</code>. When we print out the object, we also see more information about the object printed at the top. <code>WGS 84</code> is a general designation of the coordinate system of which <code>4326</code> is a special case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>points_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 2 features and 0 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 5.205498 ymin: 59.92981 xmax: 5.209806 ymax: 59.92997
+Geodetic CRS:  WGS 84
+# A tibble: 2 × 1
+             geometry
+*         &lt;POINT [°]&gt;
+1 (5.209806 59.92981)
+2 (5.205498 59.92997)</code></pre>
+</div>
+</div>
+<p>The <code>sf</code> packages comes with a special <code>ggplot2</code> function that is incredibly useful:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>map_sf <span class="ot">&lt;-</span> points_sf <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>map_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That was very basic indeed! We will fix this to become a better map a little bit later. For now, let us convert the road to a geometry as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>road_sf <span class="ot">&lt;-</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to points</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(road, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge into a single geometry (one road is one row in the data frame)</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">do_union =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to a line</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">"LINESTRING"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is the object that we now created. Note that this conversion leads to a data frame with one column (the geometry column) and only one row. This single cell contains the whole road, and we can imagine (and we will see later) that this format will be very useful. For instance, we could have several roads collected efficiently in this manner – one road per row of data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>road_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 1 feature and 0 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: 5.205498 ymin: 59.92958 xmax: 5.209817 ymax: 59.93084
+Geodetic CRS:  WGS 84
+# A tibble: 1 × 1
+                                                                        geometry
+                                                                &lt;LINESTRING [°]&gt;
+1 (5.209806 59.92981, 5.209812 59.92981, 5.209817 59.92982, 5.209816 59.92982, …</code></pre>
+</div>
+</div>
+<p>We add the road to the plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>map_sf <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry), <span class="at">data =</span> road_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We press on, and do the same thing with the countour of the island, which we convert to a <code>POLYGON</code>, that is, a closed shape. We draw the map immediately after:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>island_sf <span class="ot">&lt;-</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to points</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(island, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge into a single geometry (one road is one row in the data frame)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">do_union =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to a polygon</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>) </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>map_sf <span class="sc">+</span> </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry), <span class="at">data =</span> road_sf) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry), <span class="at">fill =</span> <span class="st">"#00000020"</span>, <span class="at">data =</span> island_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Very nice! Let us wrap up this initial case by making some finishing touches to the plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>island_sf <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry), <span class="at">data =</span> road_sf, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry), <span class="at">data =</span> points_sf, <span class="at">shape =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"gray"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-geographical-data" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="plotting-geographical-data"><span class="header-section-number">11.2</span> Plotting geographical data</h2>
+</section>
+<section id="downloading-and-using-official-map-data" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="downloading-and-using-official-map-data"><span class="header-section-number">11.3</span> Downloading and using official map data</h2>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
