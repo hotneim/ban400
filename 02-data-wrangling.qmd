@@ -279,7 +279,7 @@ sales |>
 
 </iframe>
 
-Finally, we will join data frames. See the [R4DS-book](data%20wrangling%20cheat%20sheet). Joins are necessary when we want to analyse two or more data sets jointly. In our simple example, we have two data sets: one with transactions, and one with customers:
+Finally, we will join data frames. See the [R4DS-book](https://r4ds.hadley.nz/joins). Joins are necessary when we want to analyse two or more data sets jointly. In our simple example, we have two data sets: one with transactions, and one with customers:
 
 ```{r}
 # Read in both sheets
