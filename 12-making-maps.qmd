@@ -146,7 +146,7 @@ We add the road to the plot:
 map_sf + geom_sf(aes(geometry = geometry), data = road_sf)
 ```
 
-We press on, and do the same thing with the countour of the island, which we convert to a `POLYGON`, that is, a closed shape. We draw the map immediately after:
+We press on, and do the same thing with the contour of the island, which we convert to a `POLYGON`, that is, a closed shape. We draw the map immediately after:
 
 ```{r}
 island_sf <- 
@@ -176,7 +176,163 @@ island_sf %>%
   theme(axis.text = element_text(color = "gray"))
 ```
 
-
 ## Plotting geographical data
 
+We then move on to the next example. This time we do not only want to draw the map, but we want to use the map to visualize some geographical data. Also, we increase the scale of our problem from a small island on the Norwegian Coast to the entire world. The following packages contain a lot of data on the various countries of the world (as always, you need to install the packages before running the `library()` command):
+
+```{r}
+#| message: false
+library(rnaturalearth)
+library(rnaturalearthdata)
+```
+
+We then extract a data frame which contains a geometry column (as well as many other columns containing other kind of information). We also print out a list of the columns and note that there is a `geometry`-column containing the information about the shape of each contry of the world:
+
+```{r, message = FALSE}
+world <- ne_countries(scale = "medium", returnclass = "sf")
+colnames(world)
+```
+
+The `geometry` column has the class `MULTIPOLYGON`, as we see below, which means that the contour of each contry consists of potentially several polygons, which makes perfect sense of course, since each country may consist of several disconnected areas (islands, exclaves, overseas territories, etc.). But still, each country has one row in the data set: 
+
+```{r}
+world %>% select(geometry) %>% head()
+```
+ 
+We can draw a basic world map as we did above:
+ 
+```{r}
+world %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf()
+```
+ 
+ The nice thing with this structure is of course that we can apply our data wrangling skills to the data frame in the usual way. For instance, if we want to make a map ofEurope, we just filter the data fframe based on the `region_un` column that we just happen to have in this case:
+ 
+```{r}
+world %>% 
+  filter(region_un == "Europe") %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf()
+```
+
+As with most plots, we need to work on it in order to get what we want. In this case it seems that "Europe" means whatever territory is controlled by European countries as well as the whole of Russia. For a normal x-y-plot this would be easy to fix using the `xlim()` and `ylim()` functions. This is not so straightforward now, given that it is not perfectly obvious how we should supply the limits. Indeed, when reading the documentation for the `geom_sf()` function we see that specifying limits via `xlim()` and `ylim()` is "strongly discouraged".
+
+There are two options; either cropping the map data before we plot using `st_crop()` as part of a pipe-sequence, or cropping the image after we plot using `coord_sf()` as part of a `ggplot` layering sequence (i.e. with a "+"). Here is the latter option:
+
+```{r}
+world %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf() +
+  coord_sf(xlim = c(-20, 45), ylim = c(35, 73))
+```
+
+For completeness, we can show the first option as well, which can be particularly useful when the data frame is very large, and this is not at all uncommon when they contain mapping geometries:
+
+```{r}
+#| warning: false
+world %>% 
+  st_crop(xmin = -20, xmax = 45, ymin = 35, ymax = 73) %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf()
+```
+
+Looks good. By reading through [this](https://www.r-bloggers.com/2019/04/zooming-in-on-maps-with-sf-and-ggplot2/) blog post we see that we can make some further refinements to the map, including making the explicit transformation to our chosen map projection. 
+ 
+```{r}
+world %>% 
+  st_transform(crs = crs) %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf() +
+  coord_sf(xlim = c(-20, 45), ylim = c(35, 73)) + 
+  theme_minimal() + 
+  theme(axis.text = element_text(color = "gray")) 
+```
+
+But the point of all this was not no just make another map! We want to visualize data. In fact, there is some numerical data present in the world data that we have created above, but it is poorly documented (at least so poorly that I was not able to figure out the units and where the data comes from). No worries, there are plenty of sources containing data on the countries of the world. One very convenient is the `gapminder` package (see (gapminder.org)[www.gapminder.org] for some background, this is the data that the late Hans Rosling use for his legendary visualizations on world development):
+
+```{r}
+library(gapminder)
+head(gapminder)
+```
+
+As we see, there is one row per country-year. Next, we have a joining problem because the map data and the numerical data lives in two different data frames. Let us try to do a `left_join()` *into* the data frame containing the mapping data so that we will be able to draw the entire world map regradless of whether we have data there or not:
+
+```{r}
+gdp <- 
+  world %>% 
+  # The name of the country name column must match
+  mutate(country = admin) %>% 
+  # We try to join, keeping only the countries that we have in the gapminder data
+  left_join(gapminder, by = "country") %>% 
+  # We only use the latest year of data
+  filter(year == 2007) %>% 
+  # Drop the columns that we do not need, let us plot the GDP per capita for 2007
+  select(country, gdpPercap, geometry)
+```
+
+Let us see how this went by printing out all the countries in the gapminder data that did not find a match in the world data:
+
+```{r}
+no_match <- 
+  anti_join(gapminder, gdp, by = "country") %>% 
+  select(country) %>% 
+  distinct()
+no_match
+```
+
+There are several countries that do not match and this happens because there are various ways to spell these country names. Missing countries the other way around is not a problem (if we do not have the gdp data we do not have it), because the country will show up in the map regardless (because is is still contained in the `world` data that contains all the countries of the world). But we really want to plot the GDP data that we *do* have by matching all the data points with an entry in the mapping data frame.
+
+There are several ways to do this. One way is of course to do it manually, to go into the gapminder data and to change "United States" to "United States of America" and so forth for all the countries without a match. But this problem is quite common and there are automatic ways to do it. You would probably get some part of the way by fuzzy (partial) matching (see the `fuzzyjoin` package), but joining by country name is so common that we can go via a third
+database containing all possible spellings of the countries of the world.
+
+One such database is contained in the `countries` package (again, you need to install this the first time you try to use it), which also contains a very convenient function `auto_merge()` that tries to find the columns containing information about the country and join accordingly. We do not even have to make the column names match. Look here; where we throw out the years that we do not want in the same operation:
+
+```{r}
+gdp2 <- 
+  countries::auto_merge(gapminder %>% filter(year == 2007), world) %>% 
+  select(name, gdpPercap, geometry)
+```
+
+The flip side of doing the merge this way is that we do not have much control of how this went because we did not explicitly say which columns contian the country names in the two data frames. Let us count the none-NA values in the 2007 gapminder data and compare:
+ 
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>%
+  select(gdpPercap) %>% 
+  drop_na() %>% 
+  nrow
+
+gdp2 %>% 
+  select(gdpPercap) %>% 
+  drop_na() %>% 
+  nrow
+```
+
+It does look like all the GDP data was kep at least. We are noe ready to make a map, which is now super simple using the `sf` package in combination with the usual way of adding information to a `ggplot`: We take the world map, and simply add the GDP variable to the fill aestethic:
+
+```{r}
+gdp2 %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = gdpPercap))
+```
+
+This looks pretty good, but let us also do the usual work of finishing the plot to make it presentable. I want to change the color scale and the color used to display countries without GDP data. We will add a title and worl on the legend as well for good measure:
+
+```{r}
+gdp2 %>% 
+  ggplot(aes(geometry = geometry)) +
+  geom_sf(aes(fill = gdpPercap/1000)) + # Divide by 1000 for easier unit
+  scale_fill_gradient(low = "white", high = "darkgreen", na.value = "lightgray") +
+  ggtitle("GDP per Capita ($1000)") +
+  theme_minimal() +
+  labs(fill = "") +
+  theme(legend.position = "bottom",
+        legend.key.width = unit(1, 'cm'),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank()) 
+```
+
+
+ 
 ## Downloading and using official map data
