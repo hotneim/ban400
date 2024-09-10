@@ -10,7 +10,7 @@ There are a lot of online resources for `ggplot2`, for example:
 
 -   [The official online reference](https://ggplot2.tidyverse.org/reference/).
 -   [Data Visualization: A Practical Introduction](https://socviz.co/), a well written free and online e-book.
--   [The `ggplot2` cheat sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf); which is a superb quick-reference.
+-   [The `ggplot2` cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf); which is a superb quick-reference.
 -   [Twenty rules for good graphics](https://robjhyndman.com/hyndsight/graphics/), a useful blog post by statistician Rob Hyndman.
 -   [The books by Edward Tufte](https://www.edwardtufte.com/tufte/) are classic works in the more general topic of data visualization.
 
@@ -26,7 +26,7 @@ We can repeat the links that are mentioned at the end of the video:
 
 -   [The official online reference](https://ggplot2.tidyverse.org/reference/).
 -   [Data Visualization: A Practical Introduction](https://socviz.co/), a well written free and online e-book.
--   [The `ggplot2` cheat sheet](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf); which is a superb quick-reference.
+-   [The `ggplot2` cheat sheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf); which is a superb quick-reference.
 
 ## Wide or long? {#wideorlong}
 
