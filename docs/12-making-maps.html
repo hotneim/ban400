@@ -395,12 +395,12 @@ window.Quarto = {
 <p>On one hand, making maps adds a level of complexity to our coding skills because we are basically trying to plot information that is distributed on a globe onto a flat surface giving rise to different projections and coordinate systems. On the other hand we will still be able to use well known techniques of data wrangling and plotting that we have learned earlier in the course, because we will use a package (<code>sf</code>) that plays well with the principles of tidy data that we use in the <code>tidyverse</code> as well as the syntax of <code>ggplot2</code>.</p>
 <section id="drawing-geographical-features-on-a-map" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="drawing-geographical-features-on-a-map"><span class="header-section-number">11.1</span> Drawing geographical features on a map</h2>
-<p>First of all, we load the basic packages that we need; the <code>tidyverse</code> for everything tidy (including <code>ggplot2</code>) and the <code>here</code>-package for easy project management (a finished script containing the code for this lesson as well as all data and material is available <a href="https://github.com/hotneim/ban400-makingmaps">in this git repository</a>).</p>
+<p>First of all, we load the basic packages that we need; the <code>tidyverse</code> for everything tidy (including <code>ggplot2</code>) and the <code>here</code>-package for easy project management (a finished script containing the code for this lesson as well as most of the data and material is available <a href="https://github.com/hotneim/ban400-makingmaps">in this git repository</a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the simplest of terms, making a map is not much more than making a two-dimensional plot; we can plot <span class="math inline">x</span> againsy <span class="math inline">y</span>, longitude against latitude. Let us first define two points in a data frame and plot them in a simple figure:</p>
+<p>In the simplest of terms, making a map is not much more than making a two-dimensional plot; we can plot <span class="math inline">x</span> against <span class="math inline">y</span>, longitude against latitude. Let us first define two points in a data frame and plot them in a simple figure:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">5.209806</span>, <span class="fl">5.205498</span>),</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">59.92981</span>, <span class="fl">59.92997</span>))</span>
@@ -417,7 +417,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This is a map, I guess we can say, as these two points represent two geographical points in the world, definde by the lat-lon coordinates (degrees north of the equator and degrees east of the zero-meridian). We can also draw a line between them, which is the path we would take when travelling between these points:</p>
+<p>This is a map, I guess we can say, as these two points represent two geographical points in the world, defined by the lat-lon coordinates (degrees north of the equator and degrees east of the zero-meridian). We can also draw a line between them, which is the path we would take when travelling between these points:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>map <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -484,9 +484,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Okey, this can pass as a nice little map over an island with two points of interest and a road between these points. But still, this is inconvenient for a number of different reasons:</p>
+<p>Okay, this can pass as a nice little map over an island with two points of interest and a road between these points. But still, this is inconvenient for a number of different reasons:</p>
 <ol type="1">
-<li>According to recent studies of the earth, the longitudes and latitudes does not appear to define a regular Eucledian coordinate system. (The earth is round; the geographical distance you need to travel to go one degree east depends on your latitude). This has consequences for how we draw the map on a flat surface and gives rise to the concept of map projections (<a href="https://en.wikipedia.org/wiki/Map_projection">https://en.wikipedia.org/wiki/Map_projection</a>). When treating the geographical coordinates simply as x and y as above we lose any concept of this.</li>
+<li>According to recent studies of the earth, the longitudes and latitudes does not appear to define a regular Euclidean coordinate system. (The earth is round; the geographical distance you need to travel to go one degree east depends on your latitude). This has consequences for how we draw the map on a flat surface and gives rise to the concept of map projections (<a href="https://en.wikipedia.org/wiki/Map_projection">https://en.wikipedia.org/wiki/Map_projection</a>). When treating the geographical coordinates simply as x and y as above we lose any concept of this.</li>
 <li>Why did we not use <code>geom_line()</code> to draw the island above? Try it, it looks very strange. This is because the points in the file that we supplied do not have the point in the correct order travelling around the circumference. But R or <code>ggplot2</code> does not know this, there is no understanding in the system now that the points define an island – the line goes from one point to the next.</li>
 <li>Of course, we do not want to just draw maps, we probably want to associate some data to the geographical shapes that we want to visualize in some way. Say we have several islands like the one above with information about the sheep population on each island, and we want to color them according to this number. Not obvious if we store the island coastlines as plain <span class="math inline">x</span>- and <span class="math inline">y</span>-coordinates.</li>
 <li>Above, we are explicitly dealing with the spatial resolution of the coastline; we have more than 11,000 entries in a file to describe this small island. In a map of the whole country, this is way too much because we would need several gigabytes (terabytes?) to describe everything at this resolution. Islands of this size might not be needed at all. Do we want to deal with these considerations manually? No.</li>
@@ -502,7 +502,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">&lt;-</span> <span class="dv">4326</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can convert the data frame containing the two points to a geometric object using the following function. We supply the points as the first argument, we specify which columns containg the latitudes and longitudes, respectively, using the <code>coords</code> argument, and then we specify the coordinate reference system using the <code>crs</code> argument, where we simply supply the variable that we defined above.</p>
+<p>We can convert the data frame containing the two points to a geometric object using the following function. We supply the points as the first argument, we specify which columns containing the latitudes and longitudes, respectively, using the <code>coords</code> argument, and then we specify the coordinate reference system using the <code>crs</code> argument, where we simply supply the variable that we defined above.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(points, </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>),</span>
@@ -622,7 +622,7 @@ Geodetic CRS:  WGS 84
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We then extract a data frame which contains a geometry column (as well as many other columns containing other kind of information). We also print out a list of the columns and note that there is a <code>geometry</code>-column containing the information about the shape of each contry of the world:</p>
+<p>We then extract a data frame which contains a geometry column (as well as many other columns containing other kind of information). We also print out a list of the columns and note that there is a <code>geometry</code>-column containing the information about the shape of each country of the world:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">scale =</span> <span class="st">"medium"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(world)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -663,7 +663,7 @@ Geodetic CRS:  WGS 84
 [166] "fclass_se"  "fclass_bd"  "fclass_ua"  "geometry"  </code></pre>
 </div>
 </div>
-<p>The <code>geometry</code> column has the class <code>MULTIPOLYGON</code>, as we see below, which means that the contour of each contry consists of potentially several polygons, which makes perfect sense of course, since each country may consist of several disconnected areas (islands, exclaves, overseas territories, etc.). But still, each country has one row in the data set:</p>
+<p>The <code>geometry</code> column has the class <code>MULTIPOLYGON</code>, as we see below, which means that the contour of each country consists of potentially several polygons, which makes perfect sense of course, since each country may consist of several disconnected areas (islands, exclaves, overseas territories, etc.). But still, each country has one row in the data set:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>world <span class="sc">%&gt;%</span> <span class="fu">select</span>(geometry) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -694,7 +694,7 @@ Geodetic CRS:  WGS 84
 </div>
 </div>
 </div>
-<p>The nice thing with this structure is of course that we can apply our data wrangling skills to the data frame in the usual way. For instance, if we want to make a map ofEurope, we just filter the data fframe based on the <code>region_un</code> column that we just happen to have in this case:</p>
+<p>The nice thing with this structure is of course that we can apply our data wrangling skills to the data frame in the usual way. For instance, if we want to make a map of Europe, we just filter the data frame based on the <code>region_un</code> column that we just happen to have in this case:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>world <span class="sc">%&gt;%</span> </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region_un <span class="sc">==</span> <span class="st">"Europe"</span>) <span class="sc">%&gt;%</span> </span>
@@ -754,7 +754,7 @@ Geodetic CRS:  WGS 84
 </div>
 </div>
 </div>
-<p>But the point of all this was not no just make another map! We want to visualize data. In fact, there is some numerical data present in the world data that we have created above, but it is poorly documented (at least so poorly that I was not able to figure out the units and where the data comes from). No worries, there are plenty of sources containing data on the countries of the world. One very convenient is the <code>gapminder</code> package (see (gapminder.org)[www.gapminder.org] for some background, this is the data that the late Hans Rosling use for his legendary visualizations on world development):</p>
+<p>But the point of all this was not no just make another map! We want to visualize data. In fact, there is some numerical data present in the world data that we have created above, but it is poorly documented (at least so poorly that I was not able to figure out the units and where the data comes from). No worries, there are plenty of sources containing data on the countries of the world. One very convenient is the <code>gapminder</code> package (see <a href="www.gapminder.org">gapminder.org</a> for some background, this is the data that the late Hans Rosling use for his legendary visualizations on world development):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -770,7 +770,7 @@ Geodetic CRS:  WGS 84
 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
 </div>
 </div>
-<p>As we see, there is one row per country-year. Next, we have a joining problem because the map data and the numerical data lives in two different data frames. Let us try to do a <code>left_join()</code> <em>into</em> the data frame containing the mapping data so that we will be able to draw the entire world map regradless of whether we have data there or not:</p>
+<p>As we see, there is one row per country-year. Next, we have a joining problem because the map data and the numerical data lives in two different data frames. Let us try to do a <code>left_join()</code> <em>into</em> the data frame containing the mapping data so that we will be able to draw the entire world map regardless of whether we have data there or not:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>gdp <span class="ot">&lt;-</span> </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  world <span class="sc">%&gt;%</span> </span>
@@ -812,7 +812,7 @@ Geodetic CRS:  WGS 84
 16 Yemen, Rep.          </code></pre>
 </div>
 </div>
-<p>There are several countries that do not match and this happens because there are various ways to spell these country names. Missing countries the other way around is not a problem (if we do not have the gdp data we do not have it), because the country will show up in the map regardless (because is is still contained in the <code>world</code> data that contains all the countries of the world). But we really want to plot the GDP data that we <em>do</em> have by matching all the data points with an entry in the mapping data frame.</p>
+<p>There are several countries that do not match and this happens because there are various ways to spell these country names. Missing countries the other way around is not a problem (if we do not have the GDP data we do not have it), because the country will show up in the map regardless (because is is still contained in the <code>world</code> data that contains all the countries of the world). But we really want to plot the GDP data that we <em>do</em> have by matching all the data points with an entry in the mapping data frame.</p>
 <p>There are several ways to do this. One way is of course to do it manually, to go into the gapminder data and to change “United States” to “United States of America” and so forth for all the countries without a match. But this problem is quite common and there are automatic ways to do it. You would probably get some part of the way by fuzzy (partial) matching (see the <code>fuzzyjoin</code> package), but joining by country name is so common that we can go via a third database containing all possible spellings of the countries of the world.</p>
 <p>One such database is contained in the <code>countries</code> package (again, you need to install this the first time you try to use it), which also contains a very convenient function <code>auto_merge()</code> that tries to find the columns containing information about the country and join accordingly. We do not even have to make the column names match. Look here; where we throw out the years that we do not want in the same operation:</p>
 <div class="cell">
@@ -839,7 +839,7 @@ Merge complete
 (Set merging_info to TRUE to save merging details)</code></pre>
 </div>
 </div>
-<p>The flip side of doing the merge this way is that we do not have much control of how this went because we did not explicitly say which columns contian the country names in the two data frames. Let us count the none-NA values in the 2007 gapminder data and compare:</p>
+<p>The flip side of doing the merge this way is that we do not have much control of how this went because we did not explicitly say which columns contain the country names in the two data frames. Let us count the none-NA values in the 2007 gapminder data and compare:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
@@ -857,7 +857,7 @@ Merge complete
 <pre><code>[1] 142</code></pre>
 </div>
 </div>
-<p>It does look like all the GDP data was kep at least. We are noe ready to make a map, which is now super simple using the <code>sf</code> package in combination with the usual way of adding information to a <code>ggplot</code>: We take the world map, and simply add the GDP variable to the fill aestethic:</p>
+<p>It does look like all the GDP data was kept at least. We are now ready to make a map, which is now super simple using the <code>sf</code> package in combination with the usual way of adding information to a <code>ggplot</code>: We take the world map, and simply add the GDP variable to the fill aesthetic:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>gdp2 <span class="sc">%&gt;%</span> </span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
@@ -870,7 +870,7 @@ Merge complete
 </div>
 </div>
 </div>
-<p>This looks pretty good, but let us also do the usual work of finishing the plot to make it presentable. I want to change the color scale and the color used to display countries without GDP data. We will add a title and worl on the legend as well for good measure:</p>
+<p>This looks pretty good, but let us also do the usual work of finishing the plot to make it presentable. I want to change the color scale and the color used to display countries without GDP data. We will add a title and work on the legend as well for good measure:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>gdp2 <span class="sc">%&gt;%</span> </span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
@@ -894,6 +894,366 @@ Merge complete
 </section>
 <section id="downloading-and-using-official-map-data" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="downloading-and-using-official-map-data"><span class="header-section-number">11.3</span> Downloading and using official map data</h2>
+<p>We have so far made two important steps; we have investigated the basic format for map data the R understands via the <code>sf</code> package, and we have made our first visualization of geographical data by means of map data that is contained in a few R-packages. Our next, and for now last, step will be to work with map data from official sources. Indeed, unless we work with a very common scale (like countries of the world or states in the US), we can usually not expect to find the necessary geographical information in an R package. Instead, we will rather have to find that data somewhere else, but luckily this is generally available from the relevant official sources. We will here work with some local Norwegian data.</p>
+<p>In the exact moment of writing this, Norway consists of 15 <em>fylker</em> (counties) and they are again divided into a total of 357 <em>kommuner</em> (municipalities). There is a lot of official statistics that is available for each of these units and we will proceed by plotting some of that in a map. For that we need the basic mapping data, which we can download from <a href="www.geonorge.no">GeoNorge</a>, which is the official provider of all kinds of geographical information about Norway.</p>
+<p>This particular data is too big to provide as a download via GitHub, so you need to download the data yourself. Navigate to this web-page: <a href="https://kartkatalog.geonorge.no/metadata/norske-fylker-og-kommuner-illustrasjonsdata-2024-klippet-etter-kyst/a9c64d66-f484-4a8f-a7b4-723fdaa578d3">Norske fylker og kommuner illustrasjonsdata 2024 (klippet etter kyst)</a>, which contains the borders of the Norwegian counties and municipalities. This is the version where the borders are cut along the coastline which is the best choice for making maps.</p>
+<p>In order to download the data you can follow this recipe:</p>
+<ol type="1">
+<li>Click on “Last ned”.</li>
+<li>Click on the down-arrow next to “Meny” and then “Til nedlastning”</li>
+<li>Make the following selections:
+<ul>
+<li>Geografisk område: Hele landet (The only choice)</li>
+<li>Projeksjon: EUREF89 (does not matter really, because we will change this to our <code>crs</code> when we load the data into R)</li>
+<li>Format: GeoJSON</li>
+<li>Velg brukergruppe: Utdanning og forskning</li>
+<li>Velg formål: Forskning</li>
+</ul></li>
+<li>Then click “Last ned”</li>
+</ol>
+<p>This results in a zip-file containing two <code>.geojson</code>-files, one containing the counties and another containing the municipalities. We will only use the latter in this lesson (<code>Kommuner.geojson</code>) but feel free to retain the other one as well if you want to experiment with that on your own. The code below assumes that you have put these two files into the folder <code>/data/municipalities/</code>, placed in your project root folder (the folder that is printed out if you run <code>here()</code> in the R console).</p>
+<p>Files that we download like this may contain more than one “Layer” of information. For example, if you use another file format or if you download similar files for other countries, different political or administrative levels may be contained in the same file. It is a good habit to always check what layers the file contains by running, the following line, where we pass the file name (as constructed by the <code>here</code>-package) to the function <code>st_layers()</code>:</p>
+<!-- NOTE! I try to use caching here so that I do not have to upload these files to github! If the chunks below change or the cache disappear, Håkon will need to re-compile. Let us see if this works in practice! -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_layers</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"municipalities"</span>, <span class="st">"Kommuner.geojson"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Driver: GeoJSON 
+Available layers:
+  layer_name geometry_type features fields              crs_name
+1   Kommuner Multi Polygon      365      3 ETRS89 / UTM zone 33N</code></pre>
+</div>
+</div>
+<p>In this case we see that the file only contains one layer, and furthermore that this layer describes Multi Polygons. This makes sense because each municipality may consist of several polygons that are not connected (islands, “exclaves”, different parts separated by fjords, etc). Without actually loading the data we also see that it contains 365 <code>features</code> which in this particular setting means 365 <em>rows</em> (this is a little bit non-standard, because in the data science world we often take the word “feature” to mean “variable” which are typically organized in columns). There is one row per municipality and we also make a small mental note that this number is not in perfect accordance with the official number of municipalities per 2024 which is 357. What is the reason for this discrepancy? Another day, we might want to investigate this to find the exact reason for this. Lastly, we note that there are 3 <code>fields</code> in the data set, which means that there are 3 <em>columns</em>.</p>
+<p>We proceed by reading the data, being explicit about which layer we want to load (the only one in this case, note that we take the name of the layer from the output of the <code>st_layers()</code> function above), and also set the coordinate reference system (<code>crs</code>) right away so that all of the maps for this lesson use the same system. The main function for reading map data is <code>st_read()</code>, and we pass the file name as the first argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>munic <span class="ot">&lt;-</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"municipalities"</span>, <span class="st">"Kommuner.geojson"</span>),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">layer =</span> <span class="st">"Kommuner"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `Kommuner' from data source 
+  `/Users/hakon/work/repos/ban400/data/municipalities/Kommuner.geojson' 
+  using driver `GeoJSON'
+Simple feature collection with 365 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -77196.14 ymin: 6448394 xmax: 1115098 ymax: 7939983
+Projected CRS: ETRS89 / UTM zone 33N</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the data</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>munic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 365 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 4.499849 ymin: 57.95938 xmax: 31.16829 ymax: 71.18555
+Geodetic CRS:  WGS 84
+First 10 features:
+   fid       navn nummer                       geometry
+1    1   Skjervøy   5542 MULTIPOLYGON (((20.71859 69...
+2    2       Lier   3312 MULTIPOLYGON (((10.30566 59...
+3    3        Sel   3437 MULTIPOLYGON (((9.993579 61...
+4    4     Tromsø   5501 MULTIPOLYGON (((19.88964 69...
+5    5       Time   1121 MULTIPOLYGON (((5.617938 58...
+6    6     Deatnu   5628 MULTIPOLYGON (((26.05421 69...
+7    7 Ullensvang   4618 MULTIPOLYGON (((6.525198 59...
+8    8   Rendalen   3424 MULTIPOLYGON (((10.44849 61...
+9    9    Målselv   5524 MULTIPOLYGON (((19.81801 68...
+10  10     Horten   3901 MULTIPOLYGON (((10.47475 59...</code></pre>
+</div>
+</div>
+<p>We see that the resulting data set contains the name of the municipality, an identifying number, and the geometry column. We can now make a basic map of all the municipalities in Norway:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>munic <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Phew! That was pretty heavy on the computer! This is not surprising given that we have upwards of 200MB of data just for the borders of the municipalities. For the sake of demonstration I suggest that we narrow down our problem to a smaller area surrounding Bergen on the western coast. This is itself an interesting problem, related to the zooming issue into Europe above. We want a smaller version of the municipality data covering just a specified area. We can do that by first constructing a <em>square</em> in the map covering the area we want to look at, and here we do just that in one single pipe sequence:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>bergen_box <span class="ot">&lt;-</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, we define just a small data frame with the coordinates of the box</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">lon =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="fl">6.3</span>, <span class="fl">6.3</span>), <span class="at">lat =</span> <span class="fu">c</span>(<span class="fl">59.7</span>, <span class="fl">60.7</span>, <span class="fl">60.7</span>, <span class="fl">59.7</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Then we convert this to a geometry columns as we did above with the island and the road:</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lon"</span>, <span class="st">"lat"</span>),</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> crs) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Merge into a single geometry </span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">do_union =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to a polygon</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let us plot the full map once again and the square on top so that we can see where it is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>munic <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> bergen_box)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Next, we do a very nice trick; We intersect these two data frames (<code>munic</code> and <code>bergen_box</code>) and create a new geographic object that only covers the area that is included in both objects:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the intersection</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>munic_small <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(munic, bergen_box)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the first rows of the resulting data frame</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>munic_small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 21 features and 3 fields
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: 4.695385 ymin: 59.7 xmax: 6.3 ymax: 60.70301
+Geodetic CRS:  WGS 84
+First 10 features:
+    fid          navn nummer                       geometry
+7     7    Ullensvang   4618 POLYGON ((6.3 60.31089, 6.2...
+66   66         Stord   4614 MULTIPOLYGON (((5.358141 59...
+91   91     Austevoll   4625 MULTIPOLYGON (((5.052234 59...
+100 100          Etne   4611 MULTIPOLYGON (((6.3 59.9595...
+117 117       Vaksdal   4628 MULTIPOLYGON (((6.07889 60....
+119 119 Bjørnafjorden   4624 MULTIPOLYGON (((5.368622 60...
+124 124          Voss   4621 MULTIPOLYGON (((5.902444 60...
+126 126        Tysnes   4616 MULTIPOLYGON (((5.362646 59...
+129 129         Sauda   1135 POLYGON ((6.3 59.7, 6.3 59....
+208 208          Kvam   4622 MULTIPOLYGON (((6.3 60.5027...</code></pre>
+</div>
+</div>
+<p>Two things have happened here: All the municipalities that are completely outside of the box have been taken away from the data set altogether in the smaller version, and all the municipalities that are on the border with the smaller box are clipped so that their shape in the new smaller data set only contains the part that is inside of the box. We can confirm this by making a new plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>munic_small <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let us next load some data to plot. In the following table we have the number of votes that each political party got during the local elections that took place in 2023. This <code>.csv</code> is downloaded directly from <a href="https://www.ssb.no/statbank/table/01180/tableViewLayout1/">Statistics Norway</a> (You can download the file <a href="data/votes.csv">here</a> or directly from the link by clicking on “Lagre data som”, then “Semikolonneseparert med overskrift (csv)” and finally “Lagre”). There is one line per party per municipality. We skip the first three lines that contain some additional information and also skip the headlines because we want to set those ourselves. We also filter out all the observations with zero votes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>votes <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"votes.csv"</span>),</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">delim =</span> <span class="st">";"</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">skip =</span> <span class="dv">3</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"municipality"</span>, <span class="st">"party"</span>, <span class="st">"votes"</span>), </span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># This file contains special Norwegian characters. </span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Let us be specific about the encoding of this text to ensure that </span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># they survive the reading operation. </span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># (Try without and see what you get)</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(votes <span class="sc">!=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 22491 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ";"
+chr (2): municipality, party
+dbl (1): votes
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>We inspect the first few rows to see what we have to work with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>votes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,586 × 3
+   municipality party                     votes
+   &lt;chr&gt;        &lt;chr&gt;                     &lt;dbl&gt;
+ 1 3101 Halden  Arbeiderpartiet            3001
+ 2 3101 Halden  Fremskrittspartiet         1051
+ 3 3101 Halden  Høyre                      4043
+ 4 3101 Halden  Kristelig Folkeparti        516
+ 5 3101 Halden  Miljøpartiet de Grønne      554
+ 6 3101 Halden  Rødt                        821
+ 7 3101 Halden  Senterpartiet               815
+ 8 3101 Halden  Sosialistisk Venstreparti   697
+ 9 3101 Halden  Venstre                     194
+10 3101 Halden  Pensjonistpartiet          1439
+# ℹ 2,576 more rows</code></pre>
+</div>
+</div>
+<p>Let us color code the map by the party that received the largest number of votes. In order to do that, we need to find a column to join by, and we see that the data frame containing the mapping data has a column with municipality name (a bit risky to use for joining due to the possibility of having different spelling of the names) and a municipality number that should be the same across both tables. We have the same information in the voting data, but the number and the names are inconveniently contained in the same column (<code>municipality</code>).</p>
+<p>We should split this column into one containing the municipality number and another containing the municipality name. We can think of a few different strategies:</p>
+<ul>
+<li>Pick out the first four characters and use that as the municipality number. But are we sure that the number is four characters for all the municipalities?</li>
+<li>Split the column at the Space-character. But careful! There are some municipalities that contain spaces.</li>
+<li>Perhaps the best strategy is to split at <em>the first space</em>.</li>
+</ul>
+<p>We can do this using the <code>separate()</code> function. Looking at <code>?separate</code> we see that we can supply a column, then the separating character (which is the space <code>" "</code> in our case), then the names of the new columns and then we finally use the critical argument <code>extra</code> to tell the function what to do if it encounters several instances of the separating character, which we set to <code>merge</code> to indicate that all the remaining splits after the first should be merged into the last column:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>votes_split <span class="ot">&lt;-</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  votes <span class="sc">%&gt;%</span> </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(municipality,</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">" "</span>,</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"number"</span>, <span class="st">"municipality"</span>),</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">extra =</span> <span class="st">"merge"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert the municipality number to a numeric column</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">number =</span> <span class="fu">as.integer</span>(number))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Confirming that this seems to have worked:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>votes_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,586 × 4
+   number municipality party                     votes
+    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;                     &lt;dbl&gt;
+ 1   3101 Halden       Arbeiderpartiet            3001
+ 2   3101 Halden       Fremskrittspartiet         1051
+ 3   3101 Halden       Høyre                      4043
+ 4   3101 Halden       Kristelig Folkeparti        516
+ 5   3101 Halden       Miljøpartiet de Grønne      554
+ 6   3101 Halden       Rødt                        821
+ 7   3101 Halden       Senterpartiet               815
+ 8   3101 Halden       Sosialistisk Venstreparti   697
+ 9   3101 Halden       Venstre                     194
+10   3101 Halden       Pensjonistpartiet          1439
+# ℹ 2,576 more rows</code></pre>
+</div>
+</div>
+<p>Here are all the unique municipality names (not run here to save space) – looks good and I think we were smart not to rely on joining data based on these names and they contain Sami (and in some cases other languages as well) spelling in a very specific way.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(votes_split<span class="sc">$</span>municipality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we join the small municipality map data with the voting data and figure out which party got the largest number of votes within each municipality:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>winners <span class="ot">&lt;-</span> </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  munic_small <span class="sc">%&gt;%</span> </span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename column so that we can join</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"number"</span> <span class="ot">=</span> nummer) <span class="sc">%&gt;%</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(votes_split, <span class="at">by =</span> <span class="st">"number"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Quick way to find the winning party in each municipality: </span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group, arrange and pick the top one</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(municipality) <span class="sc">%&gt;%</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(votes)) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The resulting data frame looks like this, with one row per municipality containing the winning party and the number of votes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>winners</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 21 features and 6 fields
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: 4.695385 ymin: 59.7 xmax: 6.3 ymax: 60.70301
+Geodetic CRS:  WGS 84
+# A tibble: 21 × 7
+# Groups:   municipality [21]
+     fid navn          number municipality party votes                  geometry
+   &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt;        &lt;MULTIPOLYGON [°]&gt;
+ 1   339 Alver           4631 Alver        Høyre  3010 (((5.421913 60.70301, 5.…
+ 2   228 Askøy           4627 Askøy        Høyre  3692 (((5.039113 60.49945, 5.…
+ 3    91 Austevoll       4625 Austevoll    Frem…   938 (((5.052234 59.96218, 5.…
+ 4   328 Bergen          4601 Bergen       Høyre 38798 (((5.686446 60.43576, 5.…
+ 5   119 Bjørnafjorden   4624 Bjørnafjord… Frem…  4656 (((5.368622 60.22528, 5.…
+ 6   275 Bømlo           4613 Bømlo        Høyre  1349 (((5.1439 59.74947, 5.14…
+ 7   100 Etne            4611 Etne         Frem…   575 (((6.3 59.95954, 6.29816…
+ 8   216 Fitjar          4615 Fitjar       Høyre   487 (((5.48319 59.91968, 5.4…
+ 9   208 Kvam            4622 Kvam         Arbe…  1127 (((6.3 60.50275, 6.29314…
+10   267 Kvinnherad      4617 Kvinnherad   Høyre  1682 (((5.70948 60.03915, 5.7…
+# ℹ 11 more rows</code></pre>
+</div>
+</div>
+<p>Then, we make a map, coloring each municipality according to the winner:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>winners <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> party, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interesting! We see that there are four different parties who won the largest share of votes in the respective municipalities. The color code is a bit off, though, because there is a largely accepted (rough) color code for the Norwegian political parties that we have to map manually. See <a href="https://r-charts.com/colors/">here</a> for a full list of colors recognized by R.</p>
+<p>We take this opportunity to finish of the plot as well:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>winners <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> party, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Høyre"</span> <span class="ot">=</span> <span class="st">"lightblue3"</span>, </span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Fremskrittspartiet"</span> <span class="ot">=</span> <span class="st">"royalblue4"</span>,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Arbeiderpartiet"</span> <span class="ot">=</span> <span class="st">"coral"</span>,</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Senterpartiet"</span> <span class="ot">=</span> <span class="st">"darkolivegreen4"</span>)) <span class="sc">+</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>One final exercise:</strong> Can you find the island that we drew in the very beginning of this lesson in the map above? Using code, obviously, and not by just looking for it!</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expand for solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We make the map and add the island in a red color:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>munic_small <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"gray80"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> island_sf, <span class="at">fill =</span> <span class="st">"coral"</span>) <span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There it is! Let us zoom in:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There it is; let us zoom:</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>munic_small <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"gray80"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> island_sf, <span class="at">size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"coral"</span>) <span class="sc">+</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="fl">5.5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">59.8</span>, <span class="dv">60</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-making-maps_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
