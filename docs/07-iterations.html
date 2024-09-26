@@ -435,23 +435,23 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>a) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3969807</code></pre>
+<pre><code>[1] -0.47681</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>b) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2920286</code></pre>
+<pre><code>[1] -0.2212654</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1822468</code></pre>
+<pre><code>[1] 0.01228094</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>d) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1315423</code></pre>
+<pre><code>[1] 0.7034195</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7545962</code></pre>
+<pre><code>[1] -0.1530082</code></pre>
 </div>
 </div>
 <p>In addition to being verbose, we would need to make changes to these lines if we were to add or subtract columns to our data frame. And further, if we wanted different metrics (e.g.&nbsp;column means as well as medians), we would have to write even more code.</p>
@@ -474,15 +474,15 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.3863585  0.3779934  0.2173871 -0.0143367  0.5169406</code></pre>
+<pre><code>[1] -0.41021784 -0.05569118  0.19040438  0.48136908 -0.09862247</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3969807 0.2920286 0.1822468 0.1315423 0.7545962</code></pre>
+<pre><code>[1] -0.47681003 -0.22126544  0.01228094  0.70341946 -0.15300825</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.4269008 0.6122030 0.6979386 0.9861948 1.1230428</code></pre>
+<pre><code>[1] 0.7513975 0.7630876 1.0172176 0.9360253 1.2511462</code></pre>
 </div>
 </div>
 <p>With this method we can get summaries of all columns in the data frame, without needing to changing these lines if we add or subtract columns.</p>
@@ -494,19 +494,19 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$a
-[1] 0.3863585
+[1] -0.4102178
 
 $b
-[1] 0.3779934
+[1] -0.05569118
 
 $c
-[1] 0.2173871
+[1] 0.1904044
 
 $d
-[1] -0.0143367
+[1] 0.4813691
 
 $e
-[1] 0.5169406</code></pre>
+[1] -0.09862247</code></pre>
 </div>
 </div>
 <p>The output from map-functions is a list. If you expect the return from the <code>map</code> call to be boolan, integer, double or character vectors, you can ensure you do indeed get such a vector in return by using <code>map_lgl, map_int, map_dbl</code> or <code>map_chr</code>-respectively.</p>
@@ -517,9 +517,9 @@ $e
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-      a     b     c      d     e
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1 0.387 0.369 0.201 0.0804 0.557</code></pre>
+       a      b     c     d       e
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+1 -0.471 -0.122 0.202 0.581 -0.0406</code></pre>
 </div>
 </div>
 <p>When we call <code>map</code>, we need to supply a <strong>single</strong> function that will be applied to each of the objects we are iterating over. If we want to apply multiple functions at the same time, we could store this as a new function, and call this once. However, we can also call an anonymous function (see also the “Function” chapter of the compendium”):</p>
@@ -533,9 +533,9 @@ $e
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
-      a     b     c       d     e
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 0.271 0.617 0.311 -0.0145 0.460</code></pre>
+       a       b     c     d       e
+   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+1 -0.546 -0.0730 0.187 0.514 -0.0788</code></pre>
 </div>
 </div>
 <p>With map functions we can do a lot more interesting stuff than making column summaries. Run the code below yourself line by line. In the example below, we</p>
@@ -637,13 +637,13 @@ Caused by error:
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map2</span>(mu,sigma,rnorm,<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -10000.388 -10002.004  -9999.149  -9999.163 -10000.405
+[1]  -9998.327  -9999.677  -9998.090 -10001.862 -10000.444
 
 [[2]]
-[1]  2.452113 12.328659 -2.494250 -7.840119  4.314445
+[1]  0.50089717 -2.04838680  0.03321822 11.45311617 -1.44075870
 
 [[3]]
-[1]  9987.904 10006.055 10002.634 10010.375  9985.371</code></pre>
+[1]  9995.276 10004.676 10004.599 10009.571 10003.055</code></pre>
 </div>
 </div>
 <p>We can also iterate over more than two lists simultaneously. The lists then need to be combined in a single list, and the names of each list must match the names of the arguments in the function we want to apply.</p>
@@ -658,17 +658,17 @@ Caused by error:
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmap</span>(rnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
-[1] -10000.18
+[1] -10000.65
 
 [[2]]
- [1] -0.8663206 -3.9326850  6.3155746  0.6118162  2.5076451 -1.5381574
- [7]  6.8184961  5.4936968  2.9839300 -6.6093429
+ [1] -8.812345  5.414707 17.272175  7.360774  5.343469  4.312637  1.418561
+ [8] -9.808836 -2.643762 -1.573943
 
 [[3]]
- [1] 100.08456 116.18805 107.37666 108.71405  98.19738 102.73829 100.04100
- [8]  95.33319 100.13464 101.66066 103.10440 101.70264  84.88075  96.71196
-[15]  87.99072  99.17512 108.56455  72.13046 103.73073  99.60750 105.47328
-[22] 101.12935 107.70986  99.55078  98.36889</code></pre>
+ [1]  95.07705  98.83824  97.80646 107.05972  87.09036  83.03787 108.63964
+ [8] 105.27070 116.08004 107.89733  93.21593  85.14012  79.08885  93.92841
+[15]  96.97242  74.66638  99.65087  92.98063 105.39110 114.52128 106.99994
+[22] 102.35647  91.84869  66.35251  88.35148</code></pre>
 </div>
 </div>
 </section>
@@ -763,7 +763,7 @@ Caused by error:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(stations[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8066</code></pre>
+<pre><code>[1] 8094</code></pre>
 </div>
 </div>
 </section>
@@ -781,7 +781,7 @@ $name
 
 $latestData
 $latestData$volumeByDay
-[1] "2024-09-22T00:00:00+02:00"
+[1] "2024-09-26T00:00:00+02:00"
 
 
 $location
@@ -826,7 +826,7 @@ Expand for solution
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(as_tibble) <span class="sc">|&gt;</span> </span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 4
+<pre><code># A tibble: 8,094 × 4
    id            name            latestData   location        
    &lt;chr&gt;         &lt;chr&gt;           &lt;named list&gt; &lt;named list&gt;    
  1 52742V2282262 ØRBEKK EV6      &lt;chr [1]&gt;    &lt;named list [1]&gt;
@@ -837,9 +837,9 @@ Expand for solution
  6 99015V249528  Hjelset øst     &lt;chr [1]&gt;    &lt;named list [1]&gt;
  7 78755V249572  Sogge           &lt;chr [1]&gt;    &lt;named list [1]&gt;
  8 83652V319725  Strandgata nord &lt;chr [1]&gt;    &lt;named list [1]&gt;
- 9 51934V2523546 SNARUD N        &lt;chr [1]&gt;    &lt;named list [1]&gt;
+ 9 51934V2523546 Snarud nord     &lt;chr [1]&gt;    &lt;named list [1]&gt;
 10 65271V443150  Vestby syd ny   &lt;chr [1]&gt;    &lt;named list [1]&gt;
-# ℹ 8,056 more rows</code></pre>
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 <p>There is still some work left to do with the date time and location columns. As you can see below, they are still in a list format. We can try to pull out the insides of the contents of the <code>latestData</code>-column. It is formatted as a list, but actually only contains one date time entry.</p>
@@ -852,7 +852,7 @@ Expand for solution
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$volumeByDay
-[1] "2024-09-22T00:00:00+02:00"</code></pre>
+[1] "2024-09-26T00:00:00+02:00"</code></pre>
 </div>
 </div>
 </div>
@@ -906,20 +906,20 @@ Caused by error:
 <span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, unlist_safe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 4
+<pre><code># A tibble: 8,094 × 4
    id            name            latestData                location        
    &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;named list&gt;    
- 1 52742V2282262 ØRBEKK EV6      2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  2 41517V704478  BASTERUD        2017-11-14T00:00:00+01:00 &lt;named list [1]&gt;
- 3 01050V1126115 Trollvika       2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
- 4 24748V22148   Pinesund        2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
- 5 11446V1175840 Melsomvik       2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 3 01050V1126115 Trollvika       2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+ 4 24748V22148   Pinesund        2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+ 5 11446V1175840 Melsomvik       2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  6 99015V249528  Hjelset øst     2023-05-09T00:00:00+02:00 &lt;named list [1]&gt;
- 7 78755V249572  Sogge           2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 7 78755V249572  Sogge           2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  8 83652V319725  Strandgata nord 2024-08-20T00:00:00+02:00 &lt;named list [1]&gt;
- 9 51934V2523546 SNARUD N        2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
-10 65271V443150  Vestby syd ny   2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+10 65271V443150  Vestby syd ny   2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 <p>Alternatively, we can use the defaults in <code>map_chr</code>. It will now have a safe fallback value it can use if it doesn’t find the element we are looking for in <code>latestData</code>. A simple solution is to use the <code>.default</code>-argument, and set this to missing:</p>
@@ -931,20 +931,20 @@ Caused by error:
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData,<span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)</span>
 <span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 4
+<pre><code># A tibble: 8,094 × 4
    id            name            latestData                location        
    &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                     &lt;named list&gt;    
- 1 52742V2282262 ØRBEKK EV6      2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  2 41517V704478  BASTERUD        2017-11-14T00:00:00+01:00 &lt;named list [1]&gt;
- 3 01050V1126115 Trollvika       2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
- 4 24748V22148   Pinesund        2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
- 5 11446V1175840 Melsomvik       2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 3 01050V1126115 Trollvika       2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+ 4 24748V22148   Pinesund        2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+ 5 11446V1175840 Melsomvik       2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  6 99015V249528  Hjelset øst     2023-05-09T00:00:00+02:00 &lt;named list [1]&gt;
- 7 78755V249572  Sogge           2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
+ 7 78755V249572  Sogge           2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
  8 83652V319725  Strandgata nord 2024-08-20T00:00:00+02:00 &lt;named list [1]&gt;
- 9 51934V2523546 SNARUD N        2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
-10 65271V443150  Vestby syd ny   2024-09-22T00:00:00+02:00 &lt;named list [1]&gt;
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+10 65271V443150  Vestby syd ny   2024-09-26T00:00:00+02:00 &lt;named list [1]&gt;
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 </div>
@@ -961,20 +961,20 @@ Caused by error:
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default=</span><span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as.Date</span>(latestData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 4
+<pre><code># A tibble: 8,094 × 4
    id            name            latestData location        
    &lt;chr&gt;         &lt;chr&gt;           &lt;date&gt;     &lt;named list&gt;    
- 1 52742V2282262 ØRBEKK EV6      2024-09-22 &lt;named list [1]&gt;
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26 &lt;named list [1]&gt;
  2 41517V704478  BASTERUD        2017-11-14 &lt;named list [1]&gt;
- 3 01050V1126115 Trollvika       2024-09-22 &lt;named list [1]&gt;
- 4 24748V22148   Pinesund        2024-09-22 &lt;named list [1]&gt;
- 5 11446V1175840 Melsomvik       2024-09-22 &lt;named list [1]&gt;
+ 3 01050V1126115 Trollvika       2024-09-26 &lt;named list [1]&gt;
+ 4 24748V22148   Pinesund        2024-09-26 &lt;named list [1]&gt;
+ 5 11446V1175840 Melsomvik       2024-09-26 &lt;named list [1]&gt;
  6 99015V249528  Hjelset øst     2023-05-09 &lt;named list [1]&gt;
- 7 78755V249572  Sogge           2024-09-22 &lt;named list [1]&gt;
+ 7 78755V249572  Sogge           2024-09-26 &lt;named list [1]&gt;
  8 83652V319725  Strandgata nord 2024-08-20 &lt;named list [1]&gt;
- 9 51934V2523546 SNARUD N        2024-09-22 &lt;named list [1]&gt;
-10 65271V443150  Vestby syd ny   2024-09-22 &lt;named list [1]&gt;
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26 &lt;named list [1]&gt;
+10 65271V443150  Vestby syd ny   2024-09-26 &lt;named list [1]&gt;
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 <p>There are several functions we can use to transform the string into a date time variable. as_datetime in lubridate works in this case. Note that the interpretation of dates may be dependent on the time zone settings on your laptop. Here, we are explicitly stating that we want the a Europe/Berlin tz on the variable:</p>
@@ -985,20 +985,20 @@ Caused by error:
 <span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">map_chr</span>(latestData, <span class="dv">1</span>, <span class="at">.default =</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">latestData =</span> <span class="fu">as_datetime</span>(latestData, <span class="at">tz =</span> <span class="st">"Europe/Berlin"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 4
+<pre><code># A tibble: 8,094 × 4
    id            name            latestData          location        
    &lt;chr&gt;         &lt;chr&gt;           &lt;dttm&gt;              &lt;named list&gt;    
- 1 52742V2282262 ØRBEKK EV6      2024-09-22 00:00:00 &lt;named list [1]&gt;
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26 00:00:00 &lt;named list [1]&gt;
  2 41517V704478  BASTERUD        2017-11-14 00:00:00 &lt;named list [1]&gt;
- 3 01050V1126115 Trollvika       2024-09-22 00:00:00 &lt;named list [1]&gt;
- 4 24748V22148   Pinesund        2024-09-22 00:00:00 &lt;named list [1]&gt;
- 5 11446V1175840 Melsomvik       2024-09-22 00:00:00 &lt;named list [1]&gt;
+ 3 01050V1126115 Trollvika       2024-09-26 00:00:00 &lt;named list [1]&gt;
+ 4 24748V22148   Pinesund        2024-09-26 00:00:00 &lt;named list [1]&gt;
+ 5 11446V1175840 Melsomvik       2024-09-26 00:00:00 &lt;named list [1]&gt;
  6 99015V249528  Hjelset øst     2023-05-09 00:00:00 &lt;named list [1]&gt;
- 7 78755V249572  Sogge           2024-09-22 00:00:00 &lt;named list [1]&gt;
+ 7 78755V249572  Sogge           2024-09-26 00:00:00 &lt;named list [1]&gt;
  8 83652V319725  Strandgata nord 2024-08-20 00:00:00 &lt;named list [1]&gt;
- 9 51934V2523546 SNARUD N        2024-09-22 00:00:00 &lt;named list [1]&gt;
-10 65271V443150  Vestby syd ny   2024-09-22 00:00:00 &lt;named list [1]&gt;
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26 00:00:00 &lt;named list [1]&gt;
+10 65271V443150  Vestby syd ny   2024-09-26 00:00:00 &lt;named list [1]&gt;
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 <p><strong>Exercise: Finalizing the transformation</strong></p>
@@ -1021,7 +1021,7 @@ Caused by error:
 <tr class="odd">
 <td style="text-align: left;">52742V2282262</td>
 <td style="text-align: left;">ØRBEKK EV6</td>
-<td style="text-align: left;">2024-09-22</td>
+<td style="text-align: left;">2024-09-26</td>
 <td style="text-align: right;">60.41426</td>
 <td style="text-align: right;">11.241171</td>
 </tr>
@@ -1035,21 +1035,21 @@ Caused by error:
 <tr class="odd">
 <td style="text-align: left;">01050V1126115</td>
 <td style="text-align: left;">Trollvika</td>
-<td style="text-align: left;">2024-09-22</td>
+<td style="text-align: left;">2024-09-26</td>
 <td style="text-align: right;">69.23921</td>
 <td style="text-align: right;">17.981692</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">24748V22148</td>
 <td style="text-align: left;">Pinesund</td>
-<td style="text-align: left;">2024-09-22</td>
+<td style="text-align: left;">2024-09-26</td>
 <td style="text-align: right;">58.79845</td>
 <td style="text-align: right;">9.054728</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">11446V1175840</td>
 <td style="text-align: left;">Melsomvik</td>
-<td style="text-align: left;">2024-09-22</td>
+<td style="text-align: left;">2024-09-26</td>
 <td style="text-align: right;">59.22947</td>
 <td style="text-align: right;">10.338938</td>
 </tr>
@@ -1091,20 +1091,20 @@ Expand for solution
 <span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 5
+<pre><code># A tibble: 8,094 × 5
    id            name            latestData            lat   lon
    &lt;chr&gt;         &lt;chr&gt;           &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 52742V2282262 ØRBEKK EV6      2024-09-22 00:00:00  60.4 11.2 
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26 00:00:00  60.4 11.2 
  2 41517V704478  BASTERUD        2017-11-14 00:00:00  60.8 11.2 
- 3 01050V1126115 Trollvika       2024-09-22 00:00:00  69.2 18.0 
- 4 24748V22148   Pinesund        2024-09-22 00:00:00  58.8  9.05
- 5 11446V1175840 Melsomvik       2024-09-22 00:00:00  59.2 10.3 
+ 3 01050V1126115 Trollvika       2024-09-26 00:00:00  69.2 18.0 
+ 4 24748V22148   Pinesund        2024-09-26 00:00:00  58.8  9.05
+ 5 11446V1175840 Melsomvik       2024-09-26 00:00:00  59.2 10.3 
  6 99015V249528  Hjelset øst     2023-05-09 00:00:00  62.8  7.52
- 7 78755V249572  Sogge           2024-09-22 00:00:00  62.5  7.71
+ 7 78755V249572  Sogge           2024-09-26 00:00:00  62.5  7.71
  8 83652V319725  Strandgata nord 2024-08-20 00:00:00  58.9  5.74
- 9 51934V2523546 SNARUD N        2024-09-22 00:00:00  60.8 11.0 
-10 65271V443150  Vestby syd ny   2024-09-22 00:00:00  59.6 10.7 
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26 00:00:00  60.8 11.0 
+10 65271V443150  Vestby syd ny   2024-09-26 00:00:00  59.6 10.7 
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 <p>Alternatively, we can use <code>unnest_wider</code> twice. This one does some work for us, and gives the same result:</p>
@@ -1117,20 +1117,20 @@ Expand for solution
 <span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(location) <span class="sc">|&gt;</span> </span>
 <span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(latLon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8,066 × 5
+<pre><code># A tibble: 8,094 × 5
    id            name            latestData            lat   lon
    &lt;chr&gt;         &lt;chr&gt;           &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt;
- 1 52742V2282262 ØRBEKK EV6      2024-09-22 00:00:00  60.4 11.2 
+ 1 52742V2282262 ØRBEKK EV6      2024-09-26 00:00:00  60.4 11.2 
  2 41517V704478  BASTERUD        2017-11-14 00:00:00  60.8 11.2 
- 3 01050V1126115 Trollvika       2024-09-22 00:00:00  69.2 18.0 
- 4 24748V22148   Pinesund        2024-09-22 00:00:00  58.8  9.05
- 5 11446V1175840 Melsomvik       2024-09-22 00:00:00  59.2 10.3 
+ 3 01050V1126115 Trollvika       2024-09-26 00:00:00  69.2 18.0 
+ 4 24748V22148   Pinesund        2024-09-26 00:00:00  58.8  9.05
+ 5 11446V1175840 Melsomvik       2024-09-26 00:00:00  59.2 10.3 
  6 99015V249528  Hjelset øst     2023-05-09 00:00:00  62.8  7.52
- 7 78755V249572  Sogge           2024-09-22 00:00:00  62.5  7.71
+ 7 78755V249572  Sogge           2024-09-26 00:00:00  62.5  7.71
  8 83652V319725  Strandgata nord 2024-08-20 00:00:00  58.9  5.74
- 9 51934V2523546 SNARUD N        2024-09-22 00:00:00  60.8 11.0 
-10 65271V443150  Vestby syd ny   2024-09-22 00:00:00  59.6 10.7 
-# ℹ 8,056 more rows</code></pre>
+ 9 51934V2523546 Snarud nord     2024-09-26 00:00:00  60.8 11.0 
+10 65271V443150  Vestby syd ny   2024-09-26 00:00:00  59.6 10.7 
+# ℹ 8,084 more rows</code></pre>
 </div>
 </div>
 </div>

@@ -15,36 +15,47 @@ Here are some slides that we will use for discussion in class: [ban400-git-githu
 
 We will follow this schedule in our lecture slot:
 
-|   |   |
-|---|---|
-| 08:15 - 10:00 | Complete watching the videos if you have not finished by this date. The instructor is available in the auditorium for discussion and support if you have any questions or errors that you would like to resolve. |
-| 10:15 - 11:00 | Brief review of the material. Discussion of workflow in data science projects. |
+|               |                                                                                                                                                                                                                           |
+|------------------------------------|------------------------------------|
+| 08:15 - 10:00 | Complete watching the videos if you have not finished by this date. The instructor is available in the auditorium from approximately 09:30 for discussion and support if you have any questions or errors that you would like to resolve.          |
+| 10:15 - 11:00 | Brief review of the material. Discussion of workflow in data science projects.                                                                                                                                            |
 | 11:15 - 12:00 | We introduce two important concepts for code contribution to open source projects (the fork and the pull request). We will also introduce Github Classroom which we will use to administer the assignments in the course. |
 
-: {tbl-colwidths="[20,80]" .hover}
-
+: {tbl-colwidths="\[20,80\]" .hover}
 
 Our brief treatment of Git and Github is by no means complete. Below follow a few extra sources for further reading:
 
-- [Pro Git](https://git-scm.com/book/en/v2) is a standard reference on the subject.
-- [Happy Git with R](https://happygitwithr.com/) gives an R-specific introduction to Git, with special consideration to the possibility of integrating the basic features if Git directly into RStudio.
-- [Github Ultimate](https://www.udemy.com/course/github-ultimate/) is a (paid) course at Udemy.com by Jason Taylor, that has served as inspiration for several of the videos for this seminar.
-- [This lecture at MIT](https://youtu.be/2sjqTHE0zok) provides a basic introduction to the inner workings of Git as well as many of the commands that we cover in our seminar.
+-   [Pro Git](https://git-scm.com/book/en/v2) is a standard reference on the subject.
+-   [Happy Git with R](https://happygitwithr.com/) gives an R-specific introduction to Git, with special consideration to the possibility of integrating the basic features if Git directly into RStudio.
+-   [Github Ultimate](https://www.udemy.com/course/github-ultimate/) is a (paid) course at Udemy.com by Jason Taylor, that has served as inspiration for several of the videos for this seminar.
+-   [This lecture at MIT](https://youtu.be/2sjqTHE0zok) provides a basic introduction to the inner workings of Git as well as many of the commands that we cover in our seminar.
 
 ## Setup and basic commands
 
-In the video player below we set up git and learn the basic commands. Note that we have simplified the setup process from earlier years (specifically, we no longer use a third party tool for conflict resolution), which means that some of these videos are somewhat amputated. 
+In the video player below we set up git and learn the basic commands. Note that we have simplified the setup process from earlier years (specifically, we no longer use a third party tool for conflict resolution), which means that some of these videos are somewhat amputated.
 
-<div style='padding:75% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/10619772/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
+::: {style="padding:75% 0 0 0;position:relative;"}
+<iframe src="https://vimeo.com/showcase/10619772/embed" allowfullscreen frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+
+</iframe>
+:::
 
 ## Branching and conflict resolution
 
 We introduce some more advanced concepts for version control on your local computer:
 
-<div style='padding:62.5% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/10619859/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
+::: {style="padding:62.5% 0 0 0;position:relative;"}
+<iframe src="https://vimeo.com/showcase/10619859/embed" allowfullscreen frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+
+</iframe>
+:::
 
 ## Online repositories on Github
 
-Finally, we move our repository online using GitHub and see how we can use online version control to complement our workflow with tools for collaboration and project management. 
+Finally, we move our repository online using GitHub and see how we can use online version control to complement our workflow with tools for collaboration and project management.
 
-<div style='padding:75% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/10619869/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
+::: {style="padding:75% 0 0 0;position:relative;"}
+<iframe src="https://vimeo.com/showcase/10619869/embed" allowfullscreen frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+
+</iframe>
+:::

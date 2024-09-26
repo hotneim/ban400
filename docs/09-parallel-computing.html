@@ -524,7 +524,7 @@ window.Quarto = {
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.008 sec elapsed</code></pre>
+<pre><code>1.009 sec elapsed</code></pre>
 </div>
 </div>
 <p>Tictoc can also store to logs, so we can make comparisons across experiments. However, the log is stored in an awkward format, so let’s make a function for printing out results in a data frame:</p>
@@ -592,7 +592,7 @@ window.Quarto = {
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Regular loop: 9.886 sec elapsed</code></pre>
+<pre><code>Regular loop: 10.522 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -607,7 +607,7 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">9.886</td>
+<td style="text-align: left;">10.522</td>
 </tr>
 </tbody>
 </table>
@@ -708,7 +708,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Parallel loop, 8 cores: 2.904 sec elapsed</code></pre>
+<pre><code>Parallel loop, 8 cores: 2.956 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -723,11 +723,11 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">9.886</td>
+<td style="text-align: left;">10.522</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.904</td>
+<td style="text-align: left;">2.956</td>
 </tr>
 </tbody>
 </table>
@@ -751,7 +751,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>purrr: 10.393 sec elapsed</code></pre>
+<pre><code>purrr: 10.684 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -766,15 +766,15 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">9.886</td>
+<td style="text-align: left;">10.522</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.904</td>
+<td style="text-align: left;">2.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">purrr</td>
-<td style="text-align: left;">10.393</td>
+<td style="text-align: left;">10.684</td>
 </tr>
 </tbody>
 </table>
@@ -802,7 +802,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>furrr, 8 cores: 2.648 sec elapsed</code></pre>
+<pre><code>furrr, 8 cores: 2.629 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -817,19 +817,19 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">9.886</td>
+<td style="text-align: left;">10.522</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.904</td>
+<td style="text-align: left;">2.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">purrr</td>
-<td style="text-align: left;">10.393</td>
+<td style="text-align: left;">10.684</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">furrr, 8 cores</td>
-<td style="text-align: left;">2.648</td>
+<td style="text-align: left;">2.629</td>
 </tr>
 </tbody>
 </table>
@@ -857,18 +857,18 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>furrr, 1 cores: 10.709 sec elapsed
-furrr, 2 cores: 5.912 sec elapsed
-furrr, 3 cores: 4.34 sec elapsed
-furrr, 4 cores: 3.501 sec elapsed
-furrr, 5 cores: 3.152 sec elapsed
-furrr, 6 cores: 2.831 sec elapsed
-furrr, 7 cores: 2.687 sec elapsed
-furrr, 8 cores: 2.63 sec elapsed
-furrr, 9 cores: 2.62 sec elapsed
-furrr, 10 cores: 2.682 sec elapsed
-furrr, 11 cores: 2.733 sec elapsed
-furrr, 12 cores: 2.88 sec elapsed</code></pre>
+<pre><code>furrr, 1 cores: 10.873 sec elapsed
+furrr, 2 cores: 5.918 sec elapsed
+furrr, 3 cores: 4.307 sec elapsed
+furrr, 4 cores: 3.529 sec elapsed
+furrr, 5 cores: 3.161 sec elapsed
+furrr, 6 cores: 2.858 sec elapsed
+furrr, 7 cores: 2.641 sec elapsed
+furrr, 8 cores: 2.652 sec elapsed
+furrr, 9 cores: 2.645 sec elapsed
+furrr, 10 cores: 2.718 sec elapsed
+furrr, 11 cores: 2.726 sec elapsed
+furrr, 12 cores: 2.824 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(maxcores) <span class="sc">%&gt;%</span></span>
