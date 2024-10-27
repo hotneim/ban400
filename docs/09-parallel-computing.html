@@ -524,7 +524,7 @@ window.Quarto = {
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.009 sec elapsed</code></pre>
+<pre><code>1.001 sec elapsed</code></pre>
 </div>
 </div>
 <p>Tictoc can also store to logs, so we can make comparisons across experiments. However, the log is stored in an awkward format, so let’s make a function for printing out results in a data frame:</p>
@@ -550,7 +550,7 @@ window.Quarto = {
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test: 1.009 sec elapsed</code></pre>
+<pre><code>Test: 1.002 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -565,7 +565,7 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Test</td>
-<td style="text-align: left;">1.009</td>
+<td style="text-align: left;">1.002</td>
 </tr>
 </tbody>
 </table>
@@ -592,7 +592,7 @@ window.Quarto = {
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Regular loop: 10.982 sec elapsed</code></pre>
+<pre><code>Regular loop: 25.943 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -607,7 +607,7 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">10.982</td>
+<td style="text-align: left;">25.943</td>
 </tr>
 </tbody>
 </table>
@@ -627,7 +627,7 @@ window.Quarto = {
 </section>
 <section id="resources-on-your-computer" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="resources-on-your-computer"><span class="header-section-number">9.3</span> Resources on your computer</h2>
-<p>Your computer has a central processing unit - also known as a CPU or a simply a processor. This is the unit that does the calculations on your laptop. Modern CPU’s consist of several cores, where each of the cores can do computations in parallell with the others. Below is a picture of the activity on my CPU. Not much happening, but 12 so called “logical cores”. In reality, this CPU only has six cores, but through a technology called hyperthreading each core can process two sets of instructions at the same time. This doubles the amount to six. If you have a Windows machine, you can see your processor activity by pressing CTRL+SHIFT+ESC (Mac users see here). Your computer may have a different number of cores.&nbsp;</p>
+<p>Your computer has a central processing unit - also known as a CPU or a simply a processor. This is the unit that does the calculations on your laptop. Modern CPU’s consist of several cores, where each of the cores can do computations in parallell with the others. Below is a picture of the activity on my CPU. Not much happening, but 12 so called “logical cores”. In reality, this CPU only has six cores, but through a technology called hyperthreading each core can process two sets of instructions at the same time. This doubles the amount to six. If you have a Windows machine, you can see your processor activity by pressing CTRL+SHIFT+ESC (Mac users see [here](<a href="https://support.apple.com/guide/activity-monitor/welcome/mac" class="uri">https://support.apple.com/guide/activity-monitor/welcome/mac</a>)). Your computer may have a different number of cores.&nbsp;</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pictures/resources.PNG" class="img-fluid figure-img"></p>
@@ -708,7 +708,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Parallel loop, 8 cores: 2.888 sec elapsed</code></pre>
+<pre><code>Parallel loop, 8 cores: 8.266 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -723,11 +723,11 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">10.982</td>
+<td style="text-align: left;">25.943</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.888</td>
+<td style="text-align: left;">8.266</td>
 </tr>
 </tbody>
 </table>
@@ -751,7 +751,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>purrr: 10.886 sec elapsed</code></pre>
+<pre><code>purrr: 24.619 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -766,15 +766,15 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">10.982</td>
+<td style="text-align: left;">25.943</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.888</td>
+<td style="text-align: left;">8.266</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">purrr</td>
-<td style="text-align: left;">10.886</td>
+<td style="text-align: left;">24.619</td>
 </tr>
 </tbody>
 </table>
@@ -802,7 +802,7 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>furrr, 8 cores: 2.708 sec elapsed</code></pre>
+<pre><code>furrr, 8 cores: 7.864 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -817,19 +817,19 @@ Attaching package: 'foreach'</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Regular loop</td>
-<td style="text-align: left;">10.982</td>
+<td style="text-align: left;">25.943</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parallel loop, 8 cores</td>
-<td style="text-align: left;">2.888</td>
+<td style="text-align: left;">8.266</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">purrr</td>
-<td style="text-align: left;">10.886</td>
+<td style="text-align: left;">24.619</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">furrr, 8 cores</td>
-<td style="text-align: left;">2.708</td>
+<td style="text-align: left;">7.864</td>
 </tr>
 </tbody>
 </table>
@@ -857,18 +857,18 @@ Attaching package: 'foreach'</code></pre>
 <span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">toc</span>(<span class="at">log =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>furrr, 1 cores: 11.101 sec elapsed
-furrr, 2 cores: 6.137 sec elapsed
-furrr, 3 cores: 4.424 sec elapsed
-furrr, 4 cores: 3.616 sec elapsed
-furrr, 5 cores: 3.182 sec elapsed
-furrr, 6 cores: 2.925 sec elapsed
-furrr, 7 cores: 2.754 sec elapsed
-furrr, 8 cores: 2.729 sec elapsed
-furrr, 9 cores: 2.702 sec elapsed
-furrr, 10 cores: 2.779 sec elapsed
-furrr, 11 cores: 2.829 sec elapsed
-furrr, 12 cores: 2.906 sec elapsed</code></pre>
+<pre><code>furrr, 1 cores: 25.15 sec elapsed
+furrr, 2 cores: 14.528 sec elapsed
+furrr, 3 cores: 10.656 sec elapsed
+furrr, 4 cores: 8.789 sec elapsed
+furrr, 5 cores: 7.882 sec elapsed
+furrr, 6 cores: 7.561 sec elapsed
+furrr, 7 cores: 8.232 sec elapsed
+furrr, 8 cores: 8.037 sec elapsed
+furrr, 9 cores: 7.95 sec elapsed
+furrr, 10 cores: 7.947 sec elapsed
+furrr, 11 cores: 8.083 sec elapsed
+furrr, 12 cores: 7.964 sec elapsed</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printTicTocLog</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(maxcores) <span class="sc">%&gt;%</span></span>
